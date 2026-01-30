@@ -1,0 +1,78 @@
+============================================================
+SMC-Inverse Model Analysis Report
+============================================================
+
+## Overall Prediction Performance
+Total Predictions: 298
+Total Hits (Top-3): 219
+Overall Hit Rate: 73.49%
+
+## Season-by-Season Hit Rates
+  Season 1 (Rank): 100.00%
+  Season 2 (Rank): 100.00%
+  Season 3 (Percentage): 57.14%
+  Season 4 (Percentage): 87.50%
+  Season 5 (Percentage): 77.78%
+  Season 6 (Percentage): 88.89%
+  Season 7 (Percentage): 77.78%
+  Season 8 (Percentage): 80.00%
+  Season 9 (Percentage): 66.67%
+  Season 10 (Percentage): 87.50%
+  Season 11 (Percentage): 66.67%
+  Season 12 (Percentage): 87.50%
+  Season 13 (Percentage): 66.67%
+  Season 14 (Percentage): 77.78%
+  Season 15 (Percentage): 70.00%
+  Season 16 (Percentage): 100.00%
+  Season 17 (Percentage): 66.67%
+  Season 18 (Percentage): 75.00%
+  Season 19 (Percentage): 80.00%
+  Season 20 (Percentage): 55.56%
+  Season 21 (Percentage): 62.50%
+  Season 22 (Percentage): 88.89%
+  Season 23 (Percentage): 80.00%
+  Season 24 (Percentage): 77.78%
+  Season 25 (Percentage): 60.00%
+  Season 26 (Percentage): 71.43%
+  Season 27 (Percentage): 44.44%
+  Season 28 (Rank): 71.43%
+  Season 29 (Rank): 80.00%
+  Season 30 (Rank): 72.73%
+  Season 31 (Rank): 63.64%
+  Season 32 (Rank): 55.56%
+  Season 33 (Rank): 62.50%
+  Season 34 (Rank): 66.67%
+
+## Rule Fairness Comparison
+
+Percentage Rule (S3-S27):
+  Average Hit Rate: 74.17%
+  Average Populist Bias: -0.145
+
+Rank Rule (S1-2, S28+):
+  Average Hit Rate: 74.72%
+  Average Populist Bias: -0.140
+
+## Top 10 Controversial Eliminations
+  1. Season 30 Week 3: Christine Chiu
+     Surprise Score: 181.58
+  2. Season 28 Week 6: Sailor Brinkley-Cook
+     Surprise Score: 132.26
+  3. Season 34 Week 4: Hilaria Baldwin
+     Surprise Score: 127.82
+  4. Season 32 Week 2: Jamie Lynn Spears
+     Surprise Score: 123.76
+  5. Season 33 Week 2: Tori Spelling
+     Surprise Score: 116.57
+  6. Season 32 Week 7: Lele Pons
+     Surprise Score: 102.55
+  7. Season 34 Week 10: Whitney Leavitt
+     Surprise Score: 88.29
+  8. Season 32 Week 4: Adrian Peterson
+     Surprise Score: 87.52
+  9. Season 34 Week 2: Baron Davis
+     Surprise Score: 85.18
+  10. Season 33 Week 6: Jenn Tran
+     Surprise Score: 83.72
+
+============================================================
