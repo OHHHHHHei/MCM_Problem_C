@@ -19,12 +19,14 @@ class ParticleState:
     mu: Dict[str, float] = field(default_factory=dict)  # 长期基准 {name: mu}
     x: Dict[str, float] = field(default_factory=dict)   # 短期动量 {name: x}
     weight: float = 1.0
+    accumulated_shares: Dict[str, float] = field(default_factory=dict)  # 累积投票份额 (用于Rank Rule无淘汰周)
     
     def copy(self) -> 'ParticleState':
         return ParticleState(
             mu=self.mu.copy(),
             x=self.x.copy(),
-            weight=self.weight
+            weight=self.weight,
+            accumulated_shares=self.accumulated_shares.copy()
         )
 
 
@@ -257,19 +259,37 @@ class SMCInverse:
                                      season: int,
                                      week: int,
                                      elimination_event: EliminationEvent,
-                                     judge_scores: Dict[str, float]) -> float:
+                                     judge_scores: Dict[str, float],
+                                     use_accumulated_shares: bool = False) -> float:
         """
         计算粒子似然
         
         修正: 
         - 使用集合淘汰似然处理多人淘汰周
         - S28+ 使用完整的 Judge Save 两阶段似然
+        - Rank Rule 无淘汰周后使用累积投票份额
         """
         # 获取在场选手 (被淘汰者列表 + 幸存者)
         active_names = elimination_event.eliminated_set + elimination_event.survivors
         
-        # 计算投票份额
-        vote_shares = self._compute_vote_shares(particle, active_names)
+        # 计算当周投票份额
+        current_shares = self._compute_vote_shares(particle, active_names)
+        
+        # 对于 Rank Rule 赛季，如果需要累积份额
+        rule_type = self.rules._get_rule_type(season)
+        if use_accumulated_shares and rule_type in ['RANK', 'RANK_WITH_SAVE']:
+            # 使用累积份额 (当前份额 + 之前累积的份额)
+            vote_shares = {}
+            for name in active_names:
+                curr = current_shares.get(name, 0)
+                acc = particle.accumulated_shares.get(name, 0)
+                vote_shares[name] = curr + acc
+            # 重新归一化
+            total = sum(vote_shares.values())
+            if total > 0:
+                vote_shares = {k: v / total for k, v in vote_shares.items()}
+        else:
+            vote_shares = current_shares
         
         # 计算生存分
         survival_scores, bottom_two = self.rules.compute_survival_scores(
@@ -458,6 +478,8 @@ class SMCInverse:
             all_weeks.update(c.weekly_scores.keys())
         
         # 按周处理淘汰事件 (现在每周只有一个事件，可能包含多人)
+        rule_type = self.rules._get_rule_type(season)
+        
         for event in events:
             week = event.week
             
@@ -502,15 +524,26 @@ class SMCInverse:
             pred_probs = self._predict_elimination_probabilities(
                 season, week, active, judge_scores
             )
+            # 判断是否有无淘汰周需要累积投票份额 (Rank Rule)
+            has_no_elim_weeks = any(w not in elimination_weeks for w in range(1, week))
+            use_accumulated_shares = has_no_elim_weeks and rule_type in ['RANK', 'RANK_WITH_SAVE']
             
             # 计算似然并更新权重 (现在一周一个事件，可能多人淘汰)
             log_likelihoods = []
             for particle in self.particles:
                 ll = self._compute_particle_likelihood(
-                    particle, season, week, event, judge_scores
+                    particle, season, week, event, judge_scores, use_accumulated_shares
                 )
                 particle.weight *= ll
                 log_likelihoods.append(np.log(ll + 1e-300))
+                
+                # 更新粒子的累积份额 (用于下一周)
+                if use_accumulated_shares:
+                    current_shares = self._compute_vote_shares(particle, active_names)
+                    for name in active_names:
+                        particle.accumulated_shares[name] = (
+                            particle.accumulated_shares.get(name, 0) + current_shares.get(name, 0)
+                        )
             
             results['log_likelihoods'].append({
                 'week': week,
@@ -563,6 +596,10 @@ class SMCInverse:
             
             # 更新淘汰状态
             self.rules.update_elimination_status(True)
+            
+            # 淘汰周后重置累积份额 (下一轮重新开始累积)
+            for p in self.particles:
+                p.accumulated_shares = {}
             
             # 更新 prev_week 用于下一轮累加判断
             prev_week = week
