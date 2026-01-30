@@ -261,7 +261,9 @@ class SMCInverse:
         """
         计算粒子似然
         
-        修正: 使用集合淘汰似然处理多人淘汰周
+        修正: 
+        - 使用集合淘汰似然处理多人淘汰周
+        - S28+ 使用完整的 Judge Save 两阶段似然
         """
         # 获取在场选手 (被淘汰者列表 + 幸存者)
         active_names = elimination_event.eliminated_set + elimination_event.survivors
@@ -276,20 +278,57 @@ class SMCInverse:
         
         score_dict = {s.contestant_name: s.survival_score for s in survival_scores}
         
-        # 获取所有被淘汰者和幸存者的分数
-        eliminated_scores = [score_dict.get(e, 0.0) for e in elimination_event.eliminated_set]
-        survivor_scores = [score_dict.get(s, 0.0) for s in elimination_event.survivors]
-        
         rule_type = self.rules._get_rule_type(season)
         
-        if rule_type == 'RANK_WITH_SAVE' and bottom_two:
-            # S28+ Judge Save 机制
-            # 简化处理: 使用集合似然
-            likelihood = self.likelihood_calc.compute_group_elimination_likelihood(
-                eliminated_scores, survivor_scores
-            )
+        if rule_type == 'RANK_WITH_SAVE' and bottom_two and len(elimination_event.eliminated_set) == 1:
+            # S28+ Judge Save 机制 (仅单人淘汰时适用)
+            # 两阶段似然:
+            # Stage 1: 被淘汰者在 Bottom 2 中
+            # Stage 2: 评委选择拯救另一人 (基于技术分)
+            
+            eliminated_name = elimination_event.eliminated_set[0]
+            
+            # 找出谁被拯救了: 应该是 Bottom 2 中的另一人
+            # 推断: 下周仍在场的 Bottom 2 成员 = 被拯救者
+            # 简化: 假设 Bottom 2 中分数较高者被拯救
+            b2_name1, b2_name2 = bottom_two
+            
+            if eliminated_name in [b2_name1, b2_name2]:
+                # 被淘汰者确实在 Bottom 2 中，符合 Judge Save 逻辑
+                saved_name = b2_name1 if eliminated_name == b2_name2 else b2_name2
+                
+                # Stage 1: Bottom 2 概率 (两人分数低于其他人)
+                b2_scores = [score_dict.get(b2_name1, 0), score_dict.get(b2_name2, 0)]
+                max_b2_score = max(b2_scores)
+                
+                other_scores = [score_dict.get(name, 0) for name in elimination_event.survivors
+                               if name not in [b2_name1, b2_name2]]
+                
+                bottom2_prob = 1.0
+                for other_score in other_scores:
+                    # 其他人分数都高于 Bottom 2 中的最高者
+                    bottom2_prob *= self.likelihood_calc.sigmoid(
+                        self.likelihood_calc.alpha * (other_score - max_b2_score)
+                    )
+                
+                # Stage 2: 评委拯救概率 (基于累计评审分)
+                # 评委倾向拯救技术分更高的选手
+                tech_saved = judge_scores.get(saved_name, 0)
+                tech_elim = judge_scores.get(eliminated_name, 0)
+                save_prob = self.likelihood_calc.sigmoid(
+                    self.rules.beta_judge * (tech_saved - tech_elim)
+                )
+                
+                likelihood = bottom2_prob * save_prob
+            else:
+                # 被淘汰者不在该粒子的 Bottom 2 中，极低似然
+                likelihood = 1e-10
         else:
+            # 非 Judge Save 赛季，或多人淘汰
             # 使用集合淘汰似然 (统一处理单人和多人淘汰)
+            eliminated_scores = [score_dict.get(e, 0.0) for e in elimination_event.eliminated_set]
+            survivor_scores = [score_dict.get(s, 0.0) for s in elimination_event.survivors]
+            
             likelihood = self.likelihood_calc.compute_group_elimination_likelihood(
                 eliminated_scores, survivor_scores
             )
