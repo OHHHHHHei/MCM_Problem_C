@@ -100,15 +100,17 @@ class SMCInverse:
     
     def _fit_initial_regression(self, exclude_season: int):
         """
-        使用 LOSO 策略拟合初始人气回归
+        使用 Expanding Window 策略拟合初始人气回归
         
-        排除 exclude_season 季的数据，使用其他所有赛季训练
+        只使用 exclude_season 之前的赛季训练，避免时间泄露
+        (修正原LOSO策略中使用未来数据的问题)
         """
         X_list = []
         y_list = []
         
         for season in self.dp.get_seasons():
-            if season == exclude_season:
+            # 只使用过去赛季的数据 (严格小于当前赛季)
+            if season >= exclude_season:
                 continue
             
             contestants = self.dp.get_contestants_in_season(season)
@@ -127,11 +129,12 @@ class SMCInverse:
                 y_list.append(popularity)
         
         if len(X_list) < 2:
-            # 数据不足，使用零系数
+            # 数据不足 (如第1季没有历史数据)，使用先验默认值
             feature_dim = self.dp.get_feature_vector(
                 self.dp.get_contestants_in_season(exclude_season)[0]
             ).shape[0]
             self.beta_coefficients[exclude_season] = np.zeros(feature_dim)
+            self._intercept = 0.5  # 默认先验均值
             return
         
         X = np.array(X_list)

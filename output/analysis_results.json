@@ -1,185 +1,185 @@
 {
   "overall_statistics": {
-    "overall_hit_rate": 0.7348993288590604,
+    "overall_hit_rate": 0.7550335570469798,
     "total_predictions": 298,
-    "total_hits": 219,
+    "total_hits": 225,
     "season_hit_rates": {
       "1": 1.0,
       "2": 1.0,
-      "3": 0.5714285714285714,
+      "3": 0.7142857142857143,
       "4": 0.875,
-      "5": 0.7777777777777778,
-      "6": 0.8888888888888888,
-      "7": 0.7777777777777778,
-      "8": 0.8,
+      "5": 0.8888888888888888,
+      "6": 1.0,
+      "7": 0.8888888888888888,
+      "8": 0.6,
       "9": 0.6666666666666666,
       "10": 0.875,
       "11": 0.6666666666666666,
-      "12": 0.875,
+      "12": 1.0,
       "13": 0.6666666666666666,
-      "14": 0.7777777777777778,
-      "15": 0.7,
+      "14": 1.0,
+      "15": 0.6,
       "16": 1.0,
       "17": 0.6666666666666666,
-      "18": 0.75,
+      "18": 0.625,
       "19": 0.8,
       "20": 0.5555555555555556,
-      "21": 0.625,
+      "21": 0.75,
       "22": 0.8888888888888888,
       "23": 0.8,
       "24": 0.7777777777777778,
-      "25": 0.6,
+      "25": 0.8,
       "26": 0.7142857142857143,
-      "27": 0.4444444444444444,
+      "27": 0.5555555555555556,
       "28": 0.7142857142857143,
-      "29": 0.8,
-      "30": 0.7272727272727273,
-      "31": 0.6363636363636364,
+      "29": 0.9,
+      "30": 0.6363636363636364,
+      "31": 0.8181818181818182,
       "32": 0.5555555555555556,
-      "33": 0.625,
-      "34": 0.6666666666666666
+      "33": 0.5,
+      "34": 0.4444444444444444
     }
   },
   "top_controversies": [
     {
+      "season": 34,
+      "week": 4,
+      "eliminated": "Hilaria Baldwin",
+      "log_likelihood": -225.62607953254377,
+      "surprise_score": 225.62607953254377
+    },
+    {
       "season": 30,
       "week": 3,
       "eliminated": "Christine Chiu",
-      "log_likelihood": -181.58166280524716,
-      "surprise_score": 181.58166280524716
+      "log_likelihood": -174.41376282470472,
+      "surprise_score": 174.41376282470472
     },
     {
       "season": 28,
       "week": 6,
       "eliminated": "Sailor Brinkley-Cook",
-      "log_likelihood": -132.25541962706401,
-      "surprise_score": 132.25541962706401
-    },
-    {
-      "season": 34,
-      "week": 4,
-      "eliminated": "Hilaria Baldwin",
-      "log_likelihood": -127.8237142504537,
-      "surprise_score": 127.8237142504537
-    },
-    {
-      "season": 32,
-      "week": 2,
-      "eliminated": "Jamie Lynn Spears",
-      "log_likelihood": -123.76085825510289,
-      "surprise_score": 123.76085825510289
+      "log_likelihood": -143.36369577265296,
+      "surprise_score": 143.36369577265296
     },
     {
       "season": 33,
       "week": 2,
       "eliminated": "Tori Spelling",
-      "log_likelihood": -116.57179637912103,
-      "surprise_score": 116.57179637912103
+      "log_likelihood": -116.97656864098062,
+      "surprise_score": 116.97656864098062
     },
     {
       "season": 32,
       "week": 7,
       "eliminated": "Lele Pons",
-      "log_likelihood": -102.5504792888561,
-      "surprise_score": 102.5504792888561
+      "log_likelihood": -115.7469968553754,
+      "surprise_score": 115.7469968553754
     },
     {
-      "season": 34,
-      "week": 10,
-      "eliminated": "Whitney Leavitt",
-      "log_likelihood": -88.28823457297318,
-      "surprise_score": 88.28823457297318
+      "season": 32,
+      "week": 2,
+      "eliminated": "Jamie Lynn Spears",
+      "log_likelihood": -104.82876567991049,
+      "surprise_score": 104.82876567991049
+    },
+    {
+      "season": 33,
+      "week": 4,
+      "eliminated": "Brooks Nader",
+      "log_likelihood": -86.9454400136165,
+      "surprise_score": 86.9454400136165
     },
     {
       "season": 32,
       "week": 4,
       "eliminated": "Adrian Peterson",
-      "log_likelihood": -87.5166322864417,
-      "surprise_score": 87.5166322864417
+      "log_likelihood": -82.70971817494892,
+      "surprise_score": 82.70971817494892
     },
     {
       "season": 34,
       "week": 2,
       "eliminated": "Baron Davis",
-      "log_likelihood": -85.18412338770962,
-      "surprise_score": 85.18412338770962
+      "log_likelihood": -82.29297761785222,
+      "surprise_score": 82.29297761785222
     },
     {
-      "season": 33,
-      "week": 6,
-      "eliminated": "Jenn Tran",
-      "log_likelihood": -83.71540594970483,
-      "surprise_score": 83.71540594970483
-    },
-    {
-      "season": 34,
-      "week": 7,
-      "eliminated": "Jen Affleck",
-      "log_likelihood": -80.24172772908145,
-      "surprise_score": 80.24172772908145
+      "season": 30,
+      "week": 5,
+      "eliminated": "Melanie C",
+      "log_likelihood": -75.7888029187552,
+      "surprise_score": 75.7888029187552
     },
     {
       "season": 33,
       "week": 2,
       "eliminated": "Anna Delvey",
-      "log_likelihood": -76.30506906313516,
-      "surprise_score": 76.30506906313516
+      "log_likelihood": -75.28685274722282,
+      "surprise_score": 75.28685274722282
+    },
+    {
+      "season": 34,
+      "week": 7,
+      "eliminated": "Jen Affleck",
+      "log_likelihood": -73.02370344657766,
+      "surprise_score": 73.02370344657766
+    },
+    {
+      "season": 30,
+      "week": 9,
+      "eliminated": "Suni Lee",
+      "log_likelihood": -68.83536700739664,
+      "surprise_score": 68.83536700739664
     },
     {
       "season": 30,
       "week": 8,
       "eliminated": "Olivia Jade",
-      "log_likelihood": -63.86309640094239,
-      "surprise_score": 63.86309640094239
+      "log_likelihood": -57.60790383011803,
+      "surprise_score": 57.60790383011803
     },
     {
-      "season": 31,
-      "week": 5,
-      "eliminated": "Joseph Baena",
-      "log_likelihood": -63.136104622900774,
-      "surprise_score": 63.136104622900774
+      "season": 33,
+      "week": 6,
+      "eliminated": "Jenn Tran",
+      "log_likelihood": -52.50363633337023,
+      "surprise_score": 52.50363633337023
     },
     {
       "season": 28,
       "week": 7,
       "eliminated": "Karamo Brown",
-      "log_likelihood": -55.03623684767961,
-      "surprise_score": 55.03623684767961
+      "log_likelihood": -47.21872255928104,
+      "surprise_score": 47.21872255928104
     },
     {
       "season": 31,
       "week": 1,
       "eliminated": "Jason Lewis",
-      "log_likelihood": -51.090925609311114,
-      "surprise_score": 51.090925609311114
+      "log_likelihood": -45.964854872745065,
+      "surprise_score": 45.964854872745065
     },
     {
       "season": 31,
-      "week": 2,
-      "eliminated": "Teresa Giudice",
-      "log_likelihood": -49.4645509037138,
-      "surprise_score": 49.4645509037138
+      "week": 5,
+      "eliminated": "Joseph Baena",
+      "log_likelihood": -45.04931999743528,
+      "surprise_score": 45.04931999743528
     },
     {
       "season": 32,
       "week": 1,
       "eliminated": "Matt Walsh",
-      "log_likelihood": -46.99103008698015,
-      "surprise_score": 46.99103008698015
+      "log_likelihood": -42.73409238419585,
+      "surprise_score": 42.73409238419585
     },
     {
-      "season": 29,
-      "week": 8,
-      "eliminated": "Chrishell Stause",
-      "log_likelihood": -42.77064811912637,
-      "surprise_score": 42.77064811912637
-    },
-    {
-      "season": 2,
-      "week": 3,
-      "eliminated": "Giselle Fernandez",
-      "log_likelihood": -40.080522658283854,
-      "surprise_score": 40.080522658283854
+      "season": 34,
+      "week": 10,
+      "eliminated": "Whitney Leavitt",
+      "log_likelihood": -40.13680680982349,
+      "surprise_score": 40.13680680982349
     }
   ],
   "rule_fairness_analysis": {
@@ -211,8 +211,8 @@
         26,
         27
       ],
-      "avg_hit_rate": 0.7416507936507934,
-      "avg_populist_bias": -0.1447111048022223
+      "avg_hit_rate": 0.7750317460317462,
+      "avg_populist_bias": -0.13675861512224075
     },
     "rank_rule": {
       "seasons": [
@@ -226,8 +226,8 @@
         33,
         34
       ],
-      "avg_hit_rate": 0.747238255571589,
-      "avg_populist_bias": -0.14047886621891303
+      "avg_hit_rate": 0.7298701298701299,
+      "avg_populist_bias": -0.14262855701310512
     }
   }
 }
