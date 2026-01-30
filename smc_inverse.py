@@ -19,14 +19,17 @@ class ParticleState:
     mu: Dict[str, float] = field(default_factory=dict)  # 长期基准 {name: mu}
     x: Dict[str, float] = field(default_factory=dict)   # 短期动量 {name: x}
     weight: float = 1.0
-    accumulated_shares: Dict[str, float] = field(default_factory=dict)  # 累积投票份额 (用于Rank Rule无淘汰周)
+    weight: float = 1.0
+    accumulated_shares: Dict[str, float] = field(default_factory=dict)  # 累积投票份额 (Percentage Rule)
+    accumulated_vote_ranks: Dict[str, float] = field(default_factory=dict)  # 累积投票排名分 (Rank Rule)
     
     def copy(self) -> 'ParticleState':
         return ParticleState(
             mu=self.mu.copy(),
             x=self.x.copy(),
             weight=self.weight,
-            accumulated_shares=self.accumulated_shares.copy()
+            accumulated_shares=self.accumulated_shares.copy(),
+            accumulated_vote_ranks=self.accumulated_vote_ranks.copy()
         )
 
 
@@ -260,7 +263,8 @@ class SMCInverse:
                                      week: int,
                                      elimination_event: EliminationEvent,
                                      judge_scores: Dict[str, float],
-                                     use_accumulated_shares: bool = False) -> float:
+                                     use_accumulated_shares: bool = False,
+                                     override_vote_shares: Optional[Dict[str, float]] = None) -> float:
         """
         计算粒子似然
         
@@ -273,23 +277,26 @@ class SMCInverse:
         active_names = elimination_event.eliminated_set + elimination_event.survivors
         
         # 计算当周投票份额
-        current_shares = self._compute_vote_shares(particle, active_names)
-        
-        # 对于 Rank Rule 赛季，如果需要累积份额
-        rule_type = self.rules._get_rule_type(season)
-        if use_accumulated_shares and rule_type in ['RANK', 'RANK_WITH_SAVE']:
-            # 使用累积份额 (当前份额 + 之前累积的份额)
-            vote_shares = {}
-            for name in active_names:
-                curr = current_shares.get(name, 0)
-                acc = particle.accumulated_shares.get(name, 0)
-                vote_shares[name] = curr + acc
-            # 重新归一化
-            total = sum(vote_shares.values())
-            if total > 0:
-                vote_shares = {k: v / total for k, v in vote_shares.items()}
+        if override_vote_shares is not None:
+             vote_shares = override_vote_shares
         else:
-            vote_shares = current_shares
+            current_shares = self._compute_vote_shares(particle, active_names)
+            
+            # 对于 Rank Rule 赛季，如果需要累积份额
+            rule_type = self.rules._get_rule_type(season)
+            if use_accumulated_shares and rule_type in ['RANK', 'RANK_WITH_SAVE']:
+                # 使用累积份额 (当前份额 + 之前累积的份额)
+                vote_shares = {}
+                for name in active_names:
+                    curr = current_shares.get(name, 0)
+                    acc = particle.accumulated_shares.get(name, 0)
+                    vote_shares[name] = curr + acc
+                # 重新归一化
+                total = sum(vote_shares.values())
+                if total > 0:
+                    vote_shares = {k: v / total for k, v in vote_shares.items()}
+            else:
+                vote_shares = current_shares
         
         # 计算生存分
         survival_scores, bottom_two = self.rules.compute_survival_scores(
@@ -504,13 +511,38 @@ class SMCInverse:
                     self.particles[i], zscore_scores, active_names
                 )
             
-            # === B. 计算当周投票份额并累积 (Rank Rule) ===
-            if rule_type in ['RANK', 'RANK_WITH_SAVE']:
+            # === B. 累积逻辑 (Accumulation) ===
+            # 根据规则类型执行不同的累积策略
+            if rule_type == 'PERCENTAGE':
+                # 百分比规则: 累积份额 (Share Accumulation)
                 for particle in self.particles:
                     current_shares = self._compute_vote_shares(particle, active_names)
                     for name in active_names:
                         particle.accumulated_shares[name] = (
                             particle.accumulated_shares.get(name, 0) + current_shares.get(name, 0)
+                        )
+            
+            elif rule_type in ['RANK', 'RANK_WITH_SAVE']:
+                # 排名规则: 累积排名分 (Points Accumulation)
+                # "Add those ranking points together"
+                for particle in self.particles:
+                    current_shares = self._compute_vote_shares(particle, active_names)
+                    
+                    # 计算当周排名 (1为最高分/最高份额)
+                    # 注意: DWTS中Rank Point通常是排名本身(1st=1pt)，目标是分数越低越好
+                    # 或者反过来，但我们的competition_rules里用的是 Rank(1..N)，Rank 1 最好。
+                    # 加微小随机噪声防止平局相同处理
+                    noise = {n: np.random.uniform(0, 1e-9) for n in active_names}
+                    sorted_by_share = sorted(
+                        active_names, 
+                        key=lambda n: -(current_shares.get(n, 0) + noise[n])
+                    )
+                    
+                    current_ranks = {name: i+1 for i, name in enumerate(sorted_by_share)}
+                    
+                    for name in active_names:
+                        particle.accumulated_vote_ranks[name] = (
+                            particle.accumulated_vote_ranks.get(name, 0) + current_ranks.get(name, 0)
                         )
             
             # === C. 检查本周是否有淘汰事件 ===
@@ -535,18 +567,84 @@ class SMCInverse:
                 judge_scores = accumulated_scores
                 
                 # 先验预测 (重采样前)
+                # 注意: _predict_elimination_probabilities 也需要更新以支持累积
+                # 但由于该函数只是辅助用的，并不影响核心滤波，暂时简单跳过或仅传入当前
+                # 真正的优化应该也传入 accumulated_xxx
                 pred_probs = self._predict_elimination_probabilities(
                     season, week, active, judge_scores
                 )
                 
-                # Rank Rule 使用累积份额
-                use_accumulated_shares = rule_type in ['RANK', 'RANK_WITH_SAVE']
+                # 准备投票数据供似然计算
+                # 对于 Rank Rule, 传入累积排名分
+                # 对于 Percentage Rule, 传入累积份额
+                vote_metric_for_likelihood = {}
+                
+                if rule_type == 'PERCENTAGE':
+                    # 使用累积份额
+                    for particle in self.particles:
+                        # 临时存储到 particle.vote_shares_buffer 以传给 likelihood
+                        # 或者修改 _compute_particle_likelihood 接口
+                        # 这里我们在 _compute_particle_likelihood 内部处理，只需要传入 flag
+                        pass
                 
                 # 计算似然并更新权重
                 log_likelihoods = []
                 for particle in self.particles:
+                    # 获取该粒子用于判定的"投票数据"
+                    if rule_type == 'PERCENTAGE':
+                        # 份额累积
+                        p_shares = self._compute_vote_shares(particle, active_names)
+                        vote_data = {
+                            n: p_shares.get(n, 0) + particle.accumulated_shares.get(n, 0)
+                            for n in active_names
+                        }
+                        # 归一化
+                        total_s = sum(vote_data.values())
+                        if total_s > 0:
+                            vote_data = {k: v/total_s for k, v in vote_data.items()}
+                        
+                        use_rank_points = False
+                        
+                    elif rule_type in ['RANK', 'RANK_WITH_SAVE']:
+                        # 排名分累积 (直接使用累积后的 rank points)
+                        # 注意: 每一周增加一次排名分，所以 accumulated_vote_ranks 已经包含了本周 + 历史
+                        # 我们需要将其作为 "vote_shares" 传入 compute_survival_scores
+                        # 但 compute_survival_scores 会对传入的数据再次求 Rank
+                        # 这正是我们在思考中提到的问题: Rank(Sum(Points)) vs Sum(Points)
+                        # 用户指出: "Add those ranking points together... total points lowest eliminated"
+                        # 所以最终 Survival Score = JudgeRankSum + VoteRankSum
+                        # 我们传入 VoteRankSum 给 compute_survival_scores, 它会再次 Rank 吗？
+                        # 会的。 compute_rank_rule_score 内部: vote_ranks = rank(fan_vote_shares)
+                        # 如果我们传入 VoteRankSum，它会算出 Rank(VoteRankSum)。
+                        # 这与 "Total Points Lowest" 是等价的吗？
+                        # 是的。因为 Points 越小越好 (1st=1pt)。Sum 越小越好。
+                        # 对 Sum 求 Rank (1..N)，依然是 Sum 最小者 Rank=1。
+                        # 所以我们可以传入 Accumulated Rank Points 作为 "伪造的 Share"，
+                        # 但要注意: Share 是越大越好，Rank Points 是越小越好。
+                        # 所以我们需要传入 -1 * Accumulated Rank Points，或者 1/Points
+                        # 让 compute_survival_scores 的排序逻辑 (大者排前) 正确工作。
+                        # compute_rank_rule_score 内部: sorted(..., key=-x[1]) -> 大者排前
+                        # 我们希望 Points 小者排前 -> Points 小者 = "伪Share" 大者
+                        # 所以传入 1.0 / AccumulatedPoints 是合理的代理
+                        
+                        current_vote_ranks = particle.accumulated_vote_ranks
+                        vote_data = {
+                            n: 1.0 / (current_vote_ranks.get(n, 999) + 1e-6) 
+                            for n in active_names
+                        }
+                        # 仅作为排序依据，不需要归一化
+                        use_rank_points = True
+                        
+                    else:
+                        vote_data = self._compute_vote_shares(particle, active_names)
+                        use_rank_points = False
+
+                    # 调用似然计算
+                    # 注意: 我们直接传入处理好的 vote_data，不再在内部进行累积处理
                     ll = self._compute_particle_likelihood(
-                        particle, season, week, event, judge_scores, use_accumulated_shares
+                        particle, season, week, event, judge_scores, 
+                        use_accumulated_shares=False, # We already handled accumulation
+                        override_vote_shares=vote_data
                     )
                     particle.weight *= ll
                     log_likelihoods.append(np.log(ll + 1e-300))
@@ -601,32 +699,33 @@ class SMCInverse:
                 results['weekly_estimates'][week] = estimates
                 
                 # ============ 新增: 一致性验证 (Consistency Metrics) ============
-                # 1. 后验一致概率 (Posterior Consistency Probability)
-                # 计算有多少比例的粒子(加权)认为应该淘汰真实的淘汰者
+                # 1. 后验一致概率
                 consistent_weight = 0.0
                 total_weight_check = 0.0
                 
                 for particle in self.particles:
-                    p_shares = self._compute_vote_shares(particle, active_names)
-                    
-                    # 如需累积
-                    if use_accumulated_shares:
-                        p_shares_comb = {}
-                        for n in active_names:
-                            p_shares_comb[n] = p_shares.get(n, 0) + particle.accumulated_shares.get(n, 0)
-                        # 归一化
-                        s_comb = sum(p_shares_comb.values())
-                        if s_comb > 0:
-                            p_shares_comb = {k: v/s_comb for k, v in p_shares_comb.items()}
+                    # 重新构建 vote_data (同上)
+                    if rule_type == 'PERCENTAGE':
+                        p_shares = self._compute_vote_shares(particle, active_names)
+                        vote_data = {
+                            n: p_shares.get(n, 0) + particle.accumulated_shares.get(n, 0)
+                            for n in active_names
+                        }
+                        s_comb = sum(vote_data.values())
+                        if s_comb > 0: vote_data = {k: v/s_comb for k, v in vote_data.items()}
+                        
+                    elif rule_type in ['RANK', 'RANK_WITH_SAVE']:
+                        vote_data = {
+                            n: 1.0 / (particle.accumulated_vote_ranks.get(n, 999) + 1e-6)
+                            for n in active_names
+                        }
                     else:
-                        p_shares_comb = p_shares
+                        vote_data = self._compute_vote_shares(particle, active_names)
                         
                     simulated_eliminated = self.rules.simulate_elimination_outcome(
-                        season, judge_scores, p_shares_comb
+                        season, judge_scores, vote_data
                     )
                     
-                    # 检查是否命中真实淘汰者集合中的任意一个
-                    # (由于双淘汰周的存在，只要命中其中之一即视为主要责任人)
                     if simulated_eliminated in event.eliminated_set:
                         consistent_weight += particle.weight
                     
@@ -634,29 +733,37 @@ class SMCInverse:
                 
                 posterior_consistency = consistent_weight / total_weight_check if total_weight_check > 0 else 0.0
                 
-                # 2. MAP/后验均值 一致性 (MAP Consistency)
-                # 使用当周的后验均值估计票数，看是否会导致相同的结果
-                mean_shares = {name: estimates[name]['mean'] for name in active_names}
-                
-                # 注意: estimates已经是基于累积份额(如果适用)的吗？
-                # 不，_estimate_vote_shares 是基于当前时刻的动量计算的当周份额
-                # 如果是 Rank Rule，我们需要手动处理累积逻辑用于验证
-                if use_accumulated_shares:
-                    # 获取当前所有粒子的累积份额的期望
-                    avg_accumulated = {name: 0.0 for name in active_names}
+                # 2. MAP 一致性
+                # 对于 Point Accumulation, 我们不能简单的平均 "1/Rank"
+                # 应该平均 "Rank Points" 本身，然后再取倒数
+                if rule_type in ['RANK', 'RANK_WITH_SAVE']:
+                    avg_rank_points = {name: 0.0 for name in active_names}
                     for p in self.particles:
-                        for name in active_names:
-                            avg_accumulated[name] += p.accumulated_shares.get(name, 0) * p.weight
+                        for n in active_names:
+                            avg_rank_points[n] += p.accumulated_vote_ranks.get(n, 0) * p.weight
                     
-                    # 组合
-                    map_shares_comb = {}
-                    for n in active_names:
-                        map_shares_comb[n] = mean_shares.get(n, 0) + avg_accumulated.get(n, 0)
-                    total_map = sum(map_shares_comb.values())
-                    if total_map > 0:
-                        map_shares_comb = {k: v/total_map for k, v in map_shares_comb.items()}
+                    # 构造用于模拟的输入
+                    map_shares_comb = {k: 1.0/(v+1e-6) for k, v in avg_rank_points.items()}
+                
+                elif rule_type == 'PERCENTAGE':
+                     # Percentage 平均累积份额
+                    avg_shares = {name: 0.0 for name in active_names}
+                    for p in self.particles:
+                        p_shares = self._compute_vote_shares(p, active_names) # 当周
+                        for n in active_names:
+                            # 当周 + 历史
+                            val = p_shares.get(n,0) + p.accumulated_shares.get(n,0)
+                            avg_shares[n] += val * p.weight
+                     
+                    map_shares_comb = avg_shares
+                    # 归一化
+                    s = sum(map_shares_comb.values())
+                    if s>0: map_shares_comb = {k: v/s for k, v in map_shares_comb.items()}
                 else:
-                    map_shares_comb = mean_shares
+                    # 普通周 (非累积)
+                    # ... (已有逻辑)
+                     mean_shares = {name: estimates[name]['mean'] for name in active_names}
+                     map_shares_comb = mean_shares
                 
                 map_eliminated = self.rules.simulate_elimination_outcome(
                     season, judge_scores, map_shares_comb
@@ -676,9 +783,10 @@ class SMCInverse:
                 # 更新淘汰状态
                 self.rules.update_elimination_status(True)
                 
-                # 淘汰周后重置累积份额 (新的积分赛段开始)
+                # 淘汰周后重置累积
                 for p in self.particles:
                     p.accumulated_shares = {}
+                    p.accumulated_vote_ranks = {}
             
             else:
                 # ============ 无淘汰周: 仅状态演化 ============

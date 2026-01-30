@@ -248,19 +248,16 @@ class CompetitionRules:
         if rule_type == 'RANK_WITH_SAVE' and bottom_two:
             # Judge Save: 评委拯救技术分较高者
             b1, b2 = bottom_two
-            if not b2: # 只有一个有效选手在Bottom 2 (异常情况)
-                return b1
+            
+            # 异常处理：如果不完整
+            if not b2: return b1
                 
             # 获取累计技术分(如有)或当周分
-            # 注意: 这里简化使用当周分，更严格应使用累计分
-            # 但compute_survival_scores外部通常传入的是由于滚存处理过的Effective Scores
-            # 为保持一致性，我们比较他们在judge_scores里的分数
             s1 = judge_scores.get(b1, 0)
             s2 = judge_scores.get(b2, 0)
             
             # 分数低者被淘汰
             # 如果分数相同，按规则评委拥有最终决定权
-            # 模型中假设评委偏好高分，若同分则随机(这里返回字典序大的以保持确定性)
             if s1 > s2:
                 return b2
             elif s2 > s1:
@@ -272,7 +269,13 @@ class CompetitionRules:
             # 基础规则: 生存分最低者淘汰
             if not survival_scores:
                 return ""
+                
             # 按生存分排序，分低者在前
+            # 注意: 如果是传入了 Rank Points作为 "伪Shares" (1/Points)，
+            # compute_rank_rule_score 会再次 Rank 它们。
+            # Rank(1/Points) = Rank(Points_Reversed).
+            # Points 越小越好 -> 1/Points 越大越好 -> Rank(1/Points)=1 (最好的)
+            # 所以逻辑是自洽的。
             sorted_scores = sorted(survival_scores, key=lambda x: x.survival_score)
             return sorted_scores[0].contestant_name
 
