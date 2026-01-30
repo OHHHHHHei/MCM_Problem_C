@@ -188,12 +188,22 @@ class CompetitionRules:
             # Rank Rule (S1-2, S28+)
             n = len(judge_scores)
             
-            # 计算评审分排名
-            sorted_by_judge = sorted(judge_scores.items(), key=lambda x: -x[1])
+            # 计算评审分排名 (加极小噪声打破平局)
+            # 噪声量级 1e-6 远小于最小分差0.5，不影响非平局顺序
+            # 但能确保平局时不同粒子得到不同排名，符合概率性思想
+            jittered_judge = {
+                name: score + np.random.uniform(0, 1e-6) 
+                for name, score in judge_scores.items()
+            }
+            sorted_by_judge = sorted(jittered_judge.items(), key=lambda x: -x[1])
             judge_ranks = {name: rank+1 for rank, (name, _) in enumerate(sorted_by_judge)}
             
-            # 计算投票份额排名
-            sorted_by_vote = sorted(fan_vote_shares.items(), key=lambda x: -x[1])
+            # 计算投票份额排名 (同样加噪声)
+            jittered_vote = {
+                name: share + np.random.uniform(0, 1e-9)
+                for name, share in fan_vote_shares.items()
+            }
+            sorted_by_vote = sorted(jittered_vote.items(), key=lambda x: -x[1])
             vote_ranks = {name: rank+1 for rank, (name, _) in enumerate(sorted_by_vote)}
             
             for name, score in judge_scores.items():
@@ -248,7 +258,7 @@ class LikelihoodCalculator:
                                             eliminated_score: float,
                                             survivor_scores: List[float]) -> float:
         """
-        计算基础淘汰似然
+        计算基础淘汰似然 (单人淘汰)
         
         式(121): L = Π_{j∈S} σ(α·(S_j - S_e))
         
@@ -258,6 +268,30 @@ class LikelihoodCalculator:
         for s_j in survivor_scores:
             prob = self.sigmoid(self.alpha * (s_j - eliminated_score))
             likelihood *= prob
+        return likelihood
+    
+    def compute_group_elimination_likelihood(self,
+                                            eliminated_scores: List[float],
+                                            survivor_scores: List[float]) -> float:
+        """
+        计算集合淘汰似然 (支持多人淘汰)
+        
+        修正双淘汰周逻辑bug: 不再要求淘汰者之间有大小关系
+        
+        数学表达:
+        L = Π_{e∈E} Π_{s∈S} σ(α·(S_s - S_e))
+        
+        含义: 每个被淘汰者的分数都低于每个幸存者
+        淘汰者内部的相对顺序不影响似然
+        """
+        likelihood = 1.0
+        
+        for e_score in eliminated_scores:
+            for s_score in survivor_scores:
+                # P(幸存者分数 > 被淘汰者分数)
+                prob = self.sigmoid(self.alpha * (s_score - e_score))
+                likelihood *= prob
+        
         return likelihood
     
     def compute_judge_save_likelihood(self,

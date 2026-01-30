@@ -260,9 +260,11 @@ class SMCInverse:
                                      judge_scores: Dict[str, float]) -> float:
         """
         计算粒子似然
+        
+        修正: 使用集合淘汰似然处理多人淘汰周
         """
-        # 获取在场选手
-        active_names = [elimination_event.eliminated] + elimination_event.survivors
+        # 获取在场选手 (被淘汰者列表 + 幸存者)
+        active_names = elimination_event.eliminated_set + elimination_event.survivors
         
         # 计算投票份额
         vote_shares = self._compute_vote_shares(particle, active_names)
@@ -274,23 +276,22 @@ class SMCInverse:
         
         score_dict = {s.contestant_name: s.survival_score for s in survival_scores}
         
-        # 获取被淘汰者和幸存者的分数
-        eliminated_score = score_dict.get(elimination_event.eliminated, 0.0)
+        # 获取所有被淘汰者和幸存者的分数
+        eliminated_scores = [score_dict.get(e, 0.0) for e in elimination_event.eliminated_set]
         survivor_scores = [score_dict.get(s, 0.0) for s in elimination_event.survivors]
         
         rule_type = self.rules._get_rule_type(season)
         
         if rule_type == 'RANK_WITH_SAVE' and bottom_two:
             # S28+ Judge Save 机制
-            # 需要两阶段似然
-            # 暂时简化：使用基础淘汰似然
-            likelihood = self.likelihood_calc.compute_base_elimination_likelihood(
-                eliminated_score, survivor_scores
+            # 简化处理: 使用集合似然
+            likelihood = self.likelihood_calc.compute_group_elimination_likelihood(
+                eliminated_scores, survivor_scores
             )
         else:
-            # 基础淘汰似然
-            likelihood = self.likelihood_calc.compute_base_elimination_likelihood(
-                eliminated_score, survivor_scores
+            # 使用集合淘汰似然 (统一处理单人和多人淘汰)
+            likelihood = self.likelihood_calc.compute_group_elimination_likelihood(
+                eliminated_scores, survivor_scores
             )
         
         return max(likelihood, 1e-300)  # 防止零似然
@@ -407,15 +408,19 @@ class SMCInverse:
             'log_likelihoods': []
         }
         
-        # 按周处理淘汰事件
-        events_by_week = {}
-        for e in events:
-            if e.week not in events_by_week:
-                events_by_week[e.week] = []
-            events_by_week[e.week].append(e)
+        # 评委分累加器 (用于无淘汰周的分数滚存)
+        judge_score_accumulator = {}
+        prev_week = None
+        elimination_weeks = {e.week for e in events}
         
-        for week in sorted(events_by_week.keys()):
-            week_events = events_by_week[week]
+        # 找出所有需要处理的周次 (包括无淘汰周)
+        all_weeks = set()
+        for c in initial_contestants:
+            all_weeks.update(c.weekly_scores.keys())
+        
+        # 按周处理淘汰事件 (现在每周只有一个事件，可能包含多人)
+        for event in events:
+            week = event.week
             
             # 获取在场选手和分数
             active = self.dp.get_active_contestants(season, week)
@@ -424,11 +429,29 @@ class SMCInverse:
             
             active_names = [c.name for c in active]
             
-            # 获取标准化分数
+            # 获取标准化分数 (用于状态转移)
             zscore_scores = self.dp.compute_zscore_scores(season, week)
             
-            # 获取原始分数
-            judge_scores = {c.name: self.dp.get_weekly_total_score(c, week) for c in active}
+            # 获取当周原始分数
+            current_week_scores = {c.name: self.dp.get_weekly_total_score(c, week) for c in active}
+            
+            # 判断前几周是否有无淘汰周 (决定是否累加)
+            # 如果 week-1 不在 elimination_weeks 中，说明上周没淘汰，需要累加上周分数
+            # 我们需要回溯找到连续的无淘汰周并累加
+            accumulated_scores = current_week_scores.copy()
+            
+            # 检查是否需要累加之前的分数
+            check_week = week - 1
+            while check_week >= 1 and check_week not in elimination_weeks:
+                # 该周没有淘汰，需要累加该周分数
+                for c in active:
+                    if check_week in c.weekly_scores:
+                        prev_score = self.dp.get_weekly_total_score(c, check_week)
+                        accumulated_scores[c.name] = accumulated_scores.get(c.name, 0) + prev_score
+                check_week -= 1
+            
+            # 使用累加后的分数
+            judge_scores = accumulated_scores
             
             # 状态转移
             for i in range(len(self.particles)):
@@ -441,22 +464,21 @@ class SMCInverse:
                 season, week, active, judge_scores
             )
             
-            # 处理每个淘汰事件
-            for event in week_events:
-                # 计算似然并更新权重
-                log_likelihoods = []
-                for particle in self.particles:
-                    ll = self._compute_particle_likelihood(
-                        particle, season, week, event, judge_scores
-                    )
-                    particle.weight *= ll
-                    log_likelihoods.append(np.log(ll + 1e-300))
-                
-                results['log_likelihoods'].append({
-                    'week': week,
-                    'eliminated': event.eliminated,
-                    'mean_log_likelihood': np.mean(log_likelihoods)
-                })
+            # 计算似然并更新权重 (现在一周一个事件，可能多人淘汰)
+            log_likelihoods = []
+            for particle in self.particles:
+                ll = self._compute_particle_likelihood(
+                    particle, season, week, event, judge_scores
+                )
+                particle.weight *= ll
+                log_likelihoods.append(np.log(ll + 1e-300))
+            
+            results['log_likelihoods'].append({
+                'week': week,
+                'eliminated': event.eliminated_set,  # 列表形式
+                'mean_log_likelihood': np.mean(log_likelihoods),
+                'is_multi_elimination': event.is_multi_elimination
+            })
             
             # 归一化权重
             total_weight = sum(p.weight for p in self.particles)
@@ -470,45 +492,56 @@ class SMCInverse:
                 'season': season, 'week': week, 'ess': ess
             })
             
-            # 检验预测
-            for event in week_events:
-                # 计算命中率 (被淘汰者是否在预测的危险区)
-                sorted_preds = sorted(pred_probs.items(), key=lambda x: -x[1])
-                top_3_names = [name for name, _ in sorted_preds[:3]]
-                
-                hit = event.eliminated in top_3_names
+            # 检验预测 (对每个被淘汰者分别检验)
+            sorted_preds = sorted(pred_probs.items(), key=lambda x: -x[1])
+            top_1_names = [name for name, _ in sorted_preds[:1]]
+            top_3_names = [name for name, _ in sorted_preds[:3]]
+            
+            for elim_name in event.eliminated_set:
+                hit_top1 = elim_name in top_1_names
+                hit_top3 = elim_name in top_3_names
                 results['predictions'].append({
                     'week': week,
-                    'eliminated': event.eliminated,
+                    'eliminated': elim_name,
                     'predicted_probs': pred_probs,
-                    'hit_top3': hit
+                    'hit_top1': hit_top1,
+                    'hit_top3': hit_top3
                 })
             
             # 重采样
             if ess < self.params.resample_threshold * self.params.n_particles:
                 self._resample()
                 if verbose:
-                    print(f"  Week {week}: ESS={ess:.1f}, Resampled")
+                    elim_str = ', '.join(event.eliminated_set)
+                    print(f"  Week {week}: ESS={ess:.1f}, Resampled (eliminated: {elim_str})")
             elif verbose:
-                print(f"  Week {week}: ESS={ess:.1f}")
+                elim_str = ', '.join(event.eliminated_set)
+                print(f"  Week {week}: ESS={ess:.1f} (eliminated: {elim_str})")
             
             # 估计投票份额
             estimates = self._estimate_vote_shares(active_names)
             results['weekly_estimates'][week] = estimates
             
             # 更新淘汰状态
-            self.rules.update_elimination_status(len(week_events) > 0)
+            self.rules.update_elimination_status(True)
+            
+            # 更新 prev_week 用于下一轮累加判断
+            prev_week = week
         
-        # 计算整体命中率
+        # 计算整体命中率 (Top-1 和 Top-3)
         if results['predictions']:
-            hit_count = sum(1 for p in results['predictions'] if p['hit_top3'])
-            results['hit_rate_top3'] = hit_count / len(results['predictions'])
+            hit_count_top1 = sum(1 for p in results['predictions'] if p['hit_top1'])
+            hit_count_top3 = sum(1 for p in results['predictions'] if p['hit_top3'])
+            results['hit_rate_top1'] = hit_count_top1 / len(results['predictions'])
+            results['hit_rate_top3'] = hit_count_top3 / len(results['predictions'])
         else:
+            results['hit_rate_top1'] = 0.0
             results['hit_rate_top3'] = 0.0
         
         if verbose:
             print(f"\nSeason {season} Summary:")
             print(f"  Total elimination events: {len(events)}")
+            print(f"  Top-1 Hit Rate: {results['hit_rate_top1']:.2%}")
             print(f"  Top-3 Hit Rate: {results['hit_rate_top3']:.2%}")
         
         return results

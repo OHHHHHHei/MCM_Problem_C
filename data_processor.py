@@ -27,12 +27,27 @@ class Contestant:
 
 @dataclass
 class EliminationEvent:
-    """淘汰事件"""
+    """
+    淘汰事件
+    
+    修正：支持多人淘汰（双淘汰周）
+    同一周淘汰多人时，合并为一个事件，避免逻辑冲突
+    """
     season: int
     week: int
-    eliminated: str  # 被淘汰选手名称
-    survivors: List[str]  # 幸存者名称列表
+    eliminated_set: List[str]  # 被淘汰选手列表 (支持多人)
+    survivors: List[str]  # 幸存者名称列表 (不含任何被淘汰者)
     bottom_two: Optional[Tuple[str, str]] = None  # 对于S28+的 Judge Save
+    
+    @property
+    def eliminated(self) -> str:
+        """兼容旧代码：返回第一个被淘汰者"""
+        return self.eliminated_set[0] if self.eliminated_set else ''
+    
+    @property
+    def is_multi_elimination(self) -> bool:
+        """是否为多人淘汰"""
+        return len(self.eliminated_set) > 1
 
 
 class DataProcessor:
@@ -179,7 +194,7 @@ class DataProcessor:
                     eliminations_by_week[elim_week] = []
                 eliminations_by_week[elim_week].append(c.name)
         
-        # 构建淘汰事件
+        # 构建淘汰事件 (同一周合并为一个事件，修复双淘汰逻辑bug)
         for week in sorted(eliminations_by_week.keys()):
             eliminated_names = eliminations_by_week[week]
             
@@ -187,14 +202,16 @@ class DataProcessor:
             active = self.get_active_contestants(season, week)
             active_names = [c.name for c in active]
             
-            for elim_name in eliminated_names:
-                survivors = [n for n in active_names if n != elim_name]
-                events.append(EliminationEvent(
-                    season=season,
-                    week=week,
-                    eliminated=elim_name,
-                    survivors=survivors
-                ))
+            # 幸存者 = 在场选手 - 所有被淘汰者
+            survivors = [n for n in active_names if n not in eliminated_names]
+            
+            # 一周只生成一个事件，即使有多人淘汰
+            events.append(EliminationEvent(
+                season=season,
+                week=week,
+                eliminated_set=eliminated_names,  # 列表形式
+                survivors=survivors
+            ))
         
         return events
     
@@ -309,7 +326,7 @@ class DataProcessor:
         df_scores.to_csv(f'{output_dir}/weekly_scores.csv', index=False, encoding='utf-8-sig')
         print(f"导出评审分: {len(scores_rows)} 条 -> {output_dir}/weekly_scores.csv")
         
-        # 3. 导出淘汰事件
+        # 3. 导出淘汰事件 (支持多人淘汰)
         events_rows = []
         for season in self.get_seasons():
             events = self.get_elimination_events(season)
@@ -317,10 +334,12 @@ class DataProcessor:
                 events_rows.append({
                     'season': e.season,
                     'week': e.week,
-                    'eliminated': e.eliminated,
+                    'eliminated': '; '.join(e.eliminated_set),  # 支持多人
+                    'num_eliminated': len(e.eliminated_set),
                     'num_survivors': len(e.survivors),
                     'survivors': '; '.join(e.survivors),
-                    'rule_type': self.get_rule_type(e.season)
+                    'rule_type': self.get_rule_type(e.season),
+                    'is_multi_elimination': e.is_multi_elimination
                 })
         
         df_events = pd.DataFrame(events_rows)

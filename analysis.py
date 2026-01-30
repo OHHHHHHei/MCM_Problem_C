@@ -47,25 +47,33 @@ class ResultAnalyzer:
             统计指标
         """
         total_predictions = 0
-        total_hits = 0
-        season_hit_rates = {}
+        total_hits_top1 = 0
+        total_hits_top3 = 0
+        season_hit_rates_top1 = {}
+        season_hit_rates_top3 = {}
         
         for season, result in self.results.items():
             predictions = result.get('predictions', [])
             if not predictions:
                 continue
             
-            hits = sum(1 for p in predictions if p.get('hit_top3', False))
-            season_hit_rates[season] = hits / len(predictions) if predictions else 0
+            hits_top1 = sum(1 for p in predictions if p.get('hit_top1', False))
+            hits_top3 = sum(1 for p in predictions if p.get('hit_top3', False))
+            season_hit_rates_top1[season] = hits_top1 / len(predictions) if predictions else 0
+            season_hit_rates_top3[season] = hits_top3 / len(predictions) if predictions else 0
             
-            total_hits += hits
+            total_hits_top1 += hits_top1
+            total_hits_top3 += hits_top3
             total_predictions += len(predictions)
         
         return {
-            'overall_hit_rate': total_hits / total_predictions if total_predictions > 0 else 0,
+            'overall_hit_rate_top1': total_hits_top1 / total_predictions if total_predictions > 0 else 0,
+            'overall_hit_rate_top3': total_hits_top3 / total_predictions if total_predictions > 0 else 0,
             'total_predictions': total_predictions,
-            'total_hits': total_hits,
-            'season_hit_rates': season_hit_rates
+            'total_hits_top1': total_hits_top1,
+            'total_hits_top3': total_hits_top3,
+            'season_hit_rates_top1': season_hit_rates_top1,
+            'season_hit_rates_top3': season_hit_rates_top3
         }
     
     def identify_controversies(self, likelihood_threshold: float = -2.0) -> List[Dict]:
@@ -300,14 +308,18 @@ def generate_text_report(analyzer: ResultAnalyzer) -> str:
     overall = analyzer.compute_overall_hit_rate()
     lines.append("\n## Overall Prediction Performance")
     lines.append(f"Total Predictions: {overall['total_predictions']}")
-    lines.append(f"Total Hits (Top-3): {overall['total_hits']}")
-    lines.append(f"Overall Hit Rate: {overall['overall_hit_rate']:.2%}")
+    lines.append(f"Total Hits (Top-1): {overall['total_hits_top1']}")
+    lines.append(f"Total Hits (Top-3): {overall['total_hits_top3']}")
+    lines.append(f"Overall Top-1 Hit Rate: {overall['overall_hit_rate_top1']:.2%}")
+    lines.append(f"Overall Top-3 Hit Rate: {overall['overall_hit_rate_top3']:.2%}")
     
     # 按赛季分解
     lines.append("\n## Season-by-Season Hit Rates")
-    for season, rate in sorted(overall['season_hit_rates'].items()):
+    for season in sorted(overall['season_hit_rates_top1'].keys()):
         rule_type = "Percentage" if 3 <= season <= 27 else "Rank"
-        lines.append(f"  Season {season} ({rule_type}): {rate:.2%}")
+        rate_top1 = overall['season_hit_rates_top1'][season]
+        rate_top3 = overall['season_hit_rates_top3'][season]
+        lines.append(f"  Season {season} ({rule_type}): Top-1={rate_top1:.2%}, Top-3={rate_top3:.2%}")
     
     # 规则公平性
     fairness = analyzer.analyze_rule_fairness()
