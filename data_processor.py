@@ -251,6 +251,106 @@ class DataProcessor:
             std_score = 1.0
         
         return {name: (s - mean_score) / std_score for name, s in scores.items()}
+    
+    def export_cleaned_data(self, output_dir: str = 'cleaned_data'):
+        """
+        导出清洗后的数据到CSV文件
+        
+        生成文件:
+            - cleaned_contestants.csv: 选手基本信息
+            - weekly_scores.csv: 每周评审分
+            - elimination_events.csv: 淘汰事件列表
+        """
+        import os
+        os.makedirs(output_dir, exist_ok=True)
+        
+        # 1. 导出选手基本信息
+        contestants_rows = []
+        for (name, season), c in self.contestants.items():
+            contestants_rows.append({
+                'season': c.season,
+                'name': c.name,
+                'partner': c.partner,
+                'industry': c.industry,
+                'homestate': c.homestate or '',
+                'homecountry': c.homecountry,
+                'age': c.age,
+                'result': c.result,
+                'placement': c.placement,
+                'rule_type': self.get_rule_type(c.season),
+                'elimination_week': self.get_elimination_week(c) or '',
+                'total_weeks': len(c.weekly_scores)
+            })
+        
+        df_contestants = pd.DataFrame(contestants_rows)
+        df_contestants = df_contestants.sort_values(['season', 'placement'])
+        df_contestants.to_csv(f'{output_dir}/cleaned_contestants.csv', index=False, encoding='utf-8-sig')
+        print(f"导出选手信息: {len(contestants_rows)} 条 -> {output_dir}/cleaned_contestants.csv")
+        
+        # 2. 导出每周评审分
+        scores_rows = []
+        for (name, season), c in self.contestants.items():
+            for week, scores in c.weekly_scores.items():
+                scores_rows.append({
+                    'season': c.season,
+                    'week': week,
+                    'name': c.name,
+                    'judge1_score': scores[0] if len(scores) > 0 else '',
+                    'judge2_score': scores[1] if len(scores) > 1 else '',
+                    'judge3_score': scores[2] if len(scores) > 2 else '',
+                    'judge4_score': scores[3] if len(scores) > 3 else '',
+                    'total_score': sum(scores),
+                    'average_score': np.mean(scores),
+                    'num_judges': len(scores)
+                })
+        
+        df_scores = pd.DataFrame(scores_rows)
+        df_scores = df_scores.sort_values(['season', 'week', 'total_score'], ascending=[True, True, False])
+        df_scores.to_csv(f'{output_dir}/weekly_scores.csv', index=False, encoding='utf-8-sig')
+        print(f"导出评审分: {len(scores_rows)} 条 -> {output_dir}/weekly_scores.csv")
+        
+        # 3. 导出淘汰事件
+        events_rows = []
+        for season in self.get_seasons():
+            events = self.get_elimination_events(season)
+            for e in events:
+                events_rows.append({
+                    'season': e.season,
+                    'week': e.week,
+                    'eliminated': e.eliminated,
+                    'num_survivors': len(e.survivors),
+                    'survivors': '; '.join(e.survivors),
+                    'rule_type': self.get_rule_type(e.season)
+                })
+        
+        df_events = pd.DataFrame(events_rows)
+        df_events = df_events.sort_values(['season', 'week'])
+        df_events.to_csv(f'{output_dir}/elimination_events.csv', index=False, encoding='utf-8-sig')
+        print(f"导出淘汰事件: {len(events_rows)} 条 -> {output_dir}/elimination_events.csv")
+        
+        # 4. 导出Z-Score标准化分数
+        zscore_rows = []
+        for season in self.get_seasons():
+            contestants = self.get_contestants_in_season(season)
+            max_week = max(max(c.weekly_scores.keys()) for c in contestants if c.weekly_scores)
+            
+            for week in range(1, max_week + 1):
+                zscore_dict = self.compute_zscore_scores(season, week)
+                for name, zscore in zscore_dict.items():
+                    zscore_rows.append({
+                        'season': season,
+                        'week': week,
+                        'name': name,
+                        'zscore': round(zscore, 4)
+                    })
+        
+        df_zscore = pd.DataFrame(zscore_rows)
+        df_zscore = df_zscore.sort_values(['season', 'week', 'zscore'], ascending=[True, True, False])
+        df_zscore.to_csv(f'{output_dir}/zscore_scores.csv', index=False, encoding='utf-8-sig')
+        print(f"导出Z-Score: {len(zscore_rows)} 条 -> {output_dir}/zscore_scores.csv")
+        
+        print(f"\n✓ 所有清洗后数据已导出到 {output_dir}/ 目录")
+        return output_dir
 
 
 def load_data(csv_path: str = '2026_MCM_Problem_C_Data.csv') -> DataProcessor:

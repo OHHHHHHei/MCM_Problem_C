@@ -1,0 +1,299 @@
+﻿season,week,eliminated,num_survivors,survivors,rule_type
+1,2,Trista Sutter,5,John O'Hurley; Kelly Monaco; Evander Holyfield; Rachel Hunter; Joey McIntyre,RANK
+1,3,Evander Holyfield,4,John O'Hurley; Kelly Monaco; Rachel Hunter; Joey McIntyre,RANK
+1,4,Rachel Hunter,3,John O'Hurley; Kelly Monaco; Joey McIntyre,RANK
+2,1,Kenny Mayne,9,Tatum O'Neal; Tia Carrere; George Hamilton; Lisa Rinna; Stacy Keibler; Jerry Rice; Giselle Fernandez; Master P; Drew Lachey,RANK
+2,2,Tatum O'Neal,8,Tia Carrere; George Hamilton; Lisa Rinna; Stacy Keibler; Jerry Rice; Giselle Fernandez; Master P; Drew Lachey,RANK
+2,3,Giselle Fernandez,7,Tia Carrere; George Hamilton; Lisa Rinna; Stacy Keibler; Jerry Rice; Master P; Drew Lachey,RANK
+2,4,Master P,6,Tia Carrere; George Hamilton; Lisa Rinna; Stacy Keibler; Jerry Rice; Drew Lachey,RANK
+2,5,Tia Carrere,5,George Hamilton; Lisa Rinna; Stacy Keibler; Jerry Rice; Drew Lachey,RANK
+2,6,George Hamilton,4,Lisa Rinna; Stacy Keibler; Jerry Rice; Drew Lachey,RANK
+2,7,Lisa Rinna,3,Stacy Keibler; Jerry Rice; Drew Lachey,RANK
+3,1,Tucker Carlson,10,Harry Hamlin; Vivica A. Fox; Monique Coleman; Joey Lawrence; Mario Lopez; Emmitt Smith; Shanna Moakler; Willa Ford; Sara Evans; Jerry Springer,PERCENTAGE
+3,2,Shanna Moakler,9,Harry Hamlin; Vivica A. Fox; Monique Coleman; Joey Lawrence; Mario Lopez; Emmitt Smith; Willa Ford; Sara Evans; Jerry Springer,PERCENTAGE
+3,3,Harry Hamlin,8,Vivica A. Fox; Monique Coleman; Joey Lawrence; Mario Lopez; Emmitt Smith; Willa Ford; Sara Evans; Jerry Springer,PERCENTAGE
+3,4,Vivica A. Fox,7,Monique Coleman; Joey Lawrence; Mario Lopez; Emmitt Smith; Willa Ford; Sara Evans; Jerry Springer,PERCENTAGE
+3,5,Willa Ford,6,Monique Coleman; Joey Lawrence; Mario Lopez; Emmitt Smith; Sara Evans; Jerry Springer,PERCENTAGE
+3,7,Jerry Springer,4,Monique Coleman; Joey Lawrence; Mario Lopez; Emmitt Smith,PERCENTAGE
+3,8,Monique Coleman,3,Joey Lawrence; Mario Lopez; Emmitt Smith,PERCENTAGE
+4,2,Paulina Porizkova,10,John Ratzenberger; Ian Ziering; Clyde Drexler; Laila Ali; Apolo Anton Ohno; Shandi Finnessey; Heather Mills; Billy Ray Cyrus; Joey Fatone; Leeza Gibbons,PERCENTAGE
+4,3,Shandi Finnessey,9,John Ratzenberger; Ian Ziering; Clyde Drexler; Laila Ali; Apolo Anton Ohno; Heather Mills; Billy Ray Cyrus; Joey Fatone; Leeza Gibbons,PERCENTAGE
+4,4,Leeza Gibbons,8,John Ratzenberger; Ian Ziering; Clyde Drexler; Laila Ali; Apolo Anton Ohno; Heather Mills; Billy Ray Cyrus; Joey Fatone,PERCENTAGE
+4,5,Clyde Drexler,7,John Ratzenberger; Ian Ziering; Laila Ali; Apolo Anton Ohno; Heather Mills; Billy Ray Cyrus; Joey Fatone,PERCENTAGE
+4,6,Heather Mills,6,John Ratzenberger; Ian Ziering; Laila Ali; Apolo Anton Ohno; Billy Ray Cyrus; Joey Fatone,PERCENTAGE
+4,7,John Ratzenberger,5,Ian Ziering; Laila Ali; Apolo Anton Ohno; Billy Ray Cyrus; Joey Fatone,PERCENTAGE
+4,8,Billy Ray Cyrus,4,Ian Ziering; Laila Ali; Apolo Anton Ohno; Joey Fatone,PERCENTAGE
+4,9,Ian Ziering,3,Laila Ali; Apolo Anton Ohno; Joey Fatone,PERCENTAGE
+5,1,Josie Maran,11,Cameron Mathison; Jane Seymour; Sabrina Bryan; Jennie Garth; Floyd Mayweather Jr.; Albert Reed; Helio Castroneves; Mel B; Wayne Newton; Marie Osmond; Mark Cuban,PERCENTAGE
+5,2,Albert Reed,10,Cameron Mathison; Jane Seymour; Sabrina Bryan; Jennie Garth; Floyd Mayweather Jr.; Helio Castroneves; Mel B; Wayne Newton; Marie Osmond; Mark Cuban,PERCENTAGE
+5,3,Wayne Newton,9,Cameron Mathison; Jane Seymour; Sabrina Bryan; Jennie Garth; Floyd Mayweather Jr.; Helio Castroneves; Mel B; Marie Osmond; Mark Cuban,PERCENTAGE
+5,4,Floyd Mayweather Jr.,8,Cameron Mathison; Jane Seymour; Sabrina Bryan; Jennie Garth; Helio Castroneves; Mel B; Marie Osmond; Mark Cuban,PERCENTAGE
+5,5,Mark Cuban,7,Cameron Mathison; Jane Seymour; Sabrina Bryan; Jennie Garth; Helio Castroneves; Mel B; Marie Osmond,PERCENTAGE
+5,6,Sabrina Bryan,6,Cameron Mathison; Jane Seymour; Jennie Garth; Helio Castroneves; Mel B; Marie Osmond,PERCENTAGE
+5,7,Jane Seymour,5,Cameron Mathison; Jennie Garth; Helio Castroneves; Mel B; Marie Osmond,PERCENTAGE
+5,8,Cameron Mathison,4,Jennie Garth; Helio Castroneves; Mel B; Marie Osmond,PERCENTAGE
+5,9,Jennie Garth,3,Helio Castroneves; Mel B; Marie Osmond,PERCENTAGE
+6,2,Monica Seles,11,Cristian de la Fuente; Steve Guttenberg; Priscilla Presley; Marlee Matlin; Shannon Elizabeth; Marissa Jaret Winokur; Jason Taylor; Kristi Yamaguchi; Penn Jillette; Adam Carolla; Mario,PERCENTAGE
+6,2,Penn Jillette,11,Cristian de la Fuente; Steve Guttenberg; Priscilla Presley; Marlee Matlin; Shannon Elizabeth; Marissa Jaret Winokur; Jason Taylor; Kristi Yamaguchi; Monica Seles; Adam Carolla; Mario,PERCENTAGE
+6,3,Steve Guttenberg,9,Cristian de la Fuente; Priscilla Presley; Marlee Matlin; Shannon Elizabeth; Marissa Jaret Winokur; Jason Taylor; Kristi Yamaguchi; Adam Carolla; Mario,PERCENTAGE
+6,4,Adam Carolla,8,Cristian de la Fuente; Priscilla Presley; Marlee Matlin; Shannon Elizabeth; Marissa Jaret Winokur; Jason Taylor; Kristi Yamaguchi; Mario,PERCENTAGE
+6,5,Priscilla Presley,7,Cristian de la Fuente; Marlee Matlin; Shannon Elizabeth; Marissa Jaret Winokur; Jason Taylor; Kristi Yamaguchi; Mario,PERCENTAGE
+6,6,Marlee Matlin,6,Cristian de la Fuente; Shannon Elizabeth; Marissa Jaret Winokur; Jason Taylor; Kristi Yamaguchi; Mario,PERCENTAGE
+6,7,Shannon Elizabeth,5,Cristian de la Fuente; Marissa Jaret Winokur; Jason Taylor; Kristi Yamaguchi; Mario,PERCENTAGE
+6,8,Mario,4,Cristian de la Fuente; Marissa Jaret Winokur; Jason Taylor; Kristi Yamaguchi,PERCENTAGE
+6,9,Marissa Jaret Winokur,3,Cristian de la Fuente; Jason Taylor; Kristi Yamaguchi,PERCENTAGE
+7,1,Ted McGinley,12,Cloris Leachman; Susan Lucci; Cody Linley; Misty May-Treanor; Maurice Greene; Warren Sapp; Jeffrey Ross; Toni Braxton; Lance Bass; Kim Kardashian; Rocco DiSpirito; Brooke Burke,PERCENTAGE
+7,1,Jeffrey Ross,12,Ted McGinley; Cloris Leachman; Susan Lucci; Cody Linley; Misty May-Treanor; Maurice Greene; Warren Sapp; Toni Braxton; Lance Bass; Kim Kardashian; Rocco DiSpirito; Brooke Burke,PERCENTAGE
+7,2,Kim Kardashian,10,Cloris Leachman; Susan Lucci; Cody Linley; Misty May-Treanor; Maurice Greene; Warren Sapp; Toni Braxton; Lance Bass; Rocco DiSpirito; Brooke Burke,PERCENTAGE
+7,4,Rocco DiSpirito,8,Cloris Leachman; Susan Lucci; Cody Linley; Maurice Greene; Warren Sapp; Toni Braxton; Lance Bass; Brooke Burke,PERCENTAGE
+7,5,Toni Braxton,7,Cloris Leachman; Susan Lucci; Cody Linley; Maurice Greene; Warren Sapp; Lance Bass; Brooke Burke,PERCENTAGE
+7,6,Cloris Leachman,6,Susan Lucci; Cody Linley; Maurice Greene; Warren Sapp; Lance Bass; Brooke Burke,PERCENTAGE
+7,7,Susan Lucci,5,Cody Linley; Maurice Greene; Warren Sapp; Lance Bass; Brooke Burke,PERCENTAGE
+7,8,Maurice Greene,4,Cody Linley; Warren Sapp; Lance Bass; Brooke Burke,PERCENTAGE
+7,9,Cody Linley,3,Warren Sapp; Lance Bass; Brooke Burke,PERCENTAGE
+8,2,Belinda Carlisle,12,Gilles Marini; Denise Richards; David Alan Grier; Lawrence Taylor; Ty Murray; Shawn Johnson; Steve Wozniak; Chuck Wicks; Lil' Kim; Steve-O; Holly Madison; Melissa Rycroft,PERCENTAGE
+8,3,Denise Richards,11,Gilles Marini; David Alan Grier; Lawrence Taylor; Ty Murray; Shawn Johnson; Steve Wozniak; Chuck Wicks; Lil' Kim; Steve-O; Holly Madison; Melissa Rycroft,PERCENTAGE
+8,4,Steve Wozniak,10,Gilles Marini; David Alan Grier; Lawrence Taylor; Ty Murray; Shawn Johnson; Chuck Wicks; Lil' Kim; Steve-O; Holly Madison; Melissa Rycroft,PERCENTAGE
+8,4,Holly Madison,10,Gilles Marini; David Alan Grier; Lawrence Taylor; Ty Murray; Shawn Johnson; Steve Wozniak; Chuck Wicks; Lil' Kim; Steve-O; Melissa Rycroft,PERCENTAGE
+8,5,David Alan Grier,8,Gilles Marini; Lawrence Taylor; Ty Murray; Shawn Johnson; Chuck Wicks; Lil' Kim; Steve-O; Melissa Rycroft,PERCENTAGE
+8,6,Steve-O,7,Gilles Marini; Lawrence Taylor; Ty Murray; Shawn Johnson; Chuck Wicks; Lil' Kim; Melissa Rycroft,PERCENTAGE
+8,7,Lawrence Taylor,6,Gilles Marini; Ty Murray; Shawn Johnson; Chuck Wicks; Lil' Kim; Melissa Rycroft,PERCENTAGE
+8,8,Chuck Wicks,5,Gilles Marini; Ty Murray; Shawn Johnson; Lil' Kim; Melissa Rycroft,PERCENTAGE
+8,9,Lil' Kim,4,Gilles Marini; Ty Murray; Shawn Johnson; Melissa Rycroft,PERCENTAGE
+8,10,Ty Murray,3,Gilles Marini; Shawn Johnson; Melissa Rycroft,PERCENTAGE
+9,1,Ashley Hamiliton,15,Debi Mazar; Melissa Joan Hart; Mark Dacascos; Chuck Liddell; Natalie Coughlin; Louie Vito; Michael Irvin; Joanna Krupa; Kathy Ireland; Tom DeLay; Macy Gray; Aaron Carter; Mya; Donny Osmond; Kelly Osbourne,PERCENTAGE
+9,1,Macy Gray,15,Ashley Hamiliton; Debi Mazar; Melissa Joan Hart; Mark Dacascos; Chuck Liddell; Natalie Coughlin; Louie Vito; Michael Irvin; Joanna Krupa; Kathy Ireland; Tom DeLay; Aaron Carter; Mya; Donny Osmond; Kelly Osbourne,PERCENTAGE
+9,2,Kathy Ireland,13,Debi Mazar; Melissa Joan Hart; Mark Dacascos; Chuck Liddell; Natalie Coughlin; Louie Vito; Michael Irvin; Joanna Krupa; Tom DeLay; Aaron Carter; Mya; Donny Osmond; Kelly Osbourne,PERCENTAGE
+9,3,Debi Mazar,12,Melissa Joan Hart; Mark Dacascos; Chuck Liddell; Natalie Coughlin; Louie Vito; Michael Irvin; Joanna Krupa; Tom DeLay; Aaron Carter; Mya; Donny Osmond; Kelly Osbourne,PERCENTAGE
+9,4,Chuck Liddell,10,Melissa Joan Hart; Mark Dacascos; Natalie Coughlin; Louie Vito; Michael Irvin; Joanna Krupa; Aaron Carter; Mya; Donny Osmond; Kelly Osbourne,PERCENTAGE
+9,5,Natalie Coughlin,9,Melissa Joan Hart; Mark Dacascos; Louie Vito; Michael Irvin; Joanna Krupa; Aaron Carter; Mya; Donny Osmond; Kelly Osbourne,PERCENTAGE
+9,6,Melissa Joan Hart,8,Mark Dacascos; Louie Vito; Michael Irvin; Joanna Krupa; Aaron Carter; Mya; Donny Osmond; Kelly Osbourne,PERCENTAGE
+9,6,Louie Vito,8,Melissa Joan Hart; Mark Dacascos; Michael Irvin; Joanna Krupa; Aaron Carter; Mya; Donny Osmond; Kelly Osbourne,PERCENTAGE
+9,7,Mark Dacascos,6,Michael Irvin; Joanna Krupa; Aaron Carter; Mya; Donny Osmond; Kelly Osbourne,PERCENTAGE
+9,7,Michael Irvin,6,Mark Dacascos; Joanna Krupa; Aaron Carter; Mya; Donny Osmond; Kelly Osbourne,PERCENTAGE
+9,8,Aaron Carter,4,Joanna Krupa; Mya; Donny Osmond; Kelly Osbourne,PERCENTAGE
+9,9,Joanna Krupa,3,Mya; Donny Osmond; Kelly Osbourne,PERCENTAGE
+10,2,Shannen Doherty,10,Aiden Turner; Niecy Nash; Buzz Aldrin; Chad Ochocinco; Evan Lysacek; Pamela Anderson; Nicole Scherzinger; Erin Andrews; Kate Gosselin; Jake Pavelka,PERCENTAGE
+10,3,Buzz Aldrin,9,Aiden Turner; Niecy Nash; Chad Ochocinco; Evan Lysacek; Pamela Anderson; Nicole Scherzinger; Erin Andrews; Kate Gosselin; Jake Pavelka,PERCENTAGE
+10,4,Aiden Turner,8,Niecy Nash; Chad Ochocinco; Evan Lysacek; Pamela Anderson; Nicole Scherzinger; Erin Andrews; Kate Gosselin; Jake Pavelka,PERCENTAGE
+10,5,Kate Gosselin,7,Niecy Nash; Chad Ochocinco; Evan Lysacek; Pamela Anderson; Nicole Scherzinger; Erin Andrews; Jake Pavelka,PERCENTAGE
+10,6,Jake Pavelka,6,Niecy Nash; Chad Ochocinco; Evan Lysacek; Pamela Anderson; Nicole Scherzinger; Erin Andrews,PERCENTAGE
+10,7,Pamela Anderson,5,Niecy Nash; Chad Ochocinco; Evan Lysacek; Nicole Scherzinger; Erin Andrews,PERCENTAGE
+10,8,Niecy Nash,4,Chad Ochocinco; Evan Lysacek; Nicole Scherzinger; Erin Andrews,PERCENTAGE
+10,9,Chad Ochocinco,3,Evan Lysacek; Nicole Scherzinger; Erin Andrews,PERCENTAGE
+11,1,David Hasselhoff,11,Florence Henderson; Kyle Massey; Jennifer Grey; Rick Fox; Kurt Warner; Margaret Cho; Michael Bolton; Brandy; The Situation; Audrina Patridge; Bristol Palin,PERCENTAGE
+11,2,Michael Bolton,10,Florence Henderson; Kyle Massey; Jennifer Grey; Rick Fox; Kurt Warner; Margaret Cho; Brandy; The Situation; Audrina Patridge; Bristol Palin,PERCENTAGE
+11,3,Margaret Cho,9,Florence Henderson; Kyle Massey; Jennifer Grey; Rick Fox; Kurt Warner; Brandy; The Situation; Audrina Patridge; Bristol Palin,PERCENTAGE
+11,4,The Situation,8,Florence Henderson; Kyle Massey; Jennifer Grey; Rick Fox; Kurt Warner; Brandy; Audrina Patridge; Bristol Palin,PERCENTAGE
+11,5,Florence Henderson,7,Kyle Massey; Jennifer Grey; Rick Fox; Kurt Warner; Brandy; Audrina Patridge; Bristol Palin,PERCENTAGE
+11,6,Audrina Patridge,6,Kyle Massey; Jennifer Grey; Rick Fox; Kurt Warner; Brandy; Bristol Palin,PERCENTAGE
+11,7,Rick Fox,5,Kyle Massey; Jennifer Grey; Kurt Warner; Brandy; Bristol Palin,PERCENTAGE
+11,8,Kurt Warner,4,Kyle Massey; Jennifer Grey; Brandy; Bristol Palin,PERCENTAGE
+11,9,Brandy,3,Kyle Massey; Jennifer Grey; Bristol Palin,PERCENTAGE
+12,2,Mike Catherwood,10,Ralph Macchio; Chelsea Kane; Kirstie Alley; Hines Ward; Sugar Ray Leonard; Chris Jericho; Petra Nemcova; Romeo; Wendy Williams; Kendra Wilkinson,PERCENTAGE
+12,3,Wendy Williams,9,Ralph Macchio; Chelsea Kane; Kirstie Alley; Hines Ward; Sugar Ray Leonard; Chris Jericho; Petra Nemcova; Romeo; Kendra Wilkinson,PERCENTAGE
+12,4,Sugar Ray Leonard,8,Ralph Macchio; Chelsea Kane; Kirstie Alley; Hines Ward; Chris Jericho; Petra Nemcova; Romeo; Kendra Wilkinson,PERCENTAGE
+12,5,Petra Nemcova,7,Ralph Macchio; Chelsea Kane; Kirstie Alley; Hines Ward; Chris Jericho; Romeo; Kendra Wilkinson,PERCENTAGE
+12,6,Chris Jericho,6,Ralph Macchio; Chelsea Kane; Kirstie Alley; Hines Ward; Romeo; Kendra Wilkinson,PERCENTAGE
+12,7,Kendra Wilkinson,5,Ralph Macchio; Chelsea Kane; Kirstie Alley; Hines Ward; Romeo,PERCENTAGE
+12,8,Romeo,4,Ralph Macchio; Chelsea Kane; Kirstie Alley; Hines Ward,PERCENTAGE
+12,9,Ralph Macchio,3,Chelsea Kane; Kirstie Alley; Hines Ward,PERCENTAGE
+13,1,Metta World Peace (Ron),11,Elisabetta Canalis; David Arquette; Ricki Lake; J.R. Martinez; Hope Solo; Chynna Phillips; Kristin Cavallari; Carson Kressley; Chaz Bono; Nancy Grace; Rob Kardashian,PERCENTAGE
+13,2,Elisabetta Canalis,10,David Arquette; Ricki Lake; J.R. Martinez; Hope Solo; Chynna Phillips; Kristin Cavallari; Carson Kressley; Chaz Bono; Nancy Grace; Rob Kardashian,PERCENTAGE
+13,3,Kristin Cavallari,9,David Arquette; Ricki Lake; J.R. Martinez; Hope Solo; Chynna Phillips; Carson Kressley; Chaz Bono; Nancy Grace; Rob Kardashian,PERCENTAGE
+13,4,Chynna Phillips,8,David Arquette; Ricki Lake; J.R. Martinez; Hope Solo; Carson Kressley; Chaz Bono; Nancy Grace; Rob Kardashian,PERCENTAGE
+13,5,Carson Kressley,7,David Arquette; Ricki Lake; J.R. Martinez; Hope Solo; Chaz Bono; Nancy Grace; Rob Kardashian,PERCENTAGE
+13,6,Chaz Bono,6,David Arquette; Ricki Lake; J.R. Martinez; Hope Solo; Nancy Grace; Rob Kardashian,PERCENTAGE
+13,7,David Arquette,5,Ricki Lake; J.R. Martinez; Hope Solo; Nancy Grace; Rob Kardashian,PERCENTAGE
+13,8,Nancy Grace,4,Ricki Lake; J.R. Martinez; Hope Solo; Rob Kardashian,PERCENTAGE
+13,9,Hope Solo,3,Ricki Lake; J.R. Martinez; Rob Kardashian,PERCENTAGE
+14,2,Martina Navratilova,11,William Levy; Jack Wagner; Sherri Sheperd; Jaleel White; Roshon Fegan; Melissa Gilbert; Donald Driver; Gavin DeGraw; Gladys Knight; Katherine Jenkins; Maria Menounos,PERCENTAGE
+14,3,Jack Wagner,10,William Levy; Sherri Sheperd; Jaleel White; Roshon Fegan; Melissa Gilbert; Donald Driver; Gavin DeGraw; Gladys Knight; Katherine Jenkins; Maria Menounos,PERCENTAGE
+14,4,Sherri Sheperd,9,William Levy; Jaleel White; Roshon Fegan; Melissa Gilbert; Donald Driver; Gavin DeGraw; Gladys Knight; Katherine Jenkins; Maria Menounos,PERCENTAGE
+14,5,Gavin DeGraw,8,William Levy; Jaleel White; Roshon Fegan; Melissa Gilbert; Donald Driver; Gladys Knight; Katherine Jenkins; Maria Menounos,PERCENTAGE
+14,6,Gladys Knight,7,William Levy; Jaleel White; Roshon Fegan; Melissa Gilbert; Donald Driver; Katherine Jenkins; Maria Menounos,PERCENTAGE
+14,7,Jaleel White,6,William Levy; Roshon Fegan; Melissa Gilbert; Donald Driver; Katherine Jenkins; Maria Menounos,PERCENTAGE
+14,8,Roshon Fegan,5,William Levy; Melissa Gilbert; Donald Driver; Katherine Jenkins; Maria Menounos,PERCENTAGE
+14,8,Melissa Gilbert,5,William Levy; Roshon Fegan; Donald Driver; Katherine Jenkins; Maria Menounos,PERCENTAGE
+14,9,Maria Menounos,3,William Levy; Donald Driver; Katherine Jenkins,PERCENTAGE
+15,1,Pamela Anderson,12,Gilles Marini; Sabrina Bryan; Kirstie Alley; Kelly Monaco; Apolo Anton Ohno; Emmitt Smith; Shawn Johnson; Helio Castroneves; Joey Fatone; Drew Lachey; Bristol Palin; Melissa Rycroft,PERCENTAGE
+15,2,Joey Fatone,11,Gilles Marini; Sabrina Bryan; Kirstie Alley; Kelly Monaco; Apolo Anton Ohno; Emmitt Smith; Shawn Johnson; Helio Castroneves; Drew Lachey; Bristol Palin; Melissa Rycroft,PERCENTAGE
+15,3,Helio Castroneves,10,Gilles Marini; Sabrina Bryan; Kirstie Alley; Kelly Monaco; Apolo Anton Ohno; Emmitt Smith; Shawn Johnson; Drew Lachey; Bristol Palin; Melissa Rycroft,PERCENTAGE
+15,3,Drew Lachey,10,Gilles Marini; Sabrina Bryan; Kirstie Alley; Kelly Monaco; Apolo Anton Ohno; Emmitt Smith; Shawn Johnson; Helio Castroneves; Bristol Palin; Melissa Rycroft,PERCENTAGE
+15,4,Bristol Palin,8,Gilles Marini; Sabrina Bryan; Kirstie Alley; Kelly Monaco; Apolo Anton Ohno; Emmitt Smith; Shawn Johnson; Melissa Rycroft,PERCENTAGE
+15,6,Sabrina Bryan,7,Gilles Marini; Kirstie Alley; Kelly Monaco; Apolo Anton Ohno; Emmitt Smith; Shawn Johnson; Melissa Rycroft,PERCENTAGE
+15,8,Gilles Marini,6,Kirstie Alley; Kelly Monaco; Apolo Anton Ohno; Emmitt Smith; Shawn Johnson; Melissa Rycroft,PERCENTAGE
+15,8,Kirstie Alley,6,Gilles Marini; Kelly Monaco; Apolo Anton Ohno; Emmitt Smith; Shawn Johnson; Melissa Rycroft,PERCENTAGE
+15,9,Apolo Anton Ohno,4,Kelly Monaco; Emmitt Smith; Shawn Johnson; Melissa Rycroft,PERCENTAGE
+15,9,Emmitt Smith,4,Kelly Monaco; Apolo Anton Ohno; Shawn Johnson; Melissa Rycroft,PERCENTAGE
+16,3,Wynonna Judd,10,Ingo Rademacher; Zendaya; Victor Ortiz; Alexandra Raisman; Jacoby Jones; D. L. Hughley; Andy Dick; Kellie Pickler; Lisa Vanderpump; Sean Lowe,PERCENTAGE
+16,4,Lisa Vanderpump,9,Ingo Rademacher; Zendaya; Victor Ortiz; Alexandra Raisman; Jacoby Jones; D. L. Hughley; Andy Dick; Kellie Pickler; Sean Lowe,PERCENTAGE
+16,5,D. L. Hughley,8,Ingo Rademacher; Zendaya; Victor Ortiz; Alexandra Raisman; Jacoby Jones; Andy Dick; Kellie Pickler; Sean Lowe,PERCENTAGE
+16,6,Victor Ortiz,7,Ingo Rademacher; Zendaya; Alexandra Raisman; Jacoby Jones; Andy Dick; Kellie Pickler; Sean Lowe,PERCENTAGE
+16,7,Andy Dick,6,Ingo Rademacher; Zendaya; Alexandra Raisman; Jacoby Jones; Kellie Pickler; Sean Lowe,PERCENTAGE
+16,8,Sean Lowe,5,Ingo Rademacher; Zendaya; Alexandra Raisman; Jacoby Jones; Kellie Pickler,PERCENTAGE
+16,9,Ingo Rademacher,4,Zendaya; Alexandra Raisman; Jacoby Jones; Kellie Pickler,PERCENTAGE
+16,10,Alexandra Raisman,3,Zendaya; Jacoby Jones; Kellie Pickler,PERCENTAGE
+17,2,Keyshawn Johnson,11,"Valerie Harper; Brant Daugherty; Elizabeth Berkley Lauren; Leah Remini; Corbin Bleu; Amber Riley; Bill Engvall; Christina Milian; Nicole ""Snooki"" Polizzi; Jack Osbourne; Bill Nye",PERCENTAGE
+17,3,Bill Nye,10,"Valerie Harper; Brant Daugherty; Elizabeth Berkley Lauren; Leah Remini; Corbin Bleu; Amber Riley; Bill Engvall; Christina Milian; Nicole ""Snooki"" Polizzi; Jack Osbourne",PERCENTAGE
+17,4,Valerie Harper,9,"Brant Daugherty; Elizabeth Berkley Lauren; Leah Remini; Corbin Bleu; Amber Riley; Bill Engvall; Christina Milian; Nicole ""Snooki"" Polizzi; Jack Osbourne",PERCENTAGE
+17,5,Christina Milian,8,"Brant Daugherty; Elizabeth Berkley Lauren; Leah Remini; Corbin Bleu; Amber Riley; Bill Engvall; Nicole ""Snooki"" Polizzi; Jack Osbourne",PERCENTAGE
+17,7,"Nicole ""Snooki"" Polizzi",7,Brant Daugherty; Elizabeth Berkley Lauren; Leah Remini; Corbin Bleu; Amber Riley; Bill Engvall; Jack Osbourne,PERCENTAGE
+17,8,Brant Daugherty,6,Elizabeth Berkley Lauren; Leah Remini; Corbin Bleu; Amber Riley; Bill Engvall; Jack Osbourne,PERCENTAGE
+17,9,Elizabeth Berkley Lauren,5,Leah Remini; Corbin Bleu; Amber Riley; Bill Engvall; Jack Osbourne,PERCENTAGE
+17,10,Leah Remini,4,Corbin Bleu; Amber Riley; Bill Engvall; Jack Osbourne,PERCENTAGE
+17,11,Bill Engvall,3,Corbin Bleu; Amber Riley; Jack Osbourne,PERCENTAGE
+18,2,Sean Avery,10,Billy Dee Williams; Danica McKellar; James Maslow; Candace Cameron Bure; Charlie White; Amy Purdy; Meryl Davis; Drew Carey; Cody Simpson; NeNe Leakes,PERCENTAGE
+18,2,Diana Nyad,11,Billy Dee Williams; Danica McKellar; James Maslow; Candace Cameron Bure; Sean Avery; Charlie White; Amy Purdy; Meryl Davis; Drew Carey; Cody Simpson; NeNe Leakes,PERCENTAGE
+18,5,Cody Simpson,8,Danica McKellar; James Maslow; Candace Cameron Bure; Charlie White; Amy Purdy; Meryl Davis; Drew Carey; NeNe Leakes,PERCENTAGE
+18,6,Drew Carey,7,Danica McKellar; James Maslow; Candace Cameron Bure; Charlie White; Amy Purdy; Meryl Davis; NeNe Leakes,PERCENTAGE
+18,7,NeNe Leakes,6,Danica McKellar; James Maslow; Candace Cameron Bure; Charlie White; Amy Purdy; Meryl Davis,PERCENTAGE
+18,8,Danica McKellar,5,James Maslow; Candace Cameron Bure; Charlie White; Amy Purdy; Meryl Davis,PERCENTAGE
+18,9,Charlie White,4,James Maslow; Candace Cameron Bure; Amy Purdy; Meryl Davis,PERCENTAGE
+18,10,James Maslow,3,Candace Cameron Bure; Amy Purdy; Meryl Davis,PERCENTAGE
+19,1,Lolo Jones,12,Antonio Sabato Jr.; Jonathan Bennett; Lea Thompson; Janel Parrish; Alfonso Ribeiro; Randy Couture; Tommy Chong; Betsey Johnson; Michael Waltrip; Tavis Smiley; Bethany Mota; Sadie Robertson,PERCENTAGE
+19,2,Tavis Smiley,11,Antonio Sabato Jr.; Jonathan Bennett; Lea Thompson; Janel Parrish; Alfonso Ribeiro; Randy Couture; Tommy Chong; Betsey Johnson; Michael Waltrip; Bethany Mota; Sadie Robertson,PERCENTAGE
+19,3,Randy Couture,10,Antonio Sabato Jr.; Jonathan Bennett; Lea Thompson; Janel Parrish; Alfonso Ribeiro; Tommy Chong; Betsey Johnson; Michael Waltrip; Bethany Mota; Sadie Robertson,PERCENTAGE
+19,4,Betsey Johnson,9,Antonio Sabato Jr.; Jonathan Bennett; Lea Thompson; Janel Parrish; Alfonso Ribeiro; Tommy Chong; Michael Waltrip; Bethany Mota; Sadie Robertson,PERCENTAGE
+19,6,Jonathan Bennett,8,Antonio Sabato Jr.; Lea Thompson; Janel Parrish; Alfonso Ribeiro; Tommy Chong; Michael Waltrip; Bethany Mota; Sadie Robertson,PERCENTAGE
+19,7,Antonio Sabato Jr.,7,Lea Thompson; Janel Parrish; Alfonso Ribeiro; Tommy Chong; Michael Waltrip; Bethany Mota; Sadie Robertson,PERCENTAGE
+19,8,Michael Waltrip,6,Lea Thompson; Janel Parrish; Alfonso Ribeiro; Tommy Chong; Bethany Mota; Sadie Robertson,PERCENTAGE
+19,9,Lea Thompson,5,Janel Parrish; Alfonso Ribeiro; Tommy Chong; Bethany Mota; Sadie Robertson,PERCENTAGE
+19,10,Tommy Chong,4,Janel Parrish; Alfonso Ribeiro; Bethany Mota; Sadie Robertson,PERCENTAGE
+19,11,Bethany Mota,3,Janel Parrish; Alfonso Ribeiro; Sadie Robertson,PERCENTAGE
+20,2,Redfoo,11,Suzanne Somers; Willow Shields; Riker Lynch; Rumer Willis; Nastia Liukin; Michael Sam; Robert Herjavec; Charlotte McKinney; Noah Galloway; Patti LaBelle; Chris Soules,PERCENTAGE
+20,3,Charlotte McKinney,10,Suzanne Somers; Willow Shields; Riker Lynch; Rumer Willis; Nastia Liukin; Michael Sam; Robert Herjavec; Noah Galloway; Patti LaBelle; Chris Soules,PERCENTAGE
+20,4,Michael Sam,9,Suzanne Somers; Willow Shields; Riker Lynch; Rumer Willis; Nastia Liukin; Robert Herjavec; Noah Galloway; Patti LaBelle; Chris Soules,PERCENTAGE
+20,5,Suzanne Somers,8,Willow Shields; Riker Lynch; Rumer Willis; Nastia Liukin; Robert Herjavec; Noah Galloway; Patti LaBelle; Chris Soules,PERCENTAGE
+20,6,Patti LaBelle,7,Willow Shields; Riker Lynch; Rumer Willis; Nastia Liukin; Robert Herjavec; Noah Galloway; Chris Soules,PERCENTAGE
+20,7,Willow Shields,6,Riker Lynch; Rumer Willis; Nastia Liukin; Robert Herjavec; Noah Galloway; Chris Soules,PERCENTAGE
+20,8,Robert Herjavec,5,Riker Lynch; Rumer Willis; Nastia Liukin; Noah Galloway; Chris Soules,PERCENTAGE
+20,8,Chris Soules,5,Riker Lynch; Rumer Willis; Nastia Liukin; Robert Herjavec; Noah Galloway,PERCENTAGE
+20,9,Nastia Liukin,3,Riker Lynch; Rumer Willis; Noah Galloway,PERCENTAGE
+21,2,Victor Espinoza,12,Gary Busey; Alexa PenaVega; Carlos PenaVega; Alek Skarlatos; Chaka Khan; Andy Grammer; Tamar Braxton; Nick Carter; Hayes Grier; Bindi Irwin; Kim Zolciak-Biermann; Paula Deen,PERCENTAGE
+21,2,Chaka Khan,12,Gary Busey; Alexa PenaVega; Carlos PenaVega; Victor Espinoza; Alek Skarlatos; Andy Grammer; Tamar Braxton; Nick Carter; Hayes Grier; Bindi Irwin; Kim Zolciak-Biermann; Paula Deen,PERCENTAGE
+21,4,Gary Busey,9,Alexa PenaVega; Carlos PenaVega; Alek Skarlatos; Andy Grammer; Tamar Braxton; Nick Carter; Hayes Grier; Bindi Irwin; Paula Deen,PERCENTAGE
+21,6,Paula Deen,8,Alexa PenaVega; Carlos PenaVega; Alek Skarlatos; Andy Grammer; Tamar Braxton; Nick Carter; Hayes Grier; Bindi Irwin,PERCENTAGE
+21,7,Hayes Grier,7,Alexa PenaVega; Carlos PenaVega; Alek Skarlatos; Andy Grammer; Tamar Braxton; Nick Carter; Bindi Irwin,PERCENTAGE
+21,8,Andy Grammer,6,Alexa PenaVega; Carlos PenaVega; Alek Skarlatos; Tamar Braxton; Nick Carter; Bindi Irwin,PERCENTAGE
+21,9,Alexa PenaVega,5,Carlos PenaVega; Alek Skarlatos; Tamar Braxton; Nick Carter; Bindi Irwin,PERCENTAGE
+21,11,Carlos PenaVega,3,Alek Skarlatos; Nick Carter; Bindi Irwin,PERCENTAGE
+22,2,Geraldo Rivera,11,Mischa Barton; Kim Fields; Jodie Sweetin; Doug Flutie; Von Miller; Antonio Brown; Paige VanZant; Nyle DiMarco; Ginger Zee; Wanya Morris; Marla Maples,PERCENTAGE
+22,3,Mischa Barton,10,Kim Fields; Jodie Sweetin; Doug Flutie; Von Miller; Antonio Brown; Paige VanZant; Nyle DiMarco; Ginger Zee; Wanya Morris; Marla Maples,PERCENTAGE
+22,4,Marla Maples,9,Kim Fields; Jodie Sweetin; Doug Flutie; Von Miller; Antonio Brown; Paige VanZant; Nyle DiMarco; Ginger Zee; Wanya Morris,PERCENTAGE
+22,6,Doug Flutie,8,Kim Fields; Jodie Sweetin; Von Miller; Antonio Brown; Paige VanZant; Nyle DiMarco; Ginger Zee; Wanya Morris,PERCENTAGE
+22,7,Kim Fields,7,Jodie Sweetin; Von Miller; Antonio Brown; Paige VanZant; Nyle DiMarco; Ginger Zee; Wanya Morris,PERCENTAGE
+22,7,Von Miller,7,Kim Fields; Jodie Sweetin; Antonio Brown; Paige VanZant; Nyle DiMarco; Ginger Zee; Wanya Morris,PERCENTAGE
+22,8,Jodie Sweetin,5,Antonio Brown; Paige VanZant; Nyle DiMarco; Ginger Zee; Wanya Morris,PERCENTAGE
+22,9,Antonio Brown,4,Paige VanZant; Nyle DiMarco; Ginger Zee; Wanya Morris,PERCENTAGE
+22,9,Wanya Morris,4,Antonio Brown; Paige VanZant; Nyle DiMarco; Ginger Zee,PERCENTAGE
+23,2,Jake T. Austin,12,Maureen McCormick; Marilu Henner; Ryan Lochte; Calvin Johnson Jr.; Laurie Hernandez; Amber Rose; Rick Perry; James Hinchcliffe; Babyface; Vanilla Ice; Jana Kramer; Terra Jole,PERCENTAGE
+23,3,Rick Perry,11,Maureen McCormick; Marilu Henner; Ryan Lochte; Calvin Johnson Jr.; Laurie Hernandez; Amber Rose; James Hinchcliffe; Babyface; Vanilla Ice; Jana Kramer; Terra Jole,PERCENTAGE
+23,4,Babyface,10,Maureen McCormick; Marilu Henner; Ryan Lochte; Calvin Johnson Jr.; Laurie Hernandez; Amber Rose; James Hinchcliffe; Vanilla Ice; Jana Kramer; Terra Jole,PERCENTAGE
+23,4,Vanilla Ice,10,Maureen McCormick; Marilu Henner; Ryan Lochte; Calvin Johnson Jr.; Laurie Hernandez; Amber Rose; James Hinchcliffe; Babyface; Jana Kramer; Terra Jole,PERCENTAGE
+23,6,Amber Rose,8,Maureen McCormick; Marilu Henner; Ryan Lochte; Calvin Johnson Jr.; Laurie Hernandez; James Hinchcliffe; Jana Kramer; Terra Jole,PERCENTAGE
+23,7,Maureen McCormick,7,Marilu Henner; Ryan Lochte; Calvin Johnson Jr.; Laurie Hernandez; James Hinchcliffe; Jana Kramer; Terra Jole,PERCENTAGE
+23,8,Ryan Lochte,6,Marilu Henner; Calvin Johnson Jr.; Laurie Hernandez; James Hinchcliffe; Jana Kramer; Terra Jole,PERCENTAGE
+23,9,Marilu Henner,5,Calvin Johnson Jr.; Laurie Hernandez; James Hinchcliffe; Jana Kramer; Terra Jole,PERCENTAGE
+23,10,Terra Jole,4,Calvin Johnson Jr.; Laurie Hernandez; James Hinchcliffe; Jana Kramer,PERCENTAGE
+23,11,Jana Kramer,3,Calvin Johnson Jr.; Laurie Hernandez; James Hinchcliffe,PERCENTAGE
+24,2,Chris Kattan,11,Charo; Mr. T; Heather Morris; Nancy Kerrigan; Bonner Bolton; Simone Biles; David Ross; Rashad Jennings; Erika Jayne; Normani; Nick Viall,PERCENTAGE
+24,3,Charo,10,Mr. T; Heather Morris; Nancy Kerrigan; Bonner Bolton; Simone Biles; David Ross; Rashad Jennings; Erika Jayne; Normani; Nick Viall,PERCENTAGE
+24,4,Mr. T,9,Heather Morris; Nancy Kerrigan; Bonner Bolton; Simone Biles; David Ross; Rashad Jennings; Erika Jayne; Normani; Nick Viall,PERCENTAGE
+24,5,Erika Jayne,8,Heather Morris; Nancy Kerrigan; Bonner Bolton; Simone Biles; David Ross; Rashad Jennings; Normani; Nick Viall,PERCENTAGE
+24,6,Heather Morris,7,Nancy Kerrigan; Bonner Bolton; Simone Biles; David Ross; Rashad Jennings; Normani; Nick Viall,PERCENTAGE
+24,7,Nancy Kerrigan,6,Bonner Bolton; Simone Biles; David Ross; Rashad Jennings; Normani; Nick Viall,PERCENTAGE
+24,7,Nick Viall,6,Nancy Kerrigan; Bonner Bolton; Simone Biles; David Ross; Rashad Jennings; Normani,PERCENTAGE
+24,8,Bonner Bolton,4,Simone Biles; David Ross; Rashad Jennings; Normani,PERCENTAGE
+24,9,Simone Biles,3,David Ross; Rashad Jennings; Normani,PERCENTAGE
+25,2,Barbara Corcoran,12,Sasha Pieterse; Frankie Muniz; Jordan Fisher; Derek Fisher; Nikki Bella; Terrell Owens; Victoria Arlen; Lindsey Stirling; Debbie Gibson; Nick Lachey; Drew Scott; Vanessa Lachey,PERCENTAGE
+25,2,Debbie Gibson,12,Sasha Pieterse; Frankie Muniz; Jordan Fisher; Derek Fisher; Nikki Bella; Terrell Owens; Victoria Arlen; Barbara Corcoran; Lindsey Stirling; Nick Lachey; Drew Scott; Vanessa Lachey,PERCENTAGE
+25,4,Derek Fisher,10,Sasha Pieterse; Frankie Muniz; Jordan Fisher; Nikki Bella; Terrell Owens; Victoria Arlen; Lindsey Stirling; Nick Lachey; Drew Scott; Vanessa Lachey,PERCENTAGE
+25,5,Sasha Pieterse,9,Frankie Muniz; Jordan Fisher; Nikki Bella; Terrell Owens; Victoria Arlen; Lindsey Stirling; Nick Lachey; Drew Scott; Vanessa Lachey,PERCENTAGE
+25,6,Nick Lachey,8,Frankie Muniz; Jordan Fisher; Nikki Bella; Terrell Owens; Victoria Arlen; Lindsey Stirling; Drew Scott; Vanessa Lachey,PERCENTAGE
+25,7,Nikki Bella,7,Frankie Muniz; Jordan Fisher; Terrell Owens; Victoria Arlen; Lindsey Stirling; Drew Scott; Vanessa Lachey,PERCENTAGE
+25,7,Vanessa Lachey,7,Frankie Muniz; Jordan Fisher; Nikki Bella; Terrell Owens; Victoria Arlen; Lindsey Stirling; Drew Scott,PERCENTAGE
+25,8,Terrell Owens,5,Frankie Muniz; Jordan Fisher; Victoria Arlen; Lindsey Stirling; Drew Scott,PERCENTAGE
+25,9,Victoria Arlen,4,Frankie Muniz; Jordan Fisher; Lindsey Stirling; Drew Scott,PERCENTAGE
+25,10,Drew Scott,3,Frankie Muniz; Jordan Fisher; Lindsey Stirling,PERCENTAGE
+26,1,Jamie Anderson,9,Johnny Damon; Kareem Abdul-Jabbar; Arike Ogunbowale; Jennie Finch Daigle; Chris Mazdzer; Mirai Nagasu; Tonya Harding; Josh Norman; Adam Rippon,PERCENTAGE
+26,1,Johnny Damon,9,Jamie Anderson; Kareem Abdul-Jabbar; Arike Ogunbowale; Jennie Finch Daigle; Chris Mazdzer; Mirai Nagasu; Tonya Harding; Josh Norman; Adam Rippon,PERCENTAGE
+26,2,Kareem Abdul-Jabbar,7,Arike Ogunbowale; Jennie Finch Daigle; Chris Mazdzer; Mirai Nagasu; Tonya Harding; Josh Norman; Adam Rippon,PERCENTAGE
+26,2,Arike Ogunbowale,7,Kareem Abdul-Jabbar; Jennie Finch Daigle; Chris Mazdzer; Mirai Nagasu; Tonya Harding; Josh Norman; Adam Rippon,PERCENTAGE
+26,3,Jennie Finch Daigle,5,Chris Mazdzer; Mirai Nagasu; Tonya Harding; Josh Norman; Adam Rippon,PERCENTAGE
+26,3,Chris Mazdzer,5,Jennie Finch Daigle; Mirai Nagasu; Tonya Harding; Josh Norman; Adam Rippon,PERCENTAGE
+26,3,Mirai Nagasu,5,Jennie Finch Daigle; Chris Mazdzer; Tonya Harding; Josh Norman; Adam Rippon,PERCENTAGE
+27,1,Nikki Glaser,12,Juan Pablo Di Pace; Evanna Lynch; Nancy McKeon; John Schneider; Milo Manheim; Danelle Umstead; Mary Lou Retton; DeMarcus Ware; Bobby Bones; Tinashe; Alexis Ren; Joe Amabile,PERCENTAGE
+27,2,Danelle Umstead,11,Juan Pablo Di Pace; Evanna Lynch; Nancy McKeon; John Schneider; Milo Manheim; Mary Lou Retton; DeMarcus Ware; Bobby Bones; Tinashe; Alexis Ren; Joe Amabile,PERCENTAGE
+27,3,Nancy McKeon,10,Juan Pablo Di Pace; Evanna Lynch; John Schneider; Milo Manheim; Mary Lou Retton; DeMarcus Ware; Bobby Bones; Tinashe; Alexis Ren; Joe Amabile,PERCENTAGE
+27,4,Tinashe,9,Juan Pablo Di Pace; Evanna Lynch; John Schneider; Milo Manheim; Mary Lou Retton; DeMarcus Ware; Bobby Bones; Alexis Ren; Joe Amabile,PERCENTAGE
+27,6,Mary Lou Retton,8,Juan Pablo Di Pace; Evanna Lynch; John Schneider; Milo Manheim; DeMarcus Ware; Bobby Bones; Alexis Ren; Joe Amabile,PERCENTAGE
+27,7,John Schneider,7,Juan Pablo Di Pace; Evanna Lynch; Milo Manheim; DeMarcus Ware; Bobby Bones; Alexis Ren; Joe Amabile,PERCENTAGE
+27,7,DeMarcus Ware,7,Juan Pablo Di Pace; Evanna Lynch; John Schneider; Milo Manheim; Bobby Bones; Alexis Ren; Joe Amabile,PERCENTAGE
+27,8,Juan Pablo Di Pace,5,Evanna Lynch; Milo Manheim; Bobby Bones; Alexis Ren; Joe Amabile,PERCENTAGE
+27,8,Joe Amabile,5,Juan Pablo Di Pace; Evanna Lynch; Milo Manheim; Bobby Bones; Alexis Ren,PERCENTAGE
+28,2,Mary Wilson,11,Kate Flannery; James Van Der Beek; Kel Mitchell; Ray Lewis; Lamar Odom; Sailor Brinkley-Cook; Sean Spicer; Lauren Alaina; Ally Brooke; Karamo Brown; Hannah Brown,RANK_WITH_SAVE
+28,4,Lamar Odom,9,Kate Flannery; James Van Der Beek; Kel Mitchell; Sailor Brinkley-Cook; Sean Spicer; Lauren Alaina; Ally Brooke; Karamo Brown; Hannah Brown,RANK_WITH_SAVE
+28,6,Sailor Brinkley-Cook,8,Kate Flannery; James Van Der Beek; Kel Mitchell; Sean Spicer; Lauren Alaina; Ally Brooke; Karamo Brown; Hannah Brown,RANK_WITH_SAVE
+28,7,Karamo Brown,7,Kate Flannery; James Van Der Beek; Kel Mitchell; Sean Spicer; Lauren Alaina; Ally Brooke; Hannah Brown,RANK_WITH_SAVE
+28,8,Kate Flannery,6,James Van Der Beek; Kel Mitchell; Sean Spicer; Lauren Alaina; Ally Brooke; Hannah Brown,RANK_WITH_SAVE
+28,9,Sean Spicer,5,James Van Der Beek; Kel Mitchell; Lauren Alaina; Ally Brooke; Hannah Brown,RANK_WITH_SAVE
+28,10,James Van Der Beek,4,Kel Mitchell; Lauren Alaina; Ally Brooke; Hannah Brown,RANK_WITH_SAVE
+29,2,Charles Oakley,14,Anne Heche; Jesse Metcalfe; Chrishell Stause; Skai Jackson; Justina Machado; Veron Davis; Johnny Weir; Nev Schulman; AJ McLean; Nelly; Kaitlyn Bristowe; Carole Baskin; Monica Aldama; Jeannie Mai,RANK_WITH_SAVE
+29,3,Carole Baskin,13,Anne Heche; Jesse Metcalfe; Chrishell Stause; Skai Jackson; Justina Machado; Veron Davis; Johnny Weir; Nev Schulman; AJ McLean; Nelly; Kaitlyn Bristowe; Monica Aldama; Jeannie Mai,RANK_WITH_SAVE
+29,4,Anne Heche,12,Jesse Metcalfe; Chrishell Stause; Skai Jackson; Justina Machado; Veron Davis; Johnny Weir; Nev Schulman; AJ McLean; Nelly; Kaitlyn Bristowe; Monica Aldama; Jeannie Mai,RANK_WITH_SAVE
+29,5,Jesse Metcalfe,11,Chrishell Stause; Skai Jackson; Justina Machado; Veron Davis; Johnny Weir; Nev Schulman; AJ McLean; Nelly; Kaitlyn Bristowe; Monica Aldama; Jeannie Mai,RANK_WITH_SAVE
+29,6,Veron Davis,10,Chrishell Stause; Skai Jackson; Justina Machado; Johnny Weir; Nev Schulman; AJ McLean; Nelly; Kaitlyn Bristowe; Monica Aldama; Jeannie Mai,RANK_WITH_SAVE
+29,7,Monica Aldama,9,Chrishell Stause; Skai Jackson; Justina Machado; Johnny Weir; Nev Schulman; AJ McLean; Nelly; Kaitlyn Bristowe; Jeannie Mai,RANK_WITH_SAVE
+29,8,Chrishell Stause,7,Skai Jackson; Justina Machado; Johnny Weir; Nev Schulman; AJ McLean; Nelly; Kaitlyn Bristowe,RANK_WITH_SAVE
+29,9,AJ McLean,6,Skai Jackson; Justina Machado; Johnny Weir; Nev Schulman; Nelly; Kaitlyn Bristowe,RANK_WITH_SAVE
+29,10,Skai Jackson,5,Justina Machado; Johnny Weir; Nev Schulman; Nelly; Kaitlyn Bristowe,RANK_WITH_SAVE
+29,10,Johnny Weir,5,Skai Jackson; Justina Machado; Nev Schulman; Nelly; Kaitlyn Bristowe,RANK_WITH_SAVE
+30,2,Martin Kove,14,"Brian Austin Green; Melora Hardin; Matt James; Mike ""The Miz"" Mizanin; Suni Lee; Iman Shumpert; Cody Rigsby; Melanie C; Jimmie Allen; Olivia Jade; JoJo Siwa; Christine Chiu; Kenya Moore; Amanda Kloots",RANK_WITH_SAVE
+30,3,Christine Chiu,13,"Brian Austin Green; Melora Hardin; Matt James; Mike ""The Miz"" Mizanin; Suni Lee; Iman Shumpert; Cody Rigsby; Melanie C; Jimmie Allen; Olivia Jade; JoJo Siwa; Kenya Moore; Amanda Kloots",RANK_WITH_SAVE
+30,4,Brian Austin Green,12,"Melora Hardin; Matt James; Mike ""The Miz"" Mizanin; Suni Lee; Iman Shumpert; Cody Rigsby; Melanie C; Jimmie Allen; Olivia Jade; JoJo Siwa; Kenya Moore; Amanda Kloots",RANK_WITH_SAVE
+30,4,Matt James,12,"Brian Austin Green; Melora Hardin; Mike ""The Miz"" Mizanin; Suni Lee; Iman Shumpert; Cody Rigsby; Melanie C; Jimmie Allen; Olivia Jade; JoJo Siwa; Kenya Moore; Amanda Kloots",RANK_WITH_SAVE
+30,5,Melanie C,10,"Melora Hardin; Mike ""The Miz"" Mizanin; Suni Lee; Iman Shumpert; Cody Rigsby; Jimmie Allen; Olivia Jade; JoJo Siwa; Kenya Moore; Amanda Kloots",RANK_WITH_SAVE
+30,6,Kenya Moore,9,"Melora Hardin; Mike ""The Miz"" Mizanin; Suni Lee; Iman Shumpert; Cody Rigsby; Jimmie Allen; Olivia Jade; JoJo Siwa; Amanda Kloots",RANK_WITH_SAVE
+30,7,"Mike ""The Miz"" Mizanin",8,Melora Hardin; Suni Lee; Iman Shumpert; Cody Rigsby; Jimmie Allen; Olivia Jade; JoJo Siwa; Amanda Kloots,RANK_WITH_SAVE
+30,8,Jimmie Allen,7,Melora Hardin; Suni Lee; Iman Shumpert; Cody Rigsby; Olivia Jade; JoJo Siwa; Amanda Kloots,RANK_WITH_SAVE
+30,8,Olivia Jade,7,Melora Hardin; Suni Lee; Iman Shumpert; Cody Rigsby; Jimmie Allen; JoJo Siwa; Amanda Kloots,RANK_WITH_SAVE
+30,9,Melora Hardin,5,Suni Lee; Iman Shumpert; Cody Rigsby; JoJo Siwa; Amanda Kloots,RANK_WITH_SAVE
+30,9,Suni Lee,5,Melora Hardin; Iman Shumpert; Cody Rigsby; JoJo Siwa; Amanda Kloots,RANK_WITH_SAVE
+31,1,Jason Lewis,15,Cheryl Ladd; Selma Blair; Joseph Baena; Trevor Donovan; Daniel Durant; Wayne Brady; Sam Champion; Jessie James Decker; Jordin Sparks; Heidi D'Amelio; Charli D'Amelio; Teresa Giudice; Vinny Guadagnino; Shangela; Gabby Windey,RANK_WITH_SAVE
+31,2,Teresa Giudice,14,Cheryl Ladd; Selma Blair; Joseph Baena; Trevor Donovan; Daniel Durant; Wayne Brady; Sam Champion; Jessie James Decker; Jordin Sparks; Heidi D'Amelio; Charli D'Amelio; Vinny Guadagnino; Shangela; Gabby Windey,RANK_WITH_SAVE
+31,3,Cheryl Ladd,13,Selma Blair; Joseph Baena; Trevor Donovan; Daniel Durant; Wayne Brady; Sam Champion; Jessie James Decker; Jordin Sparks; Heidi D'Amelio; Charli D'Amelio; Vinny Guadagnino; Shangela; Gabby Windey,RANK_WITH_SAVE
+31,4,Sam Champion,12,Selma Blair; Joseph Baena; Trevor Donovan; Daniel Durant; Wayne Brady; Jessie James Decker; Jordin Sparks; Heidi D'Amelio; Charli D'Amelio; Vinny Guadagnino; Shangela; Gabby Windey,RANK_WITH_SAVE
+31,5,Joseph Baena,11,Selma Blair; Trevor Donovan; Daniel Durant; Wayne Brady; Jessie James Decker; Jordin Sparks; Heidi D'Amelio; Charli D'Amelio; Vinny Guadagnino; Shangela; Gabby Windey,RANK_WITH_SAVE
+31,6,Jessie James Decker,9,Trevor Donovan; Daniel Durant; Wayne Brady; Jordin Sparks; Heidi D'Amelio; Charli D'Amelio; Vinny Guadagnino; Shangela; Gabby Windey,RANK_WITH_SAVE
+31,7,Jordin Sparks,8,Trevor Donovan; Daniel Durant; Wayne Brady; Heidi D'Amelio; Charli D'Amelio; Vinny Guadagnino; Shangela; Gabby Windey,RANK_WITH_SAVE
+31,8,Heidi D'Amelio,7,Trevor Donovan; Daniel Durant; Wayne Brady; Charli D'Amelio; Vinny Guadagnino; Shangela; Gabby Windey,RANK_WITH_SAVE
+31,8,Vinny Guadagnino,7,Trevor Donovan; Daniel Durant; Wayne Brady; Heidi D'Amelio; Charli D'Amelio; Shangela; Gabby Windey,RANK_WITH_SAVE
+31,9,Trevor Donovan,5,Daniel Durant; Wayne Brady; Charli D'Amelio; Shangela; Gabby Windey,RANK_WITH_SAVE
+31,9,Daniel Durant,5,Trevor Donovan; Wayne Brady; Charli D'Amelio; Shangela; Gabby Windey,RANK_WITH_SAVE
+32,1,Matt Walsh,13,Jamie Lynn Spears; Mira Sorvino; Barry Williams; Alyson Hannigan; Xochitl Gomez; Adrian Peterson; Tyson Beckford; Jason Mraz; Lele Pons; Harry Jowsey; Mauricio Umansky; Charity Lawson; Ariana Madix,RANK_WITH_SAVE
+32,2,Jamie Lynn Spears,12,Mira Sorvino; Barry Williams; Alyson Hannigan; Xochitl Gomez; Adrian Peterson; Tyson Beckford; Jason Mraz; Lele Pons; Harry Jowsey; Mauricio Umansky; Charity Lawson; Ariana Madix,RANK_WITH_SAVE
+32,3,Tyson Beckford,11,Mira Sorvino; Barry Williams; Alyson Hannigan; Xochitl Gomez; Adrian Peterson; Jason Mraz; Lele Pons; Harry Jowsey; Mauricio Umansky; Charity Lawson; Ariana Madix,RANK_WITH_SAVE
+32,4,Adrian Peterson,10,Mira Sorvino; Barry Williams; Alyson Hannigan; Xochitl Gomez; Jason Mraz; Lele Pons; Harry Jowsey; Mauricio Umansky; Charity Lawson; Ariana Madix,RANK_WITH_SAVE
+32,5,Mira Sorvino,9,Barry Williams; Alyson Hannigan; Xochitl Gomez; Jason Mraz; Lele Pons; Harry Jowsey; Mauricio Umansky; Charity Lawson; Ariana Madix,RANK_WITH_SAVE
+32,6,Mauricio Umansky,8,Barry Williams; Alyson Hannigan; Xochitl Gomez; Jason Mraz; Lele Pons; Harry Jowsey; Charity Lawson; Ariana Madix,RANK_WITH_SAVE
+32,7,Lele Pons,7,Barry Williams; Alyson Hannigan; Xochitl Gomez; Jason Mraz; Harry Jowsey; Charity Lawson; Ariana Madix,RANK_WITH_SAVE
+32,8,Barry Williams,6,Alyson Hannigan; Xochitl Gomez; Jason Mraz; Harry Jowsey; Charity Lawson; Ariana Madix,RANK_WITH_SAVE
+32,9,Harry Jowsey,5,Alyson Hannigan; Xochitl Gomez; Jason Mraz; Charity Lawson; Ariana Madix,RANK_WITH_SAVE
+33,2,Tori Spelling,12,Eric Roberts; Reginald VelJohnson; Chandler Kinney; Dwight Howard; Danny Amendola; Stephen Nedoroscik; Ilona Maher; Anna Delvey; Brooks Nader; Phaedra Parks; Jenn Tran; Joey Graziadei,RANK_WITH_SAVE
+33,2,Anna Delvey,12,Tori Spelling; Eric Roberts; Reginald VelJohnson; Chandler Kinney; Dwight Howard; Danny Amendola; Stephen Nedoroscik; Ilona Maher; Brooks Nader; Phaedra Parks; Jenn Tran; Joey Graziadei,RANK_WITH_SAVE
+33,3,Eric Roberts,10,Reginald VelJohnson; Chandler Kinney; Dwight Howard; Danny Amendola; Stephen Nedoroscik; Ilona Maher; Brooks Nader; Phaedra Parks; Jenn Tran; Joey Graziadei,RANK_WITH_SAVE
+33,3,Reginald VelJohnson,10,Eric Roberts; Chandler Kinney; Dwight Howard; Danny Amendola; Stephen Nedoroscik; Ilona Maher; Brooks Nader; Phaedra Parks; Jenn Tran; Joey Graziadei,RANK_WITH_SAVE
+33,4,Brooks Nader,8,Chandler Kinney; Dwight Howard; Danny Amendola; Stephen Nedoroscik; Ilona Maher; Phaedra Parks; Jenn Tran; Joey Graziadei,RANK_WITH_SAVE
+33,5,Phaedra Parks,7,Chandler Kinney; Dwight Howard; Danny Amendola; Stephen Nedoroscik; Ilona Maher; Jenn Tran; Joey Graziadei,RANK_WITH_SAVE
+33,6,Jenn Tran,6,Chandler Kinney; Dwight Howard; Danny Amendola; Stephen Nedoroscik; Ilona Maher; Joey Graziadei,RANK_WITH_SAVE
+33,7,Dwight Howard,5,Chandler Kinney; Danny Amendola; Stephen Nedoroscik; Ilona Maher; Joey Graziadei,RANK_WITH_SAVE
+34,2,Corey Feldman,13,Danielle Fishel; Elaine Hendrix; Baron Davis; Jordan Chiles; Andy Richter; Robert Irwin; Hilaria Baldwin; Lauren Jauregui; Scott Hoying; Alix Earle; Jen Affleck; Whitney Leavitt; Dylan Efron,RANK_WITH_SAVE
+34,2,Baron Davis,13,Corey Feldman; Danielle Fishel; Elaine Hendrix; Jordan Chiles; Andy Richter; Robert Irwin; Hilaria Baldwin; Lauren Jauregui; Scott Hoying; Alix Earle; Jen Affleck; Whitney Leavitt; Dylan Efron,RANK_WITH_SAVE
+34,3,Lauren Jauregui,11,Danielle Fishel; Elaine Hendrix; Jordan Chiles; Andy Richter; Robert Irwin; Hilaria Baldwin; Scott Hoying; Alix Earle; Jen Affleck; Whitney Leavitt; Dylan Efron,RANK_WITH_SAVE
+34,4,Hilaria Baldwin,10,Danielle Fishel; Elaine Hendrix; Jordan Chiles; Andy Richter; Robert Irwin; Scott Hoying; Alix Earle; Jen Affleck; Whitney Leavitt; Dylan Efron,RANK_WITH_SAVE
+34,6,Scott Hoying,9,Danielle Fishel; Elaine Hendrix; Jordan Chiles; Andy Richter; Robert Irwin; Alix Earle; Jen Affleck; Whitney Leavitt; Dylan Efron,RANK_WITH_SAVE
+34,7,Jen Affleck,8,Danielle Fishel; Elaine Hendrix; Jordan Chiles; Andy Richter; Robert Irwin; Alix Earle; Whitney Leavitt; Dylan Efron,RANK_WITH_SAVE
+34,8,Danielle Fishel,7,Elaine Hendrix; Jordan Chiles; Andy Richter; Robert Irwin; Alix Earle; Whitney Leavitt; Dylan Efron,RANK_WITH_SAVE
+34,9,Andy Richter,6,Elaine Hendrix; Jordan Chiles; Robert Irwin; Alix Earle; Whitney Leavitt; Dylan Efron,RANK_WITH_SAVE
+34,10,Whitney Leavitt,5,Elaine Hendrix; Jordan Chiles; Robert Irwin; Alix Earle; Dylan Efron,RANK_WITH_SAVE
