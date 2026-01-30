@@ -80,10 +80,11 @@ class SMCInverse:
         self.dp = data_processor
         self.params = params or ModelParams()
         
+        # 将优化参数传入子模块
         self.rules = CompetitionRules(
             xi_perturbation=self.params.xi_perturbation,
             lambda_decay=self.params.lambda_decay,
-            judge_save_beta=self.params.beta_judge
+            judge_save_beta=self.params.beta_judge  # 传入 beta_judge
         )
         
         self.likelihood_calc = LikelihoodCalculator(
