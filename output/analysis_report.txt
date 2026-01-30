@@ -4,76 +4,76 @@ SMC-Inverse Model Analysis Report
 
 ## Overall Prediction Performance
 Total Predictions: 298
-Total Hits (Top-1): 106
-Total Hits (Top-3): 231
-Overall Top-1 Hit Rate: 35.57%
-Overall Top-3 Hit Rate: 77.52%
+Total Hits (Top-1): 107
+Total Hits (Top-3): 229
+Overall Top-1 Hit Rate: 35.91%
+Overall Top-3 Hit Rate: 76.85%
 
 ## Season-by-Season Hit Rates
   Season 1 (Rank): Top-1=33.33%, Top-3=100.00%
   Season 2 (Rank): Top-1=28.57%, Top-3=100.00%
-  Season 3 (Percentage): Top-1=28.57%, Top-3=71.43%
+  Season 3 (Percentage): Top-1=28.57%, Top-3=57.14%
   Season 4 (Percentage): Top-1=37.50%, Top-3=87.50%
-  Season 5 (Percentage): Top-1=33.33%, Top-3=88.89%
+  Season 5 (Percentage): Top-1=44.44%, Top-3=88.89%
   Season 6 (Percentage): Top-1=55.56%, Top-3=100.00%
-  Season 7 (Percentage): Top-1=44.44%, Top-3=88.89%
-  Season 8 (Percentage): Top-1=40.00%, Top-3=70.00%
-  Season 9 (Percentage): Top-1=8.33%, Top-3=83.33%
+  Season 7 (Percentage): Top-1=44.44%, Top-3=77.78%
+  Season 8 (Percentage): Top-1=40.00%, Top-3=90.00%
+  Season 9 (Percentage): Top-1=16.67%, Top-3=75.00%
   Season 10 (Percentage): Top-1=62.50%, Top-3=87.50%
   Season 11 (Percentage): Top-1=33.33%, Top-3=66.67%
-  Season 12 (Percentage): Top-1=50.00%, Top-3=100.00%
+  Season 12 (Percentage): Top-1=37.50%, Top-3=100.00%
   Season 13 (Percentage): Top-1=44.44%, Top-3=66.67%
-  Season 14 (Percentage): Top-1=44.44%, Top-3=88.89%
-  Season 15 (Percentage): Top-1=30.00%, Top-3=60.00%
+  Season 14 (Percentage): Top-1=44.44%, Top-3=100.00%
+  Season 15 (Percentage): Top-1=30.00%, Top-3=70.00%
   Season 16 (Percentage): Top-1=62.50%, Top-3=100.00%
-  Season 17 (Percentage): Top-1=33.33%, Top-3=88.89%
-  Season 18 (Percentage): Top-1=25.00%, Top-3=50.00%
+  Season 17 (Percentage): Top-1=33.33%, Top-3=77.78%
+  Season 18 (Percentage): Top-1=25.00%, Top-3=62.50%
   Season 19 (Percentage): Top-1=20.00%, Top-3=80.00%
   Season 20 (Percentage): Top-1=11.11%, Top-3=44.44%
-  Season 21 (Percentage): Top-1=25.00%, Top-3=75.00%
-  Season 22 (Percentage): Top-1=55.56%, Top-3=100.00%
-  Season 23 (Percentage): Top-1=60.00%, Top-3=90.00%
+  Season 21 (Percentage): Top-1=25.00%, Top-3=62.50%
+  Season 22 (Percentage): Top-1=55.56%, Top-3=88.89%
+  Season 23 (Percentage): Top-1=60.00%, Top-3=80.00%
   Season 24 (Percentage): Top-1=33.33%, Top-3=77.78%
-  Season 25 (Percentage): Top-1=30.00%, Top-3=70.00%
+  Season 25 (Percentage): Top-1=40.00%, Top-3=80.00%
   Season 26 (Percentage): Top-1=28.57%, Top-3=71.43%
   Season 27 (Percentage): Top-1=11.11%, Top-3=55.56%
   Season 28 (Rank): Top-1=42.86%, Top-3=71.43%
   Season 29 (Rank): Top-1=60.00%, Top-3=100.00%
-  Season 30 (Rank): Top-1=36.36%, Top-3=72.73%
-  Season 31 (Rank): Top-1=27.27%, Top-3=63.64%
+  Season 30 (Rank): Top-1=36.36%, Top-3=63.64%
+  Season 31 (Rank): Top-1=27.27%, Top-3=72.73%
   Season 32 (Rank): Top-1=22.22%, Top-3=55.56%
   Season 33 (Rank): Top-1=37.50%, Top-3=75.00%
-  Season 34 (Rank): Top-1=22.22%, Top-3=55.56%
+  Season 34 (Rank): Top-1=11.11%, Top-3=44.44%
 
 ## Rule Fairness Comparison
 
 Percentage Rule (S3-S27):
-  Average Hit Rate: 78.51%
-  Average Populist Bias: -0.104
+  Average Hit Rate: 77.92%
+  Average Populist Bias: -0.103
 
 Rank Rule (S1-2, S28+):
-  Average Hit Rate: 77.10%
-  Average Populist Bias: -0.118
+  Average Hit Rate: 75.87%
+  Average Populist Bias: -0.126
 
 ## Top 10 Controversial Eliminations
   1. Season 33 Week 2: ['Tori Spelling', 'Anna Delvey']
-     Surprise Score: 147.75
+     Surprise Score: 149.06
   2. Season 34 Week 2: ['Corey Feldman', 'Baron Davis']
-     Surprise Score: 56.28
-  3. Season 2 Week 3: ['Giselle Fernandez']
-     Surprise Score: 44.84
-  4. Season 30 Week 8: ['Jimmie Allen', 'Olivia Jade']
-     Surprise Score: 44.32
-  5. Season 29 Week 10: ['Skai Jackson', 'Johnny Weir']
-     Surprise Score: 36.07
+     Surprise Score: 53.89
+  3. Season 30 Week 8: ['Jimmie Allen', 'Olivia Jade']
+     Surprise Score: 53.56
+  4. Season 30 Week 9: ['Melora Hardin', 'Suni Lee']
+     Surprise Score: 48.65
+  5. Season 2 Week 3: ['Giselle Fernandez']
+     Surprise Score: 41.45
   6. Season 2 Week 2: ["Tatum O'Neal"]
-     Surprise Score: 34.41
-  7. Season 30 Week 9: ['Melora Hardin', 'Suni Lee']
-     Surprise Score: 32.57
-  8. Season 1 Week 4: ['Rachel Hunter']
-     Surprise Score: 30.32
-  9. Season 1 Week 2: ['Trista Sutter']
-     Surprise Score: 29.96
+     Surprise Score: 35.66
+  7. Season 29 Week 10: ['Skai Jackson', 'Johnny Weir']
+     Surprise Score: 30.76
+  8. Season 1 Week 2: ['Trista Sutter']
+     Surprise Score: 27.91
+  9. Season 30 Week 4: ['Brian Austin Green', 'Matt James']
+     Surprise Score: 23.55
   10. Season 30 Week 5: ['Melanie C']
      Surprise Score: 23.03
 
