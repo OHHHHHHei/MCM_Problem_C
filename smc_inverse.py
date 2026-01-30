@@ -477,13 +477,18 @@ class SMCInverse:
         for c in initial_contestants:
             all_weeks.update(c.weekly_scores.keys())
         
-        # 按周处理淘汰事件 (现在每周只有一个事件，可能包含多人)
+        # 创建事件查找表
+        events_by_week = {e.week: e for e in events}
+        
+        # 规则类型
         rule_type = self.rules._get_rule_type(season)
         
-        for event in events:
-            week = event.week
+        # 遍历每一周 (关键修改: 不再只遍历淘汰周)
+        for week in sorted(all_weeks):
+            if week < first_week:
+                continue
             
-            # 获取在场选手和分数
+            # 获取在场选手
             active = self.dp.get_active_contestants(season, week)
             if not active:
                 continue
@@ -493,116 +498,122 @@ class SMCInverse:
             # 获取标准化分数 (用于状态转移)
             zscore_scores = self.dp.compute_zscore_scores(season, week)
             
-            # 获取当周原始分数
-            current_week_scores = {c.name: self.dp.get_weekly_total_score(c, week) for c in active}
-            
-            # 判断前几周是否有无淘汰周 (决定是否累加)
-            # 如果 week-1 不在 elimination_weeks 中，说明上周没淘汰，需要累加上周分数
-            # 我们需要回溯找到连续的无淘汰周并累加
-            accumulated_scores = current_week_scores.copy()
-            
-            # 检查是否需要累加之前的分数
-            check_week = week - 1
-            while check_week >= 1 and check_week not in elimination_weeks:
-                # 该周没有淘汰，需要累加该周分数
-                for c in active:
-                    if check_week in c.weekly_scores:
-                        prev_score = self.dp.get_weekly_total_score(c, check_week)
-                        accumulated_scores[c.name] = accumulated_scores.get(c.name, 0) + prev_score
-                check_week -= 1
-            
-            # 使用累加后的分数
-            judge_scores = accumulated_scores
-            
-            # 状态转移
+            # === A. 状态转移 (每周都要执行，无论是否有淘汰) ===
             for i in range(len(self.particles)):
                 self.particles[i] = self._state_transition(
                     self.particles[i], zscore_scores, active_names
                 )
             
-            # 先验预测 (重采样前)
-            pred_probs = self._predict_elimination_probabilities(
-                season, week, active, judge_scores
-            )
-            # 判断是否有无淘汰周需要累积投票份额 (Rank Rule)
-            has_no_elim_weeks = any(w not in elimination_weeks for w in range(1, week))
-            use_accumulated_shares = has_no_elim_weeks and rule_type in ['RANK', 'RANK_WITH_SAVE']
-            
-            # 计算似然并更新权重 (现在一周一个事件，可能多人淘汰)
-            log_likelihoods = []
-            for particle in self.particles:
-                ll = self._compute_particle_likelihood(
-                    particle, season, week, event, judge_scores, use_accumulated_shares
-                )
-                particle.weight *= ll
-                log_likelihoods.append(np.log(ll + 1e-300))
-                
-                # 更新粒子的累积份额 (用于下一周)
-                if use_accumulated_shares:
+            # === B. 计算当周投票份额并累积 (Rank Rule) ===
+            if rule_type in ['RANK', 'RANK_WITH_SAVE']:
+                for particle in self.particles:
                     current_shares = self._compute_vote_shares(particle, active_names)
                     for name in active_names:
                         particle.accumulated_shares[name] = (
                             particle.accumulated_shares.get(name, 0) + current_shares.get(name, 0)
                         )
             
-            results['log_likelihoods'].append({
-                'week': week,
-                'eliminated': event.eliminated_set,  # 列表形式
-                'mean_log_likelihood': np.mean(log_likelihoods),
-                'is_multi_elimination': event.is_multi_elimination
-            })
+            # === C. 检查本周是否有淘汰事件 ===
+            event = events_by_week.get(week, None)
             
-            # 归一化权重
-            total_weight = sum(p.weight for p in self.particles)
-            if total_weight > 0:
-                for p in self.particles:
-                    p.weight /= total_weight
-            
-            # 记录ESS
-            ess = self._effective_sample_size()
-            self.diagnostics['ess_history'].append({
-                'season': season, 'week': week, 'ess': ess
-            })
-            
-            # 检验预测 (对每个被淘汰者分别检验)
-            sorted_preds = sorted(pred_probs.items(), key=lambda x: -x[1])
-            top_1_names = [name for name, _ in sorted_preds[:1]]
-            top_3_names = [name for name, _ in sorted_preds[:3]]
-            
-            for elim_name in event.eliminated_set:
-                hit_top1 = elim_name in top_1_names
-                hit_top3 = elim_name in top_3_names
-                results['predictions'].append({
+            if event:
+                # ============ 淘汰周: 观测更新 ============
+                
+                # 获取当周原始分数
+                current_week_scores = {c.name: self.dp.get_weekly_total_score(c, week) for c in active}
+                
+                # 评委分累加: 回溯检查连续的无淘汰周
+                accumulated_scores = current_week_scores.copy()
+                check_week = week - 1
+                while check_week >= 1 and check_week not in elimination_weeks:
+                    for c in active:
+                        if check_week in c.weekly_scores:
+                            prev_score = self.dp.get_weekly_total_score(c, check_week)
+                            accumulated_scores[c.name] = accumulated_scores.get(c.name, 0) + prev_score
+                    check_week -= 1
+                
+                judge_scores = accumulated_scores
+                
+                # 先验预测 (重采样前)
+                pred_probs = self._predict_elimination_probabilities(
+                    season, week, active, judge_scores
+                )
+                
+                # Rank Rule 使用累积份额
+                use_accumulated_shares = rule_type in ['RANK', 'RANK_WITH_SAVE']
+                
+                # 计算似然并更新权重
+                log_likelihoods = []
+                for particle in self.particles:
+                    ll = self._compute_particle_likelihood(
+                        particle, season, week, event, judge_scores, use_accumulated_shares
+                    )
+                    particle.weight *= ll
+                    log_likelihoods.append(np.log(ll + 1e-300))
+                
+                results['log_likelihoods'].append({
                     'week': week,
-                    'eliminated': elim_name,
-                    'predicted_probs': pred_probs,
-                    'hit_top1': hit_top1,
-                    'hit_top3': hit_top3
+                    'eliminated': event.eliminated_set,
+                    'mean_log_likelihood': np.mean(log_likelihoods),
+                    'is_multi_elimination': event.is_multi_elimination
                 })
-            
-            # 重采样
-            if ess < self.params.resample_threshold * self.params.n_particles:
-                self._resample()
-                if verbose:
+                
+                # 归一化权重
+                total_weight = sum(p.weight for p in self.particles)
+                if total_weight > 0:
+                    for p in self.particles:
+                        p.weight /= total_weight
+                
+                # 记录ESS
+                ess = self._effective_sample_size()
+                self.diagnostics['ess_history'].append({
+                    'season': season, 'week': week, 'ess': ess
+                })
+                
+                # 检验预测
+                sorted_preds = sorted(pred_probs.items(), key=lambda x: -x[1])
+                top_1_names = [name for name, _ in sorted_preds[:1]]
+                top_3_names = [name for name, _ in sorted_preds[:3]]
+                
+                for elim_name in event.eliminated_set:
+                    hit_top1 = elim_name in top_1_names
+                    hit_top3 = elim_name in top_3_names
+                    results['predictions'].append({
+                        'week': week,
+                        'eliminated': elim_name,
+                        'predicted_probs': pred_probs,
+                        'hit_top1': hit_top1,
+                        'hit_top3': hit_top3
+                    })
+                
+                # 重采样
+                if ess < self.params.resample_threshold * self.params.n_particles:
+                    self._resample()
+                    if verbose:
+                        elim_str = ', '.join(event.eliminated_set)
+                        print(f"  Week {week}: ESS={ess:.1f}, Resampled (eliminated: {elim_str})")
+                elif verbose:
                     elim_str = ', '.join(event.eliminated_set)
-                    print(f"  Week {week}: ESS={ess:.1f}, Resampled (eliminated: {elim_str})")
-            elif verbose:
-                elim_str = ', '.join(event.eliminated_set)
-                print(f"  Week {week}: ESS={ess:.1f} (eliminated: {elim_str})")
+                    print(f"  Week {week}: ESS={ess:.1f} (eliminated: {elim_str})")
+                
+                # 估计投票份额
+                estimates = self._estimate_vote_shares(active_names)
+                results['weekly_estimates'][week] = estimates
+                
+                # 更新淘汰状态
+                self.rules.update_elimination_status(True)
+                
+                # 淘汰周后重置累积份额 (新的积分赛段开始)
+                for p in self.particles:
+                    p.accumulated_shares = {}
             
-            # 估计投票份额
-            estimates = self._estimate_vote_shares(active_names)
-            results['weekly_estimates'][week] = estimates
-            
-            # 更新淘汰状态
-            self.rules.update_elimination_status(True)
-            
-            # 淘汰周后重置累积份额 (下一轮重新开始累积)
-            for p in self.particles:
-                p.accumulated_shares = {}
-            
-            # 更新 prev_week 用于下一轮累加判断
-            prev_week = week
+            else:
+                # ============ 无淘汰周: 仅状态演化 ============
+                # 状态转移已在上面完成
+                # 份额累积已在上面完成 (Rank Rule)
+                # 不计算似然，不重采样
+                if verbose:
+                    print(f"  Week {week}: No elimination (state transition only)")
         
         # 计算整体命中率 (Top-1 和 Top-3)
         if results['predictions']:
