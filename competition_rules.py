@@ -223,13 +223,58 @@ class CompetitionRules:
         return results, bottom_two
     
     def _get_rule_type(self, season: int) -> str:
-        """内部方法：获取规则类型"""
+        """内部方法: 获取规则类型"""
         if season <= 2:
             return 'RANK'
         elif season <= 27:
             return 'PERCENTAGE'
         else:
             return 'RANK_WITH_SAVE'
+
+    def simulate_elimination_outcome(self,
+                                   season: int,
+                                   judge_scores: Dict[str, float],
+                                   fan_vote_shares: Dict[str, float]) -> str:
+        """
+        模拟淘汰结果 (确定性)
+        用于验证一致性: 输入分数和票数，输出理论上应该被淘汰的人
+        """
+        survival_scores, bottom_two = self.compute_survival_scores(
+            season, judge_scores, fan_vote_shares
+        )
+        
+        rule_type = self._get_rule_type(season)
+        
+        if rule_type == 'RANK_WITH_SAVE' and bottom_two:
+            # Judge Save: 评委拯救技术分较高者
+            b1, b2 = bottom_two
+            if not b2: # 只有一个有效选手在Bottom 2 (异常情况)
+                return b1
+                
+            # 获取累计技术分(如有)或当周分
+            # 注意: 这里简化使用当周分，更严格应使用累计分
+            # 但compute_survival_scores外部通常传入的是由于滚存处理过的Effective Scores
+            # 为保持一致性，我们比较他们在judge_scores里的分数
+            s1 = judge_scores.get(b1, 0)
+            s2 = judge_scores.get(b2, 0)
+            
+            # 分数低者被淘汰
+            # 如果分数相同，按规则评委拥有最终决定权
+            # 模型中假设评委偏好高分，若同分则随机(这里返回字典序大的以保持确定性)
+            if s1 > s2:
+                return b2
+            elif s2 > s1:
+                return b1
+            else:
+                return max(b1, b2) # 平局强制处理
+        
+        else:
+            # 基础规则: 生存分最低者淘汰
+            if not survival_scores:
+                return ""
+            # 按生存分排序，分低者在前
+            sorted_scores = sorted(survival_scores, key=lambda x: x.survival_score)
+            return sorted_scores[0].contestant_name
 
 
 class LikelihoodCalculator:

@@ -600,6 +600,79 @@ class SMCInverse:
                 estimates = self._estimate_vote_shares(active_names)
                 results['weekly_estimates'][week] = estimates
                 
+                # ============ 新增: 一致性验证 (Consistency Metrics) ============
+                # 1. 后验一致概率 (Posterior Consistency Probability)
+                # 计算有多少比例的粒子(加权)认为应该淘汰真实的淘汰者
+                consistent_weight = 0.0
+                total_weight_check = 0.0
+                
+                for particle in self.particles:
+                    p_shares = self._compute_vote_shares(particle, active_names)
+                    
+                    # 如需累积
+                    if use_accumulated_shares:
+                        p_shares_comb = {}
+                        for n in active_names:
+                            p_shares_comb[n] = p_shares.get(n, 0) + particle.accumulated_shares.get(n, 0)
+                        # 归一化
+                        s_comb = sum(p_shares_comb.values())
+                        if s_comb > 0:
+                            p_shares_comb = {k: v/s_comb for k, v in p_shares_comb.items()}
+                    else:
+                        p_shares_comb = p_shares
+                        
+                    simulated_eliminated = self.rules.simulate_elimination_outcome(
+                        season, judge_scores, p_shares_comb
+                    )
+                    
+                    # 检查是否命中真实淘汰者集合中的任意一个
+                    # (由于双淘汰周的存在，只要命中其中之一即视为主要责任人)
+                    if simulated_eliminated in event.eliminated_set:
+                        consistent_weight += particle.weight
+                    
+                    total_weight_check += particle.weight
+                
+                posterior_consistency = consistent_weight / total_weight_check if total_weight_check > 0 else 0.0
+                
+                # 2. MAP/后验均值 一致性 (MAP Consistency)
+                # 使用当周的后验均值估计票数，看是否会导致相同的结果
+                mean_shares = {name: estimates[name]['mean'] for name in active_names}
+                
+                # 注意: estimates已经是基于累积份额(如果适用)的吗？
+                # 不，_estimate_vote_shares 是基于当前时刻的动量计算的当周份额
+                # 如果是 Rank Rule，我们需要手动处理累积逻辑用于验证
+                if use_accumulated_shares:
+                    # 获取当前所有粒子的累积份额的期望
+                    avg_accumulated = {name: 0.0 for name in active_names}
+                    for p in self.particles:
+                        for name in active_names:
+                            avg_accumulated[name] += p.accumulated_shares.get(name, 0) * p.weight
+                    
+                    # 组合
+                    map_shares_comb = {}
+                    for n in active_names:
+                        map_shares_comb[n] = mean_shares.get(n, 0) + avg_accumulated.get(n, 0)
+                    total_map = sum(map_shares_comb.values())
+                    if total_map > 0:
+                        map_shares_comb = {k: v/total_map for k, v in map_shares_comb.items()}
+                else:
+                    map_shares_comb = mean_shares
+                
+                map_eliminated = self.rules.simulate_elimination_outcome(
+                    season, judge_scores, map_shares_comb
+                )
+                
+                map_consistent = map_eliminated in event.eliminated_set
+                
+                # 记录结果
+                results.setdefault('consistency_metrics', []).append({
+                    'week': week,
+                    'posterior_consistency': posterior_consistency,
+                    'map_consistent': map_consistent,
+                    'eliminated': list(event.eliminated_set),
+                    'map_predicted': map_eliminated
+                })
+                
                 # 更新淘汰状态
                 self.rules.update_elimination_status(True)
                 
@@ -630,6 +703,13 @@ class SMCInverse:
             print(f"  Total elimination events: {len(events)}")
             print(f"  Top-1 Hit Rate: {results['hit_rate_top1']:.2%}")
             print(f"  Top-3 Hit Rate: {results['hit_rate_top3']:.2%}")
+            
+            # 打印新的一致性指标
+            if 'consistency_metrics' in results:
+                avg_post = np.mean([m['posterior_consistency'] for m in results['consistency_metrics']])
+                avg_map = np.mean([1.0 if m['map_consistent'] else 0.0 for m in results['consistency_metrics']])
+                print(f"  Posterior Consistency: {avg_post:.2%}")
+                print(f"  MAP Match Rate: {avg_map:.2%}")
         
         return results
     

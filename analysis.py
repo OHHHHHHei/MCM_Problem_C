@@ -75,6 +75,36 @@ class ResultAnalyzer:
             'season_hit_rates_top1': season_hit_rates_top1,
             'season_hit_rates_top3': season_hit_rates_top3
         }
+
+    def compute_consistency_metrics(self) -> Dict:
+        """
+        计算新的后验一致性指标
+        """
+        season_metrics = {}
+        all_post_consistencies = []
+        all_map_matches = []
+        
+        for season, result in self.results.items():
+            metrics = result.get('consistency_metrics', [])
+            if not metrics:
+                continue
+                
+            avg_post = np.mean([m['posterior_consistency'] for m in metrics])
+            avg_map = np.mean([1.0 if m['map_consistent'] else 0.0 for m in metrics])
+            
+            season_metrics[season] = {
+                'posterior_consistency': avg_post,
+                'map_match_rate': avg_map
+            }
+            
+            all_post_consistencies.extend([m['posterior_consistency'] for m in metrics])
+            all_map_matches.extend([1.0 if m['map_consistent'] else 0.0 for m in metrics])
+            
+        return {
+            'overall_posterior_consistency': np.mean(all_post_consistencies) if all_post_consistencies else 0.0,
+            'overall_map_match_rate': np.mean(all_map_matches) if all_map_matches else 0.0,
+            'season_metrics': season_metrics
+        }
     
     def identify_controversies(self, likelihood_threshold: float = -2.0) -> List[Dict]:
         """
@@ -283,8 +313,12 @@ class ResultAnalyzer:
         # 规则公平性
         fairness = self.analyze_rule_fairness()
         
+        # 一致性指标
+        consistency = self.compute_consistency_metrics()
+        
         report = {
             'overall_statistics': overall,
+            'consistency_metrics': consistency,
             'top_controversies': controversies[:20],  # 前20个争议事件
             'rule_fairness_analysis': fairness
         }
@@ -312,6 +346,14 @@ def generate_text_report(analyzer: ResultAnalyzer) -> str:
     lines.append(f"Total Hits (Top-3): {overall['total_hits_top3']}")
     lines.append(f"Overall Top-1 Hit Rate: {overall['overall_hit_rate_top1']:.2%}")
     lines.append(f"Overall Top-3 Hit Rate: {overall['overall_hit_rate_top3']:.2%}")
+
+    # 一致性指标
+    consistency = analyzer.compute_consistency_metrics()
+    lines.append("\n## Consistency & Reconstructability")
+    lines.append(f"Overall Posterior Consistency Probability: {consistency['overall_posterior_consistency']:.2%}")
+    lines.append(f"Overall MAP Match Rate: {consistency['overall_map_match_rate']:.2%}")
+    lines.append("(Note: 'Posterior Consistency' = weighted % of particles agreeing with reality)")
+    lines.append("(Note: 'MAP Match Rate' = % of eliminations correctly reconstructed using point estimates)")
     
     # 按赛季分解
     lines.append("\n## Season-by-Season Hit Rates")
