@@ -16,9 +16,9 @@ import json
 import time
 from typing import List, Optional
 
-from data_processor import DataProcessor
-from smc_inverse import SMCInverse, ModelParams, create_model
-from analysis import ResultAnalyzer, generate_text_report
+from core.data_processor import DataProcessor
+from core.smc_inverse import SMCInverse, ModelParams
+from core.analysis import ResultAnalyzer, generate_text_report
 
 
 def parse_args():

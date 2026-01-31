@@ -3,10 +3,13 @@ import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
 import os
+import sys
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 from collections import defaultdict
 
-from data_processor import DataProcessor
-from smc_inverse import SMCInverse, ModelParams
+from core.data_processor import DataProcessor
+from core.smc_inverse import SMCInverse, ModelParams
 
 # Set Plot Style for Academic Publication
 plt.rcParams['font.family'] = 'sans-serif'

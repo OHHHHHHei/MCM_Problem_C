@@ -1,8 +1,8 @@
 import pandas as pd
 import os
 
-target_file = 'output/optimization_overnight_results.csv'
-fallback_file = 'output/optimization_aggressive_results.csv'
+target_file = os.path.abspath(os.path.join(os.path.dirname(__file__), '../output/optimization_overnight_results.csv'))
+fallback_file = os.path.abspath(os.path.join(os.path.dirname(__file__), '../output/optimization_aggressive_results.csv'))
 
 if os.path.exists(target_file):
     csv_path = target_file

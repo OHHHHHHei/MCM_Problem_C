@@ -3,11 +3,14 @@ import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
 import os
+import sys
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 from sklearn.calibration import calibration_curve
 
-from data_processor import DataProcessor
-from smc_inverse import SMCInverse, ModelParams
-from competition_rules import CompetitionRules
+from core.data_processor import DataProcessor
+from core.smc_inverse import SMCInverse, ModelParams
+from core.competition_rules import CompetitionRules
 
 # Set Plot Style for Academic Publication
 plt.rcParams['font.family'] = 'sans-serif'

@@ -4,95 +4,95 @@ SMC-Inverse Model Analysis Report
 
 ## Overall Prediction Performance
 Total Predictions: 298
-Total Hits (Top-1): 109
-Total Hits (Top-3): 230
-Overall Top-1 Hit Rate: 36.58%
-Overall Top-3 Hit Rate: 77.18%
+Total Hits (Top-1): 104
+Total Hits (Top-3): 224
+Overall Top-1 Hit Rate: 34.90%
+Overall Top-3 Hit Rate: 75.17%
 
 ## Consistency & Reconstructability
-Overall Posterior Consistency Probability: 57.96%
-Overall MAP Match Rate: 81.82%
+Overall Posterior Consistency Probability: 58.66%
+Overall MAP Match Rate: 82.95%
 (Note: 'Posterior Consistency' = weighted % of particles agreeing with reality)
 (Note: 'MAP Match Rate' = % of eliminations correctly reconstructed using point estimates)
 
 ## Uncertainty Heterogeneity (CI Width Analysis)
-Overall Average CI Width: 0.2212
-  - Eliminated Contestants: 0.1164 (expected: lower)
-  - Surviving Contestants:  0.2372 (expected: higher)
-  - Heterogeneity Ratio (Survivor/Eliminated): 2.04x
+Overall Average CI Width: 0.2268
+  - Eliminated Contestants: 0.1184 (expected: lower)
+  - Surviving Contestants:  0.2433 (expected: higher)
+  - Heterogeneity Ratio (Survivor/Eliminated): 2.05x
 
 By Competition Phase:
-  - Early Weeks (1/3):  0.1761
-  - Middle Weeks (1/3): 0.2364
-  - Late Weeks (1/3):   0.3154
+  - Early Weeks (1/3):  0.1778
+  - Middle Weeks (1/3): 0.2439
+  - Late Weeks (1/3):   0.3279
 (Note: CI Width = 95% Credible Interval width; lower = more certainty)
 
 ## Season-by-Season Hit Rates
   Season 1 (Rank): Top-1=33.33%, Top-3=100.00%
   Season 2 (Rank): Top-1=28.57%, Top-3=100.00%
   Season 3 (Percentage): Top-1=28.57%, Top-3=71.43%
-  Season 4 (Percentage): Top-1=62.50%, Top-3=87.50%
+  Season 4 (Percentage): Top-1=50.00%, Top-3=87.50%
   Season 5 (Percentage): Top-1=33.33%, Top-3=88.89%
   Season 6 (Percentage): Top-1=55.56%, Top-3=88.89%
-  Season 7 (Percentage): Top-1=66.67%, Top-3=88.89%
-  Season 8 (Percentage): Top-1=40.00%, Top-3=90.00%
+  Season 7 (Percentage): Top-1=55.56%, Top-3=77.78%
+  Season 8 (Percentage): Top-1=40.00%, Top-3=80.00%
   Season 9 (Percentage): Top-1=16.67%, Top-3=66.67%
   Season 10 (Percentage): Top-1=62.50%, Top-3=75.00%
   Season 11 (Percentage): Top-1=33.33%, Top-3=88.89%
-  Season 12 (Percentage): Top-1=37.50%, Top-3=87.50%
-  Season 13 (Percentage): Top-1=44.44%, Top-3=66.67%
+  Season 12 (Percentage): Top-1=25.00%, Top-3=62.50%
+  Season 13 (Percentage): Top-1=33.33%, Top-3=66.67%
   Season 14 (Percentage): Top-1=33.33%, Top-3=88.89%
-  Season 15 (Percentage): Top-1=20.00%, Top-3=50.00%
+  Season 15 (Percentage): Top-1=30.00%, Top-3=60.00%
   Season 16 (Percentage): Top-1=50.00%, Top-3=100.00%
   Season 17 (Percentage): Top-1=33.33%, Top-3=55.56%
-  Season 18 (Percentage): Top-1=25.00%, Top-3=50.00%
-  Season 19 (Percentage): Top-1=30.00%, Top-3=80.00%
-  Season 20 (Percentage): Top-1=11.11%, Top-3=44.44%
-  Season 21 (Percentage): Top-1=25.00%, Top-3=62.50%
-  Season 22 (Percentage): Top-1=44.44%, Top-3=88.89%
-  Season 23 (Percentage): Top-1=50.00%, Top-3=90.00%
-  Season 24 (Percentage): Top-1=22.22%, Top-3=77.78%
-  Season 25 (Percentage): Top-1=40.00%, Top-3=70.00%
+  Season 18 (Percentage): Top-1=25.00%, Top-3=62.50%
+  Season 19 (Percentage): Top-1=30.00%, Top-3=70.00%
+  Season 20 (Percentage): Top-1=22.22%, Top-3=44.44%
+  Season 21 (Percentage): Top-1=37.50%, Top-3=62.50%
+  Season 22 (Percentage): Top-1=33.33%, Top-3=88.89%
+  Season 23 (Percentage): Top-1=60.00%, Top-3=90.00%
+  Season 24 (Percentage): Top-1=33.33%, Top-3=77.78%
+  Season 25 (Percentage): Top-1=30.00%, Top-3=80.00%
   Season 26 (Percentage): Top-1=28.57%, Top-3=71.43%
-  Season 27 (Percentage): Top-1=11.11%, Top-3=44.44%
+  Season 27 (Percentage): Top-1=11.11%, Top-3=55.56%
   Season 28 (Rank): Top-1=42.86%, Top-3=71.43%
-  Season 29 (Rank): Top-1=50.00%, Top-3=100.00%
-  Season 30 (Rank): Top-1=45.45%, Top-3=90.91%
-  Season 31 (Rank): Top-1=45.45%, Top-3=81.82%
-  Season 32 (Rank): Top-1=33.33%, Top-3=66.67%
-  Season 33 (Rank): Top-1=37.50%, Top-3=87.50%
-  Season 34 (Rank): Top-1=22.22%, Top-3=66.67%
+  Season 29 (Rank): Top-1=60.00%, Top-3=100.00%
+  Season 30 (Rank): Top-1=36.36%, Top-3=72.73%
+  Season 31 (Rank): Top-1=36.36%, Top-3=72.73%
+  Season 32 (Rank): Top-1=11.11%, Top-3=55.56%
+  Season 33 (Rank): Top-1=12.50%, Top-3=75.00%
+  Season 34 (Rank): Top-1=33.33%, Top-3=66.67%
 
 ## Rule Fairness Comparison
 
 Percentage Rule (S3-S27):
-  Average Hit Rate: 74.97%
-  Average Populist Bias: -0.183
+  Average Hit Rate: 74.47%
+  Average Populist Bias: -0.190
 
 Rank Rule (S1-2, S28+):
-  Average Hit Rate: 85.00%
-  Average Populist Bias: -0.137
+  Average Hit Rate: 79.35%
+  Average Populist Bias: -0.169
 
 ## Top 10 Controversial Eliminations
   1. Season 33 Week 2: ['Tori Spelling', 'Anna Delvey']
-     Surprise Score: 210.56
+     Surprise Score: 208.43
   2. Season 34 Week 2: ['Corey Feldman', 'Baron Davis']
-     Surprise Score: 118.30
+     Surprise Score: 113.43
   3. Season 30 Week 4: ['Brian Austin Green', 'Matt James']
-     Surprise Score: 66.13
-  4. Season 2 Week 2: ["Tatum O'Neal"]
-     Surprise Score: 44.30
-  5. Season 1 Week 2: ['Trista Sutter']
-     Surprise Score: 39.98
-  6. Season 2 Week 3: ['Giselle Fernandez']
-     Surprise Score: 38.33
-  7. Season 30 Week 9: ['Melora Hardin', 'Suni Lee']
-     Surprise Score: 37.98
+     Surprise Score: 106.47
+  4. Season 33 Week 3: ['Eric Roberts', 'Reginald VelJohnson']
+     Surprise Score: 50.83
+  5. Season 2 Week 2: ["Tatum O'Neal"]
+     Surprise Score: 44.14
+  6. Season 1 Week 2: ['Trista Sutter']
+     Surprise Score: 37.37
+  7. Season 2 Week 3: ['Giselle Fernandez']
+     Surprise Score: 33.43
   8. Season 29 Week 10: ['Skai Jackson', 'Johnny Weir']
-     Surprise Score: 31.16
-  9. Season 33 Week 3: ['Eric Roberts', 'Reginald VelJohnson']
-     Surprise Score: 29.76
-  10. Season 1 Week 4: ['Rachel Hunter']
-     Surprise Score: 24.55
+     Surprise Score: 31.55
+  9. Season 30 Week 8: ['Jimmie Allen', 'Olivia Jade']
+     Surprise Score: 26.53
+  10. Season 34 Week 10: ['Whitney Leavitt']
+     Surprise Score: 22.57
 
 ============================================================

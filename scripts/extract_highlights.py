@@ -1,8 +1,8 @@
 import pandas as pd
 import os
 
-target_file = 'output/optimization_overnight_results.csv'
-output_file = 'output/optimization_highlights.csv'
+target_file = os.path.abspath(os.path.join(os.path.dirname(__file__), '../output/optimization_overnight_results.csv'))
+output_file = os.path.abspath(os.path.join(os.path.dirname(__file__), '../output/optimization_highlights.csv'))
 
 def extract_highlights():
     if not os.path.exists(target_file):

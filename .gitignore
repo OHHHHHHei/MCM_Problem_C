@@ -1,0 +1,65 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.env
+.venv
+
+# VS Code
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Output Files (Custom)
+output/
+*.log
+*.csv
+# Keep the input data but ignore generated CSVs if any (unless they are data)
+# We keep 2026_MCM_Problem_C_Data.csv as it's the source
+# optimization_*.csv should be ignored if they are huge, but user might want them. 
+# Let's ignore bulk output but keep summary reports if manually saved.
+# For now, ignore everything in output/ except gitkeep if it exists
+output/*
+!output/.gitkeep
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Documentation PDFs (if user wants to track them, comment this out)
+# *.pdf
+# Since user moved PDFs to docs/, we probably want to keep them.
+# So we don't ignore PDFs by default.
+
+# Jupyter Notebooks
+.ipynb_checkpoints

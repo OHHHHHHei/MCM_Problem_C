@@ -1,8 +1,12 @@
 import pandas as pd
+from core.data_processor import DataProcessor
+from core.smc_inverse import SMCInverse, ModelParams
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
 import os
+import sys
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 # Set Plot Style for Academic Publication
 plt.rcParams['font.family'] = 'sans-serif'

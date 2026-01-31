@@ -9,8 +9,8 @@ from dataclasses import dataclass, field
 from copy import deepcopy
 import warnings
 
-from data_processor import DataProcessor, Contestant, EliminationEvent
-from competition_rules import CompetitionRules, LikelihoodCalculator
+from .data_processor import DataProcessor, Contestant, EliminationEvent
+from .competition_rules import CompetitionRules, LikelihoodCalculator
 
 
 @dataclass

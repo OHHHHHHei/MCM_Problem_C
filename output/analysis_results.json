@@ -1,45 +1,45 @@
 {
   "overall_statistics": {
-    "overall_hit_rate_top1": 0.36577181208053694,
-    "overall_hit_rate_top3": 0.7718120805369127,
+    "overall_hit_rate_top1": 0.348993288590604,
+    "overall_hit_rate_top3": 0.7516778523489933,
     "total_predictions": 298,
-    "total_hits_top1": 109,
-    "total_hits_top3": 230,
+    "total_hits_top1": 104,
+    "total_hits_top3": 224,
     "season_hit_rates_top1": {
       "1": 0.3333333333333333,
       "2": 0.2857142857142857,
       "3": 0.2857142857142857,
-      "4": 0.625,
+      "4": 0.5,
       "5": 0.3333333333333333,
       "6": 0.5555555555555556,
-      "7": 0.6666666666666666,
+      "7": 0.5555555555555556,
       "8": 0.4,
       "9": 0.16666666666666666,
       "10": 0.625,
       "11": 0.3333333333333333,
-      "12": 0.375,
-      "13": 0.4444444444444444,
+      "12": 0.25,
+      "13": 0.3333333333333333,
       "14": 0.3333333333333333,
-      "15": 0.2,
+      "15": 0.3,
       "16": 0.5,
       "17": 0.3333333333333333,
       "18": 0.25,
       "19": 0.3,
-      "20": 0.1111111111111111,
-      "21": 0.25,
-      "22": 0.4444444444444444,
-      "23": 0.5,
-      "24": 0.2222222222222222,
-      "25": 0.4,
+      "20": 0.2222222222222222,
+      "21": 0.375,
+      "22": 0.3333333333333333,
+      "23": 0.6,
+      "24": 0.3333333333333333,
+      "25": 0.3,
       "26": 0.2857142857142857,
       "27": 0.1111111111111111,
       "28": 0.42857142857142855,
-      "29": 0.5,
-      "30": 0.45454545454545453,
-      "31": 0.45454545454545453,
-      "32": 0.3333333333333333,
-      "33": 0.375,
-      "34": 0.2222222222222222
+      "29": 0.6,
+      "30": 0.36363636363636365,
+      "31": 0.36363636363636365,
+      "32": 0.1111111111111111,
+      "33": 0.125,
+      "34": 0.3333333333333333
     },
     "season_hit_rates_top3": {
       "1": 1.0,
@@ -48,190 +48,190 @@
       "4": 0.875,
       "5": 0.8888888888888888,
       "6": 0.8888888888888888,
-      "7": 0.8888888888888888,
-      "8": 0.9,
+      "7": 0.7777777777777778,
+      "8": 0.8,
       "9": 0.6666666666666666,
       "10": 0.75,
       "11": 0.8888888888888888,
-      "12": 0.875,
+      "12": 0.625,
       "13": 0.6666666666666666,
       "14": 0.8888888888888888,
-      "15": 0.5,
+      "15": 0.6,
       "16": 1.0,
       "17": 0.5555555555555556,
-      "18": 0.5,
-      "19": 0.8,
+      "18": 0.625,
+      "19": 0.7,
       "20": 0.4444444444444444,
       "21": 0.625,
       "22": 0.8888888888888888,
       "23": 0.9,
       "24": 0.7777777777777778,
-      "25": 0.7,
+      "25": 0.8,
       "26": 0.7142857142857143,
-      "27": 0.4444444444444444,
+      "27": 0.5555555555555556,
       "28": 0.7142857142857143,
       "29": 1.0,
-      "30": 0.9090909090909091,
-      "31": 0.8181818181818182,
-      "32": 0.6666666666666666,
-      "33": 0.875,
+      "30": 0.7272727272727273,
+      "31": 0.7272727272727273,
+      "32": 0.5555555555555556,
+      "33": 0.75,
       "34": 0.6666666666666666
     }
   },
   "consistency_metrics": {
-    "overall_posterior_consistency": 0.5795820200429057,
-    "overall_map_match_rate": 0.8181818181818182,
+    "overall_posterior_consistency": 0.5866181323776121,
+    "overall_map_match_rate": 0.8295454545454546,
     "season_metrics": {
       "1": {
-        "posterior_consistency": 0.9372139014507163,
+        "posterior_consistency": 0.935066908549159,
         "map_match_rate": 1.0
       },
       "2": {
-        "posterior_consistency": 0.8135382110710399,
+        "posterior_consistency": 0.8480955970833163,
         "map_match_rate": 1.0
       },
       "3": {
-        "posterior_consistency": 0.4240878374650933,
+        "posterior_consistency": 0.44578243552710867,
         "map_match_rate": 0.42857142857142855
       },
       "4": {
-        "posterior_consistency": 0.6160145318466714,
+        "posterior_consistency": 0.5838798371394194,
         "map_match_rate": 1.0
       },
       "5": {
-        "posterior_consistency": 0.49286269568956875,
-        "map_match_rate": 0.8888888888888888
+        "posterior_consistency": 0.5054047471450909,
+        "map_match_rate": 0.7777777777777778
       },
       "6": {
-        "posterior_consistency": 0.6112002256836926,
-        "map_match_rate": 0.875
+        "posterior_consistency": 0.6319699302327582,
+        "map_match_rate": 1.0
       },
       "7": {
-        "posterior_consistency": 0.623481871165257,
+        "posterior_consistency": 0.6107045880900634,
         "map_match_rate": 0.875
       },
       "8": {
-        "posterior_consistency": 0.5424496181024627,
+        "posterior_consistency": 0.5427240028384989,
         "map_match_rate": 0.7777777777777778
       },
       "9": {
-        "posterior_consistency": 0.4513313375213297,
-        "map_match_rate": 0.6666666666666666
+        "posterior_consistency": 0.48258651841828626,
+        "map_match_rate": 0.7777777777777778
       },
       "10": {
-        "posterior_consistency": 0.580006888928389,
+        "posterior_consistency": 0.5680956963031545,
         "map_match_rate": 0.875
       },
       "11": {
-        "posterior_consistency": 0.43403170429809657,
-        "map_match_rate": 0.6666666666666666
+        "posterior_consistency": 0.4849873125148684,
+        "map_match_rate": 0.7777777777777778
       },
       "12": {
-        "posterior_consistency": 0.5150359206914613,
-        "map_match_rate": 0.875
-      },
-      "13": {
-        "posterior_consistency": 0.5123621122204427,
+        "posterior_consistency": 0.5352778185717332,
         "map_match_rate": 1.0
       },
+      "13": {
+        "posterior_consistency": 0.5094006256490563,
+        "map_match_rate": 0.7777777777777778
+      },
       "14": {
-        "posterior_consistency": 0.5622355482198351,
+        "posterior_consistency": 0.5642449066332473,
         "map_match_rate": 1.0
       },
       "15": {
-        "posterior_consistency": 0.5331786014132732,
+        "posterior_consistency": 0.5883731966156239,
         "map_match_rate": 0.8571428571428571
       },
       "16": {
-        "posterior_consistency": 0.606703273752642,
+        "posterior_consistency": 0.6054239213186396,
         "map_match_rate": 0.875
       },
       "17": {
-        "posterior_consistency": 0.38432303886311026,
-        "map_match_rate": 0.4444444444444444
+        "posterior_consistency": 0.41870401111765776,
+        "map_match_rate": 0.5555555555555556
       },
       "18": {
-        "posterior_consistency": 0.4008690567807231,
+        "posterior_consistency": 0.3913030458447863,
         "map_match_rate": 0.5714285714285714
       },
       "19": {
-        "posterior_consistency": 0.458341357926057,
+        "posterior_consistency": 0.4571337497912794,
         "map_match_rate": 0.6
       },
       "20": {
-        "posterior_consistency": 0.38729995088970104,
-        "map_match_rate": 0.875
+        "posterior_consistency": 0.37722971550810536,
+        "map_match_rate": 0.75
       },
       "21": {
-        "posterior_consistency": 0.5324581993624838,
+        "posterior_consistency": 0.5448787353533272,
         "map_match_rate": 1.0
       },
       "22": {
-        "posterior_consistency": 0.6411677202527105,
+        "posterior_consistency": 0.635407742255203,
         "map_match_rate": 1.0
       },
       "23": {
-        "posterior_consistency": 0.5623997802355157,
+        "posterior_consistency": 0.5787207880156227,
         "map_match_rate": 1.0
       },
       "24": {
-        "posterior_consistency": 0.507865251424026,
-        "map_match_rate": 1.0
+        "posterior_consistency": 0.5253572904750915,
+        "map_match_rate": 0.875
       },
       "25": {
-        "posterior_consistency": 0.5856980458238229,
+        "posterior_consistency": 0.5879059693221961,
         "map_match_rate": 0.875
       },
       "26": {
-        "posterior_consistency": 0.7766666666666667,
+        "posterior_consistency": 0.7673333333333257,
         "map_match_rate": 1.0
       },
       "27": {
-        "posterior_consistency": 0.2945477746297241,
-        "map_match_rate": 0.42857142857142855
+        "posterior_consistency": 0.3165114954295218,
+        "map_match_rate": 0.5714285714285714
       },
       "28": {
-        "posterior_consistency": 0.7708571428468177,
+        "posterior_consistency": 0.743809523805191,
         "map_match_rate": 0.8571428571428571
       },
       "29": {
-        "posterior_consistency": 0.8702863797238513,
+        "posterior_consistency": 0.8367545546402031,
         "map_match_rate": 0.8888888888888888
       },
       "30": {
-        "posterior_consistency": 0.727184620661586,
+        "posterior_consistency": 0.7366719742312486,
         "map_match_rate": 0.75
       },
       "31": {
-        "posterior_consistency": 0.95304857427187,
+        "posterior_consistency": 0.9525921583948738,
         "map_match_rate": 1.0
       },
       "32": {
-        "posterior_consistency": 0.6884444444387389,
-        "map_match_rate": 0.7777777777777778
+        "posterior_consistency": 0.6120162911680627,
+        "map_match_rate": 0.6666666666666666
       },
       "33": {
-        "posterior_consistency": 0.5603333333305441,
-        "map_match_rate": 0.5
+        "posterior_consistency": 0.6568596246242705,
+        "map_match_rate": 0.8333333333333334
       },
       "34": {
-        "posterior_consistency": 0.6802499999995649,
-        "map_match_rate": 0.75
+        "posterior_consistency": 0.7149057876574868,
+        "map_match_rate": 0.875
       }
     }
   },
   "uncertainty_heterogeneity": {
-    "overall_avg_ci_width": 0.2212137005146097,
+    "overall_avg_ci_width": 0.2267681976647187,
     "by_status": {
-      "eliminated": 0.11643420861335681,
-      "survivor": 0.23715607197704416
+      "eliminated": 0.11838577165330898,
+      "survivor": 0.2432587614584629
     },
     "by_week_phase": {
-      "early": 0.17614100193565746,
-      "middle": 0.23637002209316452,
-      "late": 0.31541890128044786
+      "early": 0.17780332896673007,
+      "middle": 0.24390125687846684,
+      "late": 0.32793092747043967
     },
-    "heterogeneity_ratio": 2.036824699556885
+    "heterogeneity_ratio": 2.0547972789402653
   },
   "top_controversies": [
     {
@@ -241,8 +241,8 @@
         "Tori Spelling",
         "Anna Delvey"
       ],
-      "log_likelihood": -210.56004037507893,
-      "surprise_score": 210.56004037507893
+      "log_likelihood": -208.42880717400763,
+      "surprise_score": 208.42880717400763
     },
     {
       "season": 34,
@@ -251,8 +251,8 @@
         "Corey Feldman",
         "Baron Davis"
       ],
-      "log_likelihood": -118.2975151710602,
-      "surprise_score": 118.2975151710602
+      "log_likelihood": -113.43206783294445,
+      "surprise_score": 113.43206783294445
     },
     {
       "season": 30,
@@ -261,55 +261,8 @@
         "Brian Austin Green",
         "Matt James"
       ],
-      "log_likelihood": -66.13201983314202,
-      "surprise_score": 66.13201983314202
-    },
-    {
-      "season": 2,
-      "week": 2,
-      "eliminated": [
-        "Tatum O'Neal"
-      ],
-      "log_likelihood": -44.304222096006285,
-      "surprise_score": 44.304222096006285
-    },
-    {
-      "season": 1,
-      "week": 2,
-      "eliminated": [
-        "Trista Sutter"
-      ],
-      "log_likelihood": -39.97519166870728,
-      "surprise_score": 39.97519166870728
-    },
-    {
-      "season": 2,
-      "week": 3,
-      "eliminated": [
-        "Giselle Fernandez"
-      ],
-      "log_likelihood": -38.329092726691464,
-      "surprise_score": 38.329092726691464
-    },
-    {
-      "season": 30,
-      "week": 9,
-      "eliminated": [
-        "Melora Hardin",
-        "Suni Lee"
-      ],
-      "log_likelihood": -37.98321956434795,
-      "surprise_score": 37.98321956434795
-    },
-    {
-      "season": 29,
-      "week": 10,
-      "eliminated": [
-        "Skai Jackson",
-        "Johnny Weir"
-      ],
-      "log_likelihood": -31.16014068444243,
-      "surprise_score": 31.16014068444243
+      "log_likelihood": -106.47108380965219,
+      "surprise_score": 106.47108380965219
     },
     {
       "season": 33,
@@ -318,17 +271,45 @@
         "Eric Roberts",
         "Reginald VelJohnson"
       ],
-      "log_likelihood": -29.755390175396172,
-      "surprise_score": 29.755390175396172
+      "log_likelihood": -50.83262240409486,
+      "surprise_score": 50.83262240409486
+    },
+    {
+      "season": 2,
+      "week": 2,
+      "eliminated": [
+        "Tatum O'Neal"
+      ],
+      "log_likelihood": -44.14142749490711,
+      "surprise_score": 44.14142749490711
     },
     {
       "season": 1,
-      "week": 4,
+      "week": 2,
       "eliminated": [
-        "Rachel Hunter"
+        "Trista Sutter"
       ],
-      "log_likelihood": -24.552730872992427,
-      "surprise_score": 24.552730872992427
+      "log_likelihood": -37.370112810821425,
+      "surprise_score": 37.370112810821425
+    },
+    {
+      "season": 2,
+      "week": 3,
+      "eliminated": [
+        "Giselle Fernandez"
+      ],
+      "log_likelihood": -33.428481920006824,
+      "surprise_score": 33.428481920006824
+    },
+    {
+      "season": 29,
+      "week": 10,
+      "eliminated": [
+        "Skai Jackson",
+        "Johnny Weir"
+      ],
+      "log_likelihood": -31.552465588241215,
+      "surprise_score": 31.552465588241215
     },
     {
       "season": 30,
@@ -337,8 +318,8 @@
         "Jimmie Allen",
         "Olivia Jade"
       ],
-      "log_likelihood": -23.345651049612925,
-      "surprise_score": 23.345651049612925
+      "log_likelihood": -26.528712704785498,
+      "surprise_score": 26.528712704785498
     },
     {
       "season": 34,
@@ -346,17 +327,26 @@
       "eliminated": [
         "Whitney Leavitt"
       ],
-      "log_likelihood": -22.98381183749306,
-      "surprise_score": 22.98381183749306
+      "log_likelihood": -22.572325251816597,
+      "surprise_score": 22.572325251816597
     },
     {
-      "season": 28,
-      "week": 7,
+      "season": 30,
+      "week": 5,
       "eliminated": [
-        "Karamo Brown"
+        "Melanie C"
       ],
-      "log_likelihood": -22.59339608868514,
-      "surprise_score": 22.59339608868514
+      "log_likelihood": -22.014573926224617,
+      "surprise_score": 22.014573926224617
+    },
+    {
+      "season": 1,
+      "week": 4,
+      "eliminated": [
+        "Rachel Hunter"
+      ],
+      "log_likelihood": -21.943869200522315,
+      "surprise_score": 21.943869200522315
     },
     {
       "season": 2,
@@ -364,35 +354,8 @@
       "eliminated": [
         "Kenny Mayne"
       ],
-      "log_likelihood": -21.852786785514102,
-      "surprise_score": 21.852786785514102
-    },
-    {
-      "season": 28,
-      "week": 6,
-      "eliminated": [
-        "Sailor Brinkley-Cook"
-      ],
-      "log_likelihood": -21.517954087656623,
-      "surprise_score": 21.517954087656623
-    },
-    {
-      "season": 33,
-      "week": 6,
-      "eliminated": [
-        "Jenn Tran"
-      ],
-      "log_likelihood": -21.51440720137052,
-      "surprise_score": 21.51440720137052
-    },
-    {
-      "season": 32,
-      "week": 2,
-      "eliminated": [
-        "Jamie Lynn Spears"
-      ],
-      "log_likelihood": -21.27717313162921,
-      "surprise_score": 21.27717313162921
+      "log_likelihood": -21.49216625153753,
+      "surprise_score": 21.49216625153753
     },
     {
       "season": 30,
@@ -400,17 +363,8 @@
       "eliminated": [
         "Christine Chiu"
       ],
-      "log_likelihood": -21.256346440395877,
-      "surprise_score": 21.256346440395877
-    },
-    {
-      "season": 34,
-      "week": 4,
-      "eliminated": [
-        "Hilaria Baldwin"
-      ],
-      "log_likelihood": -21.0620688131625,
-      "surprise_score": 21.0620688131625
+      "log_likelihood": -21.351869600941278,
+      "surprise_score": 21.351869600941278
     },
     {
       "season": 32,
@@ -418,8 +372,53 @@
       "eliminated": [
         "Adrian Peterson"
       ],
-      "log_likelihood": -19.71273965273432,
-      "surprise_score": 19.71273965273432
+      "log_likelihood": -21.21464325455173,
+      "surprise_score": 21.21464325455173
+    },
+    {
+      "season": 28,
+      "week": 6,
+      "eliminated": [
+        "Sailor Brinkley-Cook"
+      ],
+      "log_likelihood": -21.165949785514478,
+      "surprise_score": 21.165949785514478
+    },
+    {
+      "season": 28,
+      "week": 7,
+      "eliminated": [
+        "Karamo Brown"
+      ],
+      "log_likelihood": -21.078038731583206,
+      "surprise_score": 21.078038731583206
+    },
+    {
+      "season": 32,
+      "week": 2,
+      "eliminated": [
+        "Jamie Lynn Spears"
+      ],
+      "log_likelihood": -20.866245529972385,
+      "surprise_score": 20.866245529972385
+    },
+    {
+      "season": 34,
+      "week": 6,
+      "eliminated": [
+        "Scott Hoying"
+      ],
+      "log_likelihood": -20.823113326831397,
+      "surprise_score": 20.823113326831397
+    },
+    {
+      "season": 32,
+      "week": 7,
+      "eliminated": [
+        "Lele Pons"
+      ],
+      "log_likelihood": -20.541246820280417,
+      "surprise_score": 20.541246820280417
     }
   ],
   "rule_fairness_analysis": {
@@ -451,8 +450,8 @@
         26,
         27
       ],
-      "avg_hit_rate": 0.7496984126984126,
-      "avg_populist_bias": -0.18264928611967707
+      "avg_hit_rate": 0.7446984126984126,
+      "avg_populist_bias": -0.19008344528078094
     },
     "rank_rule": {
       "seasons": [
@@ -466,8 +465,8 @@
         33,
         34
       ],
-      "avg_hit_rate": 0.849987974987975,
-      "avg_populist_bias": -0.13701798589044384
+      "avg_hit_rate": 0.7934503767837102,
+      "avg_populist_bias": -0.1693401527136935
     }
   }
 }

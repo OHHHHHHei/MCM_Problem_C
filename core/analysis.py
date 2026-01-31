@@ -9,8 +9,8 @@ from dataclasses import dataclass
 import json
 import os
 
-from data_processor import DataProcessor
-from smc_inverse import SMCInverse, ModelParams
+from .data_processor import DataProcessor
+from .smc_inverse import SMCInverse, ModelParams
 
 
 @dataclass
@@ -266,7 +266,7 @@ class ResultAnalyzer:
             vote_shares = {name: est['mean'] for name, est in estimates.items()}
             
             # 使用目标规则计算
-            from competition_rules import CompetitionRules
+            from .competition_rules import CompetitionRules
             rules = CompetitionRules()
             
             # 临时覆盖规则判断
@@ -490,7 +490,7 @@ def generate_text_report(analyzer: ResultAnalyzer) -> str:
 
 
 if __name__ == '__main__':
-    from smc_inverse import create_model
+    from .smc_inverse import create_model
     
     print("Creating model...")
     model = create_model(n_particles=300)

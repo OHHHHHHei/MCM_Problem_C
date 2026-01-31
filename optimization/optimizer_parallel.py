@@ -6,10 +6,13 @@ import concurrent.futures
 import os
 from copy import deepcopy
 
+import sys
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 # Import core modules
-from data_processor import DataProcessor
-from smc_inverse import SMCInverse, ModelParams
-from analysis import ResultAnalyzer
+from core.data_processor import DataProcessor
+from core.smc_inverse import SMCInverse, ModelParams
+from core.analysis import ResultAnalyzer
 
 # 定义全局 worker 函数，必须在顶层以便 pickle
 def evaluate_params_worker(params_dict: dict, csv_path: str, season_list: list = None) -> dict:
@@ -73,7 +76,9 @@ def evaluate_params_worker(params_dict: dict, csv_path: str, season_list: list =
         # 捕获异常防止子进程崩溃导致主进程卡死
         return {'error': str(e), 'params': params_dict}
 
-def optimize_hyperparameters_parallel(csv_path='2026_MCM_Problem_C_Data.csv'):
+def optimize_hyperparameters_parallel(csv_path=None):
+    if csv_path is None:
+        csv_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../2026_MCM_Problem_C_Data.csv'))
     """
     并行网格搜索优化超参数 (Aggressive Mode)
     """

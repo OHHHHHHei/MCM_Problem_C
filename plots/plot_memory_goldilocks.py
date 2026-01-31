@@ -3,6 +3,8 @@ import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
 import os
+import sys
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 # Set Plot Style for Academic Publication
 plt.rcParams['font.family'] = 'sans-serif'
@@ -10,7 +12,8 @@ plt.rcParams['font.sans-serif'] = ['Arial', 'DejaVu Sans', 'Liberation Sans', 'B
 sns.set_theme(style="whitegrid", context="paper", font_scale=1.4)
 
 def plot_goldilocks():
-    input_file = 'output/optimization_overnight_results.csv'
+    # Adjust path to output file since we are in plots/
+    input_file = os.path.abspath(os.path.join(os.path.dirname(__file__), '../output/optimization_overnight_results.csv'))
     if not os.path.exists(input_file):
         print(f"File not found: {input_file}")
         return

@@ -7,10 +7,13 @@ import os
 import csv
 from typing import Dict, List
 
+import sys
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 # Import core modules
-from data_processor import DataProcessor
-from smc_inverse import SMCInverse, ModelParams
-from analysis import ResultAnalyzer
+from core.data_processor import DataProcessor
+from core.smc_inverse import SMCInverse, ModelParams
+from core.analysis import ResultAnalyzer
 
 def evaluate_params_worker_robust(params_dict: dict, csv_path: str) -> dict:
     """
@@ -95,7 +98,9 @@ def evaluate_params_worker_robust(params_dict: dict, csv_path: str) -> dict:
     except Exception as e:
         return {'error': str(e), 'params': params_dict, 'status': 'error'}
 
-def optimize_overnight(csv_path='2026_MCM_Problem_C_Data.csv'):
+def optimize_overnight(csv_path=None):
+    if csv_path is None:
+        csv_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../2026_MCM_Problem_C_Data.csv'))
     """
     通宵运行优化器 (Overnight Optimizer)
     """

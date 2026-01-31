@@ -1,4 +1,6 @@
 import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 print(f"Python executable: {sys.executable}")
 print(f"Python version: {sys.version}")
 
@@ -21,11 +23,12 @@ except ImportError as e:
     print(f"Failed to import scipy: {e}")
 
 try:
-    from smc_inverse import SMCInverse, ModelParams
-    from data_processor import DataProcessor
+    from core.smc_inverse import SMCInverse, ModelParams
+    from core.data_processor import DataProcessor
     print("Successfully imported project modules.")
     
-    dp = DataProcessor('2026_MCM_Problem_C_Data.csv')
+    csv_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../2026_MCM_Problem_C_Data.csv'))
+    dp = DataProcessor(csv_path)
     print("Successfully initialized DataProcessor.")
     
     model = SMCInverse(dp, ModelParams(n_particles=10))
