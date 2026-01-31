@@ -94,9 +94,9 @@ def optimize_hyperparameters(csv_path='2026_MCM_Problem_C_Data.csv'):
     # 权重: Top-3 Hit (0.5) + MAP Match (0.3) + Posterior Consistency (0.2)
     # 理由: Top-3 最硬，MAP Match 次之，Posterior 是软指标
     df['weighted_score'] = (
-        df['top3_hit'] * 0.8 + 
-        df['map_match_rate'] * 0.1 + 
-        df['posterior_consistency'] * 0.1
+        df['top3_hit'] * 0.6 + 
+        df['map_match_rate'] * 0.2 + 
+        df['posterior_consistency'] * 0.2
     )
     
     best_run = df.loc[df['weighted_score'].idxmax()]
