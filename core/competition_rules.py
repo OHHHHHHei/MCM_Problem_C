@@ -127,14 +127,31 @@ class CompetitionRules:
         )
     
     def compute_judge_save_probability(self,
-                                       contestant_a_cum_score: float,
-                                       contestant_b_cum_score: float) -> float:
+                                       contestant_a_score: float,
+                                       contestant_b_score: float,
+                                       max_score: float = None) -> float:
         """
         计算 Judge Save 时评委拯救A的概率
         
-        式(142): P(Save A) = σ(β_judge · (J_cum_A - J_cum_B))
+        式(142): P(Save A) = σ(β_judge · ΔJ)
+        
+        其中 ΔJ = (J_A - J_B) / max_J (归一化后), 使得 ΔJ ∈ [-1, 1]
+        
+        Args:
+            contestant_a_score: 选手A的技术分
+            contestant_b_score: 选手B的技术分
+            max_score: 当周最高分 (用于归一化); 若为 None 则使用原始差值
+            
+        Returns:
+            P(Save A): [0, 1]
         """
-        diff = contestant_a_cum_score - contestant_b_cum_score
+        if max_score and max_score > 0:
+            # 归一化: ΔJ ∈ [-1, 1]
+            diff = (contestant_a_score - contestant_b_score) / max_score
+        else:
+            # 兼容旧代码: 直接使用原始差值
+            diff = contestant_a_score - contestant_b_score
+            
         return 1.0 / (1.0 + np.exp(-self.beta_judge * diff))
     
     def identify_bottom_two(self,

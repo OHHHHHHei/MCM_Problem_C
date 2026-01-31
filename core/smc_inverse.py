@@ -433,10 +433,12 @@ class SMCInverse:
         
         return {name: count / total_weight for name, count in elimination_counts.items()}
     
-    def run_season(self, season: int, verbose: bool = True) -> Dict:
+    def run_season(self, season: int, verbose: bool = True, step_callback=None) -> Dict:
         """
         运行单赛季的粒子滤波
         
+        Args:
+            step_callback: 回调函数 fn(season, week, particles, judge_scores, active_names, event)
         Returns:
             results: 包含投票份额估计、预测精度等
         """
@@ -780,6 +782,10 @@ class SMCInverse:
                     'eliminated': list(event.eliminated_set),
                     'map_predicted': map_eliminated
                 })
+                
+                # 执行回调 (例如: 反事实分析)
+                if step_callback:
+                    step_callback(season, week, self.particles, judge_scores, active_names, event)
                 
                 # 更新淘汰状态
                 self.rules.update_elimination_status(True)
