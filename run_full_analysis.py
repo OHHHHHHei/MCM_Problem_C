@@ -277,9 +277,9 @@ def main():
     analyzer = FullSeasonAnalyzer(n_particles=300)  # 使用较少粒子加速
     
     # 选择要分析的赛季 - 全量模式
-    all_seasons = list(range(1, 33))  # S1-S32 全部赛季
+    all_seasons = list(range(1, 35))  # S1-S34 全部赛季
     
-    print(f"\nAnalyzing ALL seasons: S1-S32 ({len(all_seasons)} seasons)")
+    print(f"\nAnalyzing ALL seasons: S1-S34 ({len(all_seasons)} seasons)")
     print("This may take 15-20 minutes...")
     
     # 运行分析
