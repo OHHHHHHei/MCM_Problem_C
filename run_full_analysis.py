@@ -276,15 +276,14 @@ def main():
     # 初始化分析器
     analyzer = FullSeasonAnalyzer(n_particles=300)  # 使用较少粒子加速
     
-    # 选择要分析的赛季
-    # 先测试几个赛季
-    test_seasons = [2, 5, 15, 27, 28, 31]  # 不同时期的代表性赛季
+    # 选择要分析的赛季 - 全量模式
+    all_seasons = list(range(1, 33))  # S1-S32 全部赛季
     
-    print(f"\nAnalyzing seasons: {test_seasons}")
-    print("(For full analysis, modify test_seasons to include all seasons)")
+    print(f"\nAnalyzing ALL seasons: S1-S32 ({len(all_seasons)} seasons)")
+    print("This may take 15-20 minutes...")
     
     # 运行分析
-    analyzer.run_all_seasons(test_seasons)
+    analyzer.run_all_seasons(all_seasons)
     
     # 导出结果
     report = analyzer.export_results()
