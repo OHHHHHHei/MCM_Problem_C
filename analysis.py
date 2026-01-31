@@ -106,6 +106,92 @@ class ResultAnalyzer:
             'season_metrics': season_metrics
         }
     
+    def analyze_uncertainty_heterogeneity(self) -> Dict:
+        """
+        分析估计不确定性的异质性 (Heterogeneity of Uncertainty)
+        
+        证明: 不确定性在不同选手/不同周次间并非均匀，而是有显著差异。
+        
+        Returns:
+            {
+                'overall_avg_ci_width': float,     # 总体平均 CI 宽度
+                'by_status': {                     # 按选手状态分解
+                    'eliminated': float,           # 被淘汰者平均 CI 宽度 (预期较窄)
+                    'survivor': float              # 幸存者平均 CI 宽度 (预期较宽)
+                },
+                'by_week_phase': {                 # 按比赛阶段分解
+                    'early': float,                # 前 1/3 周
+                    'middle': float,               # 中 1/3 周
+                    'late': float                  # 后 1/3 周
+                },
+                'heterogeneity_ratio': float       # survivor/eliminated 比值 (>1 表示异质性存在)
+            }
+        """
+        all_ci_widths = []
+        eliminated_widths = []
+        survivor_widths = []
+        
+        # 按阶段分类
+        phase_widths = {'early': [], 'middle': [], 'late': []}
+        
+        for season, result in self.results.items():
+            weekly_estimates = result.get('weekly_estimates', {})
+            if not weekly_estimates:
+                continue
+            
+            # 获取该赛季所有淘汰周
+            weeks = sorted(weekly_estimates.keys())
+            n_weeks = len(weeks)
+            if n_weeks == 0:
+                continue
+            
+            # 获取淘汰事件用于判断状态
+            events = self.dp.get_elimination_events(season)
+            eliminated_by_week = {e.week: set(e.eliminated_set) for e in events}
+            
+            for idx, week in enumerate(weeks):
+                estimates = weekly_estimates[week]
+                elim_set = eliminated_by_week.get(week, set())
+                
+                # 确定阶段
+                if idx < n_weeks / 3:
+                    phase = 'early'
+                elif idx < 2 * n_weeks / 3:
+                    phase = 'middle'
+                else:
+                    phase = 'late'
+                
+                for name, est in estimates.items():
+                    ci_width = est.get('ci_width', est.get('ci_high', 0) - est.get('ci_low', 0))
+                    all_ci_widths.append(ci_width)
+                    phase_widths[phase].append(ci_width)
+                    
+                    if name in elim_set:
+                        eliminated_widths.append(ci_width)
+                    else:
+                        survivor_widths.append(ci_width)
+        
+        avg_overall = np.mean(all_ci_widths) if all_ci_widths else 0.0
+        avg_eliminated = np.mean(eliminated_widths) if eliminated_widths else 0.0
+        avg_survivor = np.mean(survivor_widths) if survivor_widths else 0.0
+        
+        # 异质性比值: >1 表示幸存者的不确定性高于被淘汰者
+        heterogeneity_ratio = avg_survivor / avg_eliminated if avg_eliminated > 0 else 1.0
+        
+        return {
+            'overall_avg_ci_width': avg_overall,
+            'by_status': {
+                'eliminated': avg_eliminated,
+                'survivor': avg_survivor
+            },
+            'by_week_phase': {
+                'early': np.mean(phase_widths['early']) if phase_widths['early'] else 0.0,
+                'middle': np.mean(phase_widths['middle']) if phase_widths['middle'] else 0.0,
+                'late': np.mean(phase_widths['late']) if phase_widths['late'] else 0.0
+            },
+            'heterogeneity_ratio': heterogeneity_ratio
+        }
+    
     def identify_controversies(self, likelihood_threshold: float = -2.0) -> List[Dict]:
         """
         识别争议事件 (低似然淘汰)
@@ -316,9 +402,13 @@ class ResultAnalyzer:
         # 一致性指标
         consistency = self.compute_consistency_metrics()
         
+        # 不确定性异质性分析
+        uncertainty = self.analyze_uncertainty_heterogeneity()
+        
         report = {
             'overall_statistics': overall,
             'consistency_metrics': consistency,
+            'uncertainty_heterogeneity': uncertainty,  # 新增
             'top_controversies': controversies[:20],  # 前20个争议事件
             'rule_fairness_analysis': fairness
         }
@@ -354,6 +444,19 @@ def generate_text_report(analyzer: ResultAnalyzer) -> str:
     lines.append(f"Overall MAP Match Rate: {consistency['overall_map_match_rate']:.2%}")
     lines.append("(Note: 'Posterior Consistency' = weighted % of particles agreeing with reality)")
     lines.append("(Note: 'MAP Match Rate' = % of eliminations correctly reconstructed using point estimates)")
+    
+    # 不确定性异质性
+    uncertainty = analyzer.analyze_uncertainty_heterogeneity()
+    lines.append("\n## Uncertainty Heterogeneity (CI Width Analysis)")
+    lines.append(f"Overall Average CI Width: {uncertainty['overall_avg_ci_width']:.4f}")
+    lines.append(f"  - Eliminated Contestants: {uncertainty['by_status']['eliminated']:.4f} (expected: lower)")
+    lines.append(f"  - Surviving Contestants:  {uncertainty['by_status']['survivor']:.4f} (expected: higher)")
+    lines.append(f"  - Heterogeneity Ratio (Survivor/Eliminated): {uncertainty['heterogeneity_ratio']:.2f}x")
+    lines.append("\nBy Competition Phase:")
+    lines.append(f"  - Early Weeks (1/3):  {uncertainty['by_week_phase']['early']:.4f}")
+    lines.append(f"  - Middle Weeks (1/3): {uncertainty['by_week_phase']['middle']:.4f}")
+    lines.append(f"  - Late Weeks (1/3):   {uncertainty['by_week_phase']['late']:.4f}")
+    lines.append("(Note: CI Width = 95% Credible Interval width; lower = more certainty)")
     
     # 按赛季分解
     lines.append("\n## Season-by-Season Hit Rates")

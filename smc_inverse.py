@@ -37,11 +37,11 @@ class ParticleState:
 class ModelParams:
     """模型参数"""
     # 状态演化参数
-    kappa: float = 0.3          # 表现冲击系数
-    delta: float = 1.5          # 冲击阈值 (标准差倍数)
+    kappa: float = 0.3          # 表现冲击系数 (Optimized: 0.3)
+    delta: float = 1.2          # 冲击阈值 (Optimized: 1.2)
     sigma_mu: float = 0.1       # 长期基准噪声
-    rho: float = 0.6            # 记忆衰减系数
-    gamma: float = 0.5          # 评审引导系数
+    rho: float = 0.9            # 记忆衰减系数 (Optimized: 0.9 - High Memory)
+    gamma: float = 0.0          # 评审引导系数 (Optimized: 0.0 - Independent Fans)
     sigma_x: float = 0.2        # 短期动量噪声
     
     # 初始化参数
@@ -50,10 +50,10 @@ class ModelParams:
     # 规则参数
     xi_perturbation: float = 1e-4
     lambda_decay: float = 0.9
-    beta_judge: float = 2.0
+    beta_judge: float = 2.0     # 评委拯救系数 (Optimized: 2.0)
     
     # 似然参数
-    alpha_discriminant: float = 5.0
+    alpha_discriminant: float = 7.0 # 判别力系数 (Optimized: 7.0 - Cruel Competition)
     
     # SMC参数
     n_particles: int = 1000
@@ -827,33 +827,54 @@ class SMCInverse:
         估计投票份额 (后验分布)
         
         Returns:
-            {name: {'mean': float, 'std': float, 'ci_low': float, 'ci_high': float}}
+            {name: {
+                'mean': float,           # 后验均值
+                'std': float,            # 后验标准差
+                'ci_low': float,         # 95% CI 下界
+                'ci_high': float,        # 95% CI 上界
+                'ci_width': float        # 95% CI 宽度 (确定性度量指标)
+            }}
+        
+        Note:
+            ci_width 越小表示确定性越高。
+            - 被淘汰选手通常 ci_width 较小 (淘汰信息提供强约束)
+            - 安全晋级选手通常 ci_width 较大 (缺乏约束)
         """
-        estimates = {name: {'shares': []} for name in active_names}
+        # 收集每个粒子的原始份额 (不预乘权重)
+        raw_shares = {name: [] for name in active_names}
+        weights = []
         
         for particle in self.particles:
             shares = self._compute_vote_shares(particle, active_names)
+            weights.append(particle.weight)
             for name, share in shares.items():
-                estimates[name]['shares'].append(share * particle.weight)
+                raw_shares[name].append(share)
         
-        # 计算统计量
-        for name in estimates:
-            shares = np.array(estimates[name]['shares'])
-            total_weight = sum(p.weight for p in self.particles)
+        weights = np.array(weights)
+        weights = weights / weights.sum()  # 归一化
+        
+        estimates = {}
+        for name in active_names:
+            shares_arr = np.array(raw_shares[name])
             
-            if total_weight > 0:
-                mean = np.sum(shares) / total_weight
-            else:
-                mean = 1.0 / len(active_names)
+            # 加权均值
+            mean = np.sum(weights * shares_arr)
             
-            # 近似标准差
-            std = np.std(shares) if len(shares) > 1 else 0.0
+            # 加权标准差: sqrt(sum(w * (x - mean)^2))
+            variance = np.sum(weights * (shares_arr - mean) ** 2)
+            std = np.sqrt(variance) if variance > 0 else 0.0
+            
+            # 95% 置信区间
+            ci_low = max(0, mean - 1.96 * std)
+            ci_high = min(1, mean + 1.96 * std)
+            ci_width = ci_high - ci_low
             
             estimates[name] = {
                 'mean': mean,
                 'std': std,
-                'ci_low': max(0, mean - 1.96 * std),
-                'ci_high': min(1, mean + 1.96 * std)
+                'ci_low': ci_low,
+                'ci_high': ci_high,
+                'ci_width': ci_width  # 新增: 确定性度量指标
             }
         
         return estimates

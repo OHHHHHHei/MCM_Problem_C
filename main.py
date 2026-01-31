@@ -69,10 +69,13 @@ def parse_args():
     )
     
     # 模型参数
-    parser.add_argument('--kappa', type=float, default=0.3, help='Performance shock coefficient')
-    parser.add_argument('--delta', type=float, default=1.5, help='Shock threshold')
-    parser.add_argument('--rho', type=float, default=0.6, help='Memory decay coefficient')
-    parser.add_argument('--gamma', type=float, default=0.5, help='Judge influence coefficient')
+    # 模型参数 (Updated with Optimization Results)
+    parser.add_argument('--kappa', type=float, default=0.3, help='Performance shock coefficient (Optimized: 0.3)')
+    parser.add_argument('--delta', type=float, default=1.2, help='Shock threshold (Optimized: 1.2)')
+    parser.add_argument('--rho', type=float, default=0.9, help='Memory decay coefficient (Optimized: 0.9)')
+    parser.add_argument('--gamma', type=float, default=0.0, help='Judge influence coefficient (Optimized: 0.0)')
+    parser.add_argument('--alpha', type=float, default=7.0, help='Discriminant power (Optimized: 7.0)')
+    parser.add_argument('--beta_judge', type=float, default=2.0, help='Judge save bias (Optimized: 2.0)')
     
     return parser.parse_args()
 
@@ -127,7 +130,9 @@ def run_model(args) -> dict:
         kappa=args.kappa,
         delta=args.delta,
         rho=args.rho,
-        gamma=args.gamma
+        gamma=args.gamma,
+        alpha_discriminant=args.alpha,
+        beta_judge=args.beta_judge
     )
     model = SMCInverse(dp, params)
     
