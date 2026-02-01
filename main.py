@@ -30,7 +30,7 @@ def parse_args():
     parser.add_argument(
         '--data', '-d',
         type=str,
-        default='2026_MCM_Problem_C_Data.csv',
+        default='data/raw/2026_MCM_Problem_C_Data.csv',
         help='Path to CSV data file'
     )
     
