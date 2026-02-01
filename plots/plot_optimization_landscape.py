@@ -44,45 +44,19 @@ def plot_landscape():
     plt.figure(figsize=(10, 8), dpi=300)
     
     # Create Heatmap
-    # Using 'magma' colormap for high contrast (light = high score, dark = low score)
+    # Using 'viridis' - the gold standard for scientific visualization (perceptually uniform)
     ax = sns.heatmap(
         pivot_table, 
         annot=True, 
         fmt=".3f", 
-        cmap="magma", 
+        cmap="viridis", 
         linewidths=.5,
-        cbar_kws={'label': 'Max Weighted Score'}
+        cbar_kws={'label': 'Weighted Score'},
+        annot_kws={'size': 9}
     )
     
-    # --- Annotating the Best Point ---
-    # Find global max in the pivot table logic
-    best_score = df['weighted_score'].max()
-    best_row = df.loc[df['weighted_score'].idxmax()]
-    best_rho = best_row['rho']
-    best_gamma = best_row['gamma']
-
-    print(f"Best Point to annotate: rho={best_rho}, gamma={best_gamma}, score={best_score:.4f}")
-
-    # Find coordinates for annotation
-    # Heatmap coords: x=col_index + 0.5, y=row_index + 0.5
-    col_idx = pivot_table.columns.get_loc(best_rho)
-    row_idx = pivot_table.index.get_loc(best_gamma)
-    
-    # Draw a star
-    ax.scatter(col_idx + 0.5, row_idx + 0.5, marker='*', s=400, color='lime', edgecolor='white', linewidth=1.5, label='Global Best')
-    
-    # Annotate text
-    ax.annotate(
-        f'Best: {best_score:.3f}\n(rho={best_rho}, gamma={best_gamma})',
-        xy=(col_idx + 0.5, row_idx + 0.5),
-        xytext=(col_idx + 0.5, row_idx - 0.5), # Shift up slightly
-        ha='center', va='bottom',
-        color='white', weight='bold', fontsize=10,
-        bbox=dict(boxstyle="round,pad=0.3", fc="black", ec="none", alpha=0.95)
-    )
-
     # --- Formatting ---
-    plt.title('Optimization Landscape: Memory vs. Judge Influence\n(Maximized over other parameters)', fontsize=14, weight='bold', pad=20)
+    plt.title('Hyperparameter Optimization Surface (Weighted Score)', fontsize=14, weight='bold', pad=20)
     plt.xlabel(r'Memory Decay Factor ($\rho$)', fontsize=12, labelpad=10)
     plt.ylabel(r'Judge Influence Factor ($\gamma$)', fontsize=12, labelpad=10)
     
@@ -93,7 +67,7 @@ def plot_landscape():
     # Save
     output_path = 'output/optimization_landscape.png'
     plt.tight_layout()
-    plt.savefig(output_path, dpi=300, bbox_inches='tight')
+    plt.savefig(output_path, dpi=300, bbox_inches='tight', facecolor='white')
     print(f"Plot saved to {output_path}")
 
 if __name__ == '__main__':
