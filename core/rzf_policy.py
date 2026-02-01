@@ -170,10 +170,11 @@ class RZFPolicy:
         current_pool = sorted_utils[:] # Copy
         
         # Step A: Direct Elimination (if N > 1)
+        # Protocol: "Lowest Score Direct Out" for Double Elimination
         while num_to_eliminate > 1:
-            direct_victim = current_pool.pop(0) # Lowest Score
+            direct_victim = current_pool.pop(0) # Lowest Utility (Omega)
             eliminated.append(direct_victim.name)
-            log.append(f"Double Elim: {direct_victim.name} eliminated directly (Lowest Utility {direct_victim.survival_utility:.3f})")
+            log.append(f"Double Elim Protocol: {direct_victim.name} ELIMINATED directly (Lowest Scale: {direct_victim.survival_utility:.3f})")
             num_to_eliminate -= 1
             
         # Now num_to_eliminate == 1. Run Standard Trifecta.
