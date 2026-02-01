@@ -17,8 +17,8 @@ from core.smc_inverse import SMCInverse
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
-OUTPUT_FILE = 'output/q3_panel_data.csv'
-CSV_PATH = '2026_MCM_Problem_C_Data.csv'
+OUTPUT_FILE = 'output/q3_panel_data_7dim.csv'
+CSV_PATH = 'data/raw/2026_MCM_Problem_C_Data.csv'
 
 def safe_logit(p, epsilon=1e-6):
     """
@@ -27,6 +27,23 @@ def safe_logit(p, epsilon=1e-6):
     """
     p_clamped = np.clip(p, epsilon, 1 - epsilon)
     return np.log(p_clamped / (1 - p_clamped))
+
+def map_industry_q1(raw_ind):
+    """
+    Map raw industry string to Q1's 7 dimensions.
+    Logic from core/data_processor.py
+    """
+    if pd.isna(raw_ind): return "Other"
+    raw = str(raw_ind).lower()
+    
+    # Priority order matches Q1 logic
+    categories = ['Actor/Actress', 'Athlete', 'Singer/Rapper', 'TV Personality', 'Model', 'Comedian']
+    
+    for cat in categories:
+        if cat.lower() in raw:
+            return cat
+            
+    return "Other"
 
 def build_panel_data():
     logger.info("Starting Q3 Panel Data Construction...")
@@ -48,7 +65,8 @@ def build_panel_data():
         static_lookup[name] = {
             'partner': row['ballroom_partner'],
             'age': row['celebrity_age_during_season'],
-            'industry': row['celebrity_industry']
+            'industry': row['celebrity_industry'],
+            'industry_7dim': map_industry_q1(row['celebrity_industry'])
         }
     
     # 2. Iterate through all seasons
@@ -116,6 +134,7 @@ def build_panel_data():
                     'partner': meta.get('partner', 'Unknown'),
                     'age': meta.get('age', 30),
                     'industry': meta.get('industry', 'Other'),
+                    'industry_7dim': meta.get('industry_7dim', 'Other'),
                     
                     'judge_score_raw': raw_score,
                     'judge_score_z': judge_z,

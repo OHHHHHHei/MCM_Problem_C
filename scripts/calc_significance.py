@@ -12,8 +12,8 @@ def calc_sig():
     table_rows = []
     
     industries = [
-        'Politician', 'Journalist', 'Reality Star', 'Athlete', 
-        'Musician', 'TV Personality', 'Model', 'Comedian'
+        'Athlete', 'Singer/Rapper', 'TV Personality', 
+        'Model', 'Comedian', 'Other'
     ]
     
     print("| 行业 | Judge beta | Fan beta | Sig Judge | Sig Fan |")
@@ -22,7 +22,7 @@ def calc_sig():
     stats_data = []
 
     for ind in industries:
-        term = f"C(industry)[T.{ind}]"
+        term = f"C(industry_7dim, Treatment(reference='Actor/Actress'))[T.{ind}]"
         
         # Get Judge
         j_row = df[(df['Model']=='Judge') & (df['Term'] == term)]

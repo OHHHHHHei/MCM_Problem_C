@@ -6,7 +6,7 @@ import statsmodels.api as sm
 import os
 
 OUTPUT_DIR = 'output'
-DATA_FILE = 'output/q3_panel_data.csv'
+DATA_FILE = 'output/q3_panel_data_7dim.csv'
 
 def fit_lmm(df, formula, groups, re_formula=None):
     """
@@ -78,7 +78,7 @@ def run_analysis():
     
     # Pre-processing
     df['season_id'] = df['season_id'].astype(str)
-    df['industry'] = df['industry'].astype('category')
+    df['industry_7dim'] = df['industry_7dim'].astype('category')
     df['week_cat'] = df['week'].astype(str)
     
     # Standardize Age
@@ -93,7 +93,7 @@ def run_analysis():
     # Track A
     # =========================================================================
     print("\n--- Track A: Meritocracy (Judge Score) ---")
-    f_A = "judge_score_z ~ age_std + C(industry) + C(week_cat)"
+    f_A = "judge_score_z ~ age_std + C(industry_7dim, Treatment(reference='Actor/Actress')) + C(week_cat)"
     res_A = fit_lmm(df, f_A, groups=df["pro_id"])
     
     icc_A = {}
@@ -106,7 +106,7 @@ def run_analysis():
     # Track B1
     # =========================================================================
     print("\n--- Track B1: Fan Popularity (Total Vote Share) ---")
-    f_B1 = "vote_share_logit_z ~ age_std + C(industry) + C(week_cat)"
+    f_B1 = "vote_share_logit_z ~ age_std + C(industry_7dim, Treatment(reference='Actor/Actress')) + C(week_cat)"
     res_B1 = fit_lmm(df, f_B1, groups=df["pro_id"])
     
     icc_B1 = {}
@@ -118,7 +118,7 @@ def run_analysis():
     # Track B2
     # =========================================================================
     print("\n--- Track B2: Fan Bias (Net Preference) ---")
-    f_B2 = "vote_share_logit_z ~ judge_score_z + age_std + C(industry) + C(week_cat)"
+    f_B2 = "vote_share_logit_z ~ judge_score_z + age_std + C(industry_7dim, Treatment(reference='Actor/Actress')) + C(week_cat)"
     res_B2 = fit_lmm(df, f_B2, groups=df["pro_id"])
     
     icc_B2 = {}

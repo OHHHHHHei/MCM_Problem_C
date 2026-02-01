@@ -5,7 +5,7 @@ from statsmodels.stats.outliers_influence import variance_inflation_factor
 from patsy import dmatrix
 
 def calc_vif():
-    df = pd.read_csv('output/q3_panel_data.csv')
+    df = pd.read_csv('output/q3_panel_data_7dim.csv')
     
     # We are checking multicollinearity for the predictors in the most complex model (Track B2)
     # Predictors: judge_score_z + age_std + C(industry) + C(week_cat)
@@ -15,7 +15,7 @@ def calc_vif():
     
     # Using patsy to create the design matrix
     # We drop one industry as reference (automatically done by dmatrix with Intercept)
-    formula = "judge_score_z + age_std + C(industry)"
+    formula = "judge_score_z + age_std + C(industry_7dim, Treatment(reference='Other'))"
     
     # dmatrix will create the design matrix X
     # return_type='dataframe' to keep column names
