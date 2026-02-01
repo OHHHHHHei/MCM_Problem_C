@@ -44,13 +44,18 @@ def plot_landscape():
     plt.figure(figsize=(10, 8), dpi=300)
     
     # Create Heatmap
-    # Using 'viridis' - the gold standard for scientific visualization (perceptually uniform)
+    # Create a custom "Pastel" Red-Yellow-Green palette
+    # h_neg=10 (Red), h_pos=135 (Green), s=100 (Max Saturation), l=50 (Standard Lightness = Vivid)
+    # solid colors, not transparent
+    custom_cmap = sns.diverging_palette(10, 135, s=100, l=50, center='light', as_cmap=True)
+
     ax = sns.heatmap(
         pivot_table, 
         annot=True, 
         fmt=".3f", 
-        cmap="viridis", 
+        cmap=custom_cmap, 
         linewidths=.5,
+        # alpha removed to ensure opacity
         cbar_kws={'label': 'Weighted Score'},
         annot_kws={'size': 9}
     )
