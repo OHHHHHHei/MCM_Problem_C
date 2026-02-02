@@ -16,7 +16,8 @@ from core.counterfactual import CounterfactualSimulator
 
 def calculate_matrix():
     print("Loading data...")
-    dp = DataProcessor("2026_MCM_Problem_C_Data.csv")
+    csv_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'data', 'raw', '2026_MCM_Problem_C_Data.csv')
+    dp = DataProcessor(csv_path)
     
     with open("output/vote_share_estimates.json", "r") as f:
         estimates_data = json.load(f)
@@ -35,14 +36,26 @@ def calculate_matrix():
     
     print("Running simulations...")
     
-    for season_str, weeks_data in tqdm(estimates_data.items()):
-        season = int(season_str)
+    # Sort seasons to ensure correct state reset order
+    sorted_seasons = sorted([int(k) for k in estimates_data.keys()])
+    
+    for season in tqdm(sorted_seasons):
+        season_str = str(season)
+        weeks_data = estimates_data[season_str]
+        
+        # RESET SEASON STATE!
+        rules.reset_season()
         
         # Get actual elimination events for the whole season
         events = dp.get_elimination_events(season)
         real_eliminated_by_week = {e.week: set(e.eliminated_set) for e in events}
         
-        for week_str, est_dict in weeks_data.items():
+        # Sort weeks to ensure correct accumulation order
+        sorted_weeks = sorted([int(k) for k in weeks_data.keys()])
+        
+        for week in sorted_weeks:
+            week_str = str(week)
+            est_dict = weeks_data[week_str]
             week = int(week_str)
             
             # Skip if unknown real outcome (e.g. final week or data issue)

@@ -57,8 +57,8 @@ def create_football_style_chart():
     
     # 4. Center Text (Rule Names)
     for i, rule in enumerate(rules):
-        # Increased font size slightly since we have space
-        ax.text(0, i, rule, ha='center', va='center', fontsize=11, 
+        # Increased font size significantly as requested
+        ax.text(0, i, rule, ha='center', va='center', fontsize=14, 
                 fontweight='bold', color='#222222', zorder=5)
 
     # 5. Value Labels
