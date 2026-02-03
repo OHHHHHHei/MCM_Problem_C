@@ -1,0 +1,1298 @@
+=== START OF 2026_MCM_Problem_C.pdf ===
+2026 MCM
+Problem C: Data With The Stars
+园
+Dancing with the Stars (DWTS) is the American version of an international television franchise
+based on the British show “Strictly Come Dancing” (“Come乐 Dancing” originally). Versions of
+the show have appeared in Albania, Argentina, Australia, China, France, India, and many other
+countries. The U.S. version, the focus of this problem, has completed 34 seasons.
+模
+Celebrities are partnered with professional dancers and then perform dances each week. A panel
+of expert judges scores each couple’s dance, a数nd fans vote (by phone or online) for their favorite
+couple that week. Fans can vote once or multiple times up to a limit announced each week.
+Further, fans vote for the star they wish to keep, but cannot vote to eliminate a star. The judge
+：
+and fan votes are combined in order to determine which couple to eliminate (the lowest
+combined score) that week. Three (in some seasons more) couples reach the finals and in the
+week of the finals the combined号 scores from fans and judges are used to rank them from 1st to 3rd
+(or 4th, 5th).
+众
+There are many possible methods of combining fan votes and judge scores. In the first two
+seasons of the U.S. show, the combination was based on ranks. Season 2 concerns (due to
+公
+celebrity contestant Jerry Rice who was a finalist despite very low judge scores) led to a
+modification to use percentages instead of ranks. Examples of these two approaches are provided
+in the Appendix.
+In season 27, another “controversy” occurred when celebrity contestant Bobby Bones won
+despite consistently low judges scores. In response, starting in season 28 a slight modification to
+the elimination process was made. The bottom two contestants were identified using the
+combined judge scores and fan votes, and then during the live show the judges voted to select
+which of these two to eliminate. Around this same season, the producers also returned to using
+the method of ranks to combine judges scores with fan votes as in seasons one and two. The
+exact season this change occurred is not known, but it is reasonable to assume it was season 28.
+Judge scores are meant to reflect which dancers are technically better, although there is some
+subjectivity in what makes a dance better. Fan votes are likely much more subjective, influenced
+by the quality of the dance, but also the popularity and charisma of the celebrity. Show producers
+might actually prefer, to some extent, conflicts in opinions and votes as such occurrences boost
+fan interest and excitement.
+| ©2026 by COMAP | www.comap.org | www.mathmodels.org | info@comap.org |
+Data with judges scores and contestant information is provided and described below. You may
+choose to include additional information or other data at your discretion, but you must
+completely document the sources. Use the data to:
+• Develop a mathematical model (or models) to produce estimated fan votes (which are
+unknown and a closely guarded secret) for each contestant for the weeks they competed.
+Does your model correctly estimate fan votes that lead to results consistent with who
+o
+was eliminated each week? Provide measures of the consistency.
+How much certainty is there in the fan vote totals you produced, and is that certainty
+o
+always the same for each contestant/week? Provide measures of your certainty for the
+estimates.
+• Use your fan vote estimates with the rest of the data to: 园
+Compare and contrast the results produced by the two approaches used by the show to
+o
+combine judge and fan votes (i.e. rank and percentage) across seasons (i.e. apply both
+乐
+approaches to each season). If differences in outcomes exist, does one method seem
+to favor fan votes more than the other?
+o
+Examine the two voting methods applied 模to specific celebrities where there was
+“controversy”, meaning differences between judges and fans. Would the choice of
+method to combine judge scores and fan votes have led to the same result for each of
+数
+these contestants? How would including the additional approach of having judges
+choose which of the bottom two couples to eliminate each week impact the results?
+Some examples you might c：onsider (there may also be others you identified):
+ season 2 –Jerry Rice, runner up despite the lowest judges scores in 5 weeks.
+ season 4 – Billy Ray Cyrus was 5th despite last place judge scores in 6 weeks.
+号
+ season 11 – Bristol Palin was 3rd with the lowest judge scores 12 times.
+ season 27 – Bobby Bones won the despite consistently low judges scores
+Based on you众r analysis, which of the two methods would you recommend using for
+o
+future seasons and why? Would you suggest including the additional approach of
+judges choosing from the bottom two couples?
+公
+• Use the data including your fan vote estimates to develop a model that analyzes the impact of
+various pro dancers as well as characteristics for the celebrities available in the data (age,
+industry, etc). How much do such things impact how well a celebrity will do in the
+competition? Do they impact judges scores and fan votes in the same way?
+• Propose another system using fan votes and judge scores each week that you believe is more
+“fair” (or “better” in some other way such as making the show more exciting for the fans).
+Provide support for why your approach should be adopted by the show producers.
+• Produce a report of no more than 25 pages with your findings and include a one- to two-page
+memo summarizing your results with advice for producers of DWTS on the impact of how
+judge and fan votes are combined with recommendations for how to do so in future seasons.
+| ©2026 by COMAP | www.comap.org | www.mathmodels.org | info@comap.org |
+Your PDF solution of no more than 25 total pages should include:
+• One-page Summary Sheet.
+• Table of Contents.
+• Your complete solution.
+• One- to two-page memo.
+• References list.
+• AI Use Report (If used does not count toward the 25-page limit.)
+Note: There is no specific required minimum page length for a complete MCM submission. You
+may use up to 25 total pages for all your solution work and any additional information you want
+to include (for example: drawings, diagrams, calculations, tables). Partial solutions are accepted.
+We permit the careful use of AI such as ChatGPT, although it is not necessary to create a
+solution to this problem. If you choose to utilize a generative AI, you must follow the COMAP
+园
+AI use policy. This will result in an additional AI use report that you must add to the end of your
+PDF solution file and does not count toward the 25 total page limit for your solution.
+乐
+Data File: 2026_MCM_Problem_C_Data.csv – contestant information, results, and judges
+scores by week for seasons 1 – 34. The data description is provided in Table 1.
+模
+Table 1: Data Description for 2026_MCM_Problem_C_Data.csv
+数
+Variables Explanation Example
+celebrity_name Name： of celebrity contestant (Star) Jerry Rice, Mark Cuban, …
+Name of professional dancer Cheryl Burke, Derek Hough,
+ballroom_partner partner …
+号
+celebrity_industry Star profession category Athlete, Model, …
+celebrity_homestate Star home state (if from U.S.) Ohio, Maine, …
+众
+celebrity_homecountry/region Star home country/region United States, England, …
+celebrity_age_during_season Age of the star in the season 32, 29, …
+公
+season Season of the show 1, 2, 3, …, 32
+1st Place, Eliminated Week 2,
+results Season results for the start …
+placement Final place for the season (1 best) 1, 2, 3, …
+weekX_judgeY_score Score from judge Y in week X 1, 2, 3, …
+Notes on the data:
+1. Judges scores for each dance are from 1 (low) to 10 (high).
+a. In some weeks the score reported includes a decimal (e.g. 8.5) because each celebrity
+performed more than one dance and the scores from each are averaged.
+b. In some weeks, bonus points were awarded (dance offs etc); they are spread evenly
+across judge/dance scores.
+c. Team dance scores were averaged with scores for each individual team member.
+2. Judges are listed in the order they scored dances; thus “Judge Y” may not be the same judge
+from week to week, or season to season.
+| ©2026 by COMAP | www.comap.org | www.mathmodels.org | info@comap.org |
+3. The number of celebrities is not the same across the seasons, nor is the number of weeks the
+show ran.
+4. Season 15 was the only season to feature an all-star cast of returning celebrities.
+5. There are occasionally weeks when no celebrity was eliminated, and others where more than
+one was eliminated.
+6. N/A values occur in the data set for
+a. the 4th judge score if there is not 4th judge for that week (usually there are 3) and
+b. in weeks that the show did not run in a season (for example, season 1 lasted 6 weeks
+so N/A values are recorded for weeks 7 thru 11).
+7. A 0 score is recorded for celebrities who are eliminated. For example, in Season 1 the first
+celebrity eliminated was Trista Sutter at the end of the Week 2 show. She thus has scores of 0
+for the rest of the season (week 3 through week 6).
+园
+Appendix: Examples of Voting Schemes
+1. COMBINED BY RANK (used in seasons 1, 2, and 28乐a - 34)
+In seasons 1 and 2 judges and fan votes were combined by rank. For example, in season 1,
+week 4 there were four remaining contestants. Rachel Hunter was eliminated meaning she
+模
+received the lowest combined rank. In Table 2 the judges scores and ranks are shown, and we
+created one possible set of fan votes that would produce the correct result. There are many
+数
+possible values for fan votes that would also give the same results. You should not use these as
+actual values as this is just one example. Since Rachel was ranked 2nd by judges, in order to
+finish with the lowest combined score,： she has the lowest fan vote (4th place) for a total rank of 6.
+Table 2: Example of Combining Judge and Fan Votes by Rank (Season 1, Week 4)
+号
+Contestant Total Judges Judges Score Fan Vote* Fan Sum of
+Score Rank Rank* ranks
+Rachel Hunter 众25 2 1.1 million 4 6
+Joey McIntyre 20 4 3.7 million 1 5
+John O’Hurley 21 3 3.2 million 2 5
+公
+Kelly Monaco 26 1 2 million 3 4
+* Fan vote/rank are unknown, hypothetical values chosen to produce the correct final ranks
+2. COMBINED BY PERCENT (used for season 3 through 27a)
+Starting in season 3 scores were combined using percents instead of ranks. An example is
+shown using week 9 of season 5. In that week, Jennie Garth was eliminated. Again, we
+artificially created fan votes that produce total percents to correctly lead to that result. The
+judges’ percent is computed by dividing the total judge score for the contestant by the sum of
+total judge scores for all 4 contestants. Based on the judges’ percent, Jennie was 3rd. However,
+adding the percent of the 10 million artificially created fan votes we assigned to the judges’
+percent she was 4th.
+| ©2026 by COMAP | www.comap.org | www.mathmodels.org | info@comap.org |
+Table 3: Example of Combining Judge and Fan Votes by Percent (Season 5, Week 9)
+Contestant Total Judges Judges Score Fan Vote* Fan Percent* Sum of
+Score Percent Percents
+Jennie Garth 29 29/117 = 24.8% 1.1 million 1.1/10 = 11% 35.8
+Marie Osmond 28 28/117 = 23.9% 3.7 million 3.7/10 = 37% 60.9
+Mel B 30 30/117 = 25.6% 3.2 million 3.2/10 = 32% 57.8
+Helio Castroneves 30 30/117 = 25.6% 2 million 2/10 = 20% 45.6
+Total 117 10 million
+* Fan vote is unknown, values hypothetical to produce the correct final standings
+a The year of the return to the rank based method is not known for certain; season 28 is a
+reasonable assumption.
+园
+乐
+模
+数
+：
+号
+众
+公
+| ©2026 by COMAP | www.comap.org | www.mathmodels.org | info@comap.org |
+
+=== END OF 2026_MCM_Problem_C.pdf ===
+
+=== START OF 终稿.pdf ===
+ProblemChosen 2026 TeamControlNumber
+MCM/ICM
+C 2607504
+SummarySheet
+Deciphering the Invisible Vote: An Exploration of Evaluation
+Bias and Rule Fairness
+Summary
+DancingwiththeStarsusesadualevaluationscheme: judges’technicalscoresandfanvotes.
+Whilethisdesignincreasessuspense,itcanalsoinvitefairnessconcernswhenthetwocomponents
+are unevenly weighted. Because vote counts are confidential and therefore latent, we model the
+dynamicsoffansupporttoilluminatethis“blackbox”andtoidentifyaprincipledtrade-offbetween
+technicalexcellenceandpublicpreference.
+Toaddresstheunobservabilityoffanvoting,weformulateapartiallyobservabledynamical
+system for contestants’ latent vote shares and solve it via particle filtering. The resulting model
+achievesaTop-3accuracyof79.19%andaTop-1accuracyof37.92%inforwardprediction;in
+posterior backtesting, it reproduces 82.20% of historical eliminations, indicating strong fidelity to
+observedoutcomes. Toquantifyestimationconfidence,weconstructconfidenceintervalsbasedon
+the posterior standard deviation of vote shares: eliminated contestants exhibit substantially tighter
+intervalsthansurvivors,andoveralluncertaintyincreasesasthecompetitionprogresses.
+Subsequently, we employed a Counterfactual Analysis framework to simulate potential
+outcomesunderdifferentrules,revealingsignificantheterogeneitybetweendifferentscoringrules.
+The probability of the Rank Rule and Percentage Rule yielding identical results is merely 38.2%.
+To dissect the directional inclination of each rule, we constructed statistical metrics for bias
+quantification. The results demonstrate that the Percentage Rule exhibits a pronounced ”Pro-Fan
+Bias,” whereas the Rank Rule effectively constrains the marginal influence of fan votes through a
+”CappingEffect”.
+To analyze controversial cases, we constructed the Robbed Score and Fan-Carried Score to
+quantify two types of controversy: High-Skill Dropouts and Low-Skill High-Rankers. Utilizing
+these metrics, we precisely identified the four controversial contestants mentioned in the prob-
+lemstatementandanalyzedtheirperformancetrajectories. Ourfindingsrevealthatfortechnically
+skilledcontestantswithlimitedfanbases,thePercentageRulecausesanaveragedeclineof0.32in
+their expected ranking. In contrast, the Judge Save mechanism serves as a critical corrective tool
+forthesecandidates,whoareotherwisepronetofallingintotheeliminationzone. Ultimately,after
+evaluatingthedirectionalbiasesofvariousrulesregardingfanandjudgeinfluence,werecommend
+theRankwithJudgeSaveruleastheoptimalframeworkforensuringcompetitionintegrity.
+Tosystematicallyquantifythecontributionsofvariousinfluentialfactors,weestablishedaLin-
+ear Mixed-Effects Model (LMM) framework. Our results reveal that the impact of Professional
+Partners is statistically negligible; instead, competition outcomes are predominantly governed by
+the intrinsic attributes of the celebrities. Actors emerged as the most competitive, consistently se-
+curingsuperiorfanvotesandjudgescores. Furthermore,thedatauncoversasignificantdivergence
+inpreferences: fansexhibitastrongpropensitytovoteforPoliticians,whereasjudgesdemonstrate
+greaterrecognitionfortheperformancesofRealityStarsandMusicians.
+Finally, leveraging our quantitative metrics, we constructed the Adaptive Concave
+Diminishing-returns Weighted Bottom-3 System (ACDW-B3). This mechanism dynamically
+amplifies the weighting of judges’ scores during periods of significant divergence between
+professional assessment and audience preference. Consequently, it allows the program to
+manufacture highly engaging ”conflicts of opinion” and ”dramatic tension,” while safeguarding
+theprofessionalintegrityofthecompetitionresults.
+Keywords: Particle Filtering, Latent Variable Inference, Counterfactual Inference, Linear
+Mixed-EffectsModel
+Team#2607504 Page2of26
+Contents
+1 Introduction 3
+1.1 RestatementoftheProblem . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+1.2 LiteratureReviews . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+1.3 OurWork . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+2 PreparationforModelling 4
+2.1 Assumptions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+2.2 DataPreprocessing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+2.3 Notation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+3 Task1: EstimationofLatentFanVoteShares 6
+3.1 ProblemAnalysis . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+3.2 ModelEstablishmentandSolution . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+3.3 ModelAccuracyandValidation . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+3.4 AnalysisofModelCertaintyandHeterogeneityinUncertainty . . . . . . . . . . . 12
+4 Task2:CounterfactualAssessmentofScoringRule 14
+4.1 ProblemAnalysis . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14
+4.2 ComparativeAnalysisandRuleSelection . . . . . . . . . . . . . . . . . . . . . . 14
+4.3 AnalysisofControversies . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16
+4.4 RecommendationofRule . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19
+5 Task3: QuantificationofInfluentialFactors 20
+5.1 ProblemAnalysis . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 20
+5.2 ModelSetting . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 20
+5.3 ResultAnalysis: HeterogeneityofEvaluationSystems . . . . . . . . . . . . . . . 22
+6 Task4: SystemDesign 23
+6.1 ACDW-B3Modelling . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 23
+6.2 ModelEvaluation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 24
+7 SensitivityAnalysis 24
+8 StrengthsandWeaknesses 25
+8.1 Strengths . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 25
+8.2 Weaknesses . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 25
+References 25
+Team#2607504 Page3of26
+1 Introduction
+1.1 Restatement of the Problem
+Intheglobalentertainmentmarket,competitiverealityshowshavebuiltalargeaudiencebase
+by combining professionalism with entertainment value. As a prime example of this genre, Danc-
+ing with the Stars—adapted from the British show Strictly Come Dancing—pairs celebrities with
+professional dancers and has achieved extensive global influence. The show uses a dual scoring
+system that integrates expert judge scores and fan votes to determine weekly eliminations. This
+designrequiresanecessarytrade-offbetweencompetitivefairnessandaudienceengagement.
+BasedonthecomprehensivedatasetfromSeasons1–34ofDancingwiththeStars—including
+contestant profiles, judges’ scores, and elimination results—this study focuses on predicting latent
+fan vote shares, optimizing scoring mechanisms, and quantifying influential factors. Specifically,
+weaddressedthefollowingfourtasks:
+• Task 1: Estimation of Latent Fan Vote Shares. We will formulate a mathematical frame-
+work to predict the unobservable fan vote shares for each contestant on a weekly basis. To
+ensure the model’s reliability, we aim to develop specific consistency metrics to validate
+our estimates against historical elimination outcomes and design quantifiable indicators to
+measurethecertaintyoftheselatentvariablepredictions.
+• Task 2: Evaluation of Scoring Rules & Controversy Analysis. By integrating the esti-
+matedfanvotes,weplantoconductacomparativeanalysisoftheRankRuleandPercentage
+Ruletodissecttheirdirectionalbiasestowardfanvoteshareversusjudges’score. Weintend
+to scrutinize controversial contestants—where significant divergence exists between judges
+and fans—to determine if alternative rules would alter their elimination fates. Additionally,
+we will investigate the corrective impact of the “Judge Save” mechanism to recommend an
+optimalvotingframework.
+• Task3: QuantificationofInfluentialFactors. Usingthedatasetaugmentedwithestimated
+fanvotes,weproposetoestablishstatisticalmodelstodisentangletheimpactsofProfessional
+Partners and Celebrity Characteristics on competition outcomes. We seek to quantify the
+influenceofthesefactorsandcontrasttheirdifferingeffectsonjudges’technicalscoresversus
+fanvotingshare.
+• Task 4: Mechanism Design for Fairness and Entertainment. Building on the preceding
+analyses, we aim to design a novel hybrid scoring system that effectively balances profes-
+sional fairness with entertainment value. We will provide a detailed mathematical justifica-
+tion to persuade producers that this system can maintain dramatic tension without compro-
+misingthecompetitiveintegrityoftheshow.
+1.2 Literature Reviews
+Theoptimizationofscoringandvotingaggregationmechanismshasbeenthesubjectofexten-
+sive academic research. Molinero et al. (2015) utilized hierarchical clustering and spatial network
+analysis to demonstrate that a single aggregation method may inadvertently suppress the voices of
+audiences in specific regions [1]. Focusing on algorithmic fairness, Dwork et al. (2012) proposed
+the principle of ”fairness through awareness” and employed similarity metrics to constrain dis-
+paratetreatment[2]. Airdetal. (2024)exploreddynamicfairness-awarerecommendationthrough
+a multi-agent social-choice framework [3]. Furthermore, Collins et al. (2019) established econo-
+metricmodelstoidentifypotentialsequentialperformancebiasinexpertevaluation[4].
+Team#2607504 Page4of26
+1.3 Our Work
+Figure1: OurWorkOverview
+2 Preparation for Modelling
+2.1 Assumptions
+Assumption 1: MarkovianPropertyofPublicMemory. Weassumethattheevolutionoffan
+support follows a Markov process, where a contestant’s current popularity depends primarily on
+the momentum retained from the previous week and their performance in the current week, rather
+thandirectlyrelyingontheirentirehistoricaltrajectory.
+Justification: Duetothefast-pacednatureofrealityTVandsocialmedia, theaudience’sattentionspanis
+short. Mostviewersdonotretrospectivelyevaluateacontestant’sperformancefromdistantweeks;instead,
+theirvotingdecisionsaredrivenbyimmediateimpressionsandthelingeringmemoryfromthemostrecent
+episode.
+Assumption 2: ExistenceofJudges’InfluenceWeassumethatjudges’scoresexertasteering
+effect on fan voting behavior, manifesting through phenomena such as ”sympathy votes” or the
+”bandwagoneffect.”Thisinfluenceismodeledasalinearsuperpositionwithinthevotegeneration
+mechanism.
+Justification: Professional critiques and scores are revealed prior to the public voting window, inevitably
+priming audience preferences. Furthermore, modeling this influence as a linear addition captures the core
+mechanismwhilemaintainingmodelinterpretabilityandavoidingunnecessarynon-linearcomplexity.
+Assumption3: EliminationResultsastheSoleGroundTruth. Weassumethataneliminated
+contestantnecessarilypossessedthelowest(oroneofthelowest)combinedscoreforthatweek.
+Justification: From the perspective of operational logic, commercial reality competitions must maintain
+fundamental rule fairness to sustain audience trust. To ensure the show’s credibility and public appeal, the
+Team#2607504 Page5of26
+eliminationmechanismmustintrinsicallyrelyonthequantitativerankingofthecontestants’combinedper-
+formancescores.
+2.2 Data Preprocessing
+We conducted comprehensive data preprocessing on the raw dataset, primarily focusing on
+missingvaluehandling,featureencoding,and scorestandardization.
+2.2.1 DataCleaningandMissingValueImputation
+Therawdatasetexhibitsdiscrepanciesinfieldcompletenessandformatting. Toaddressthese
+inconsistencies,weimplementedthefollowingdataprocessingstrategies:
+HandlingMissingData: Wefilledmissing“CelebrityAge”valueswiththemedian(30)and
+set missing “Home Country” to “Unknown.” For the “placement” field, we assigned a value of99
+toindicateanunrankedstatus.
+DeterminationofEliminationStatus: Weidentifiedeliminatedcontestantsbasedonexplicit
+weeklyresultrecords. Voluntarywithdrawalswereexcludedtoensuretheanalysisfocusedstrictly
+oncompetitiveperformanceoutcomes.
+Refining Judges’ Scores: To address “N/A” or 0 values, we filtered the data to retain only
+valid scores greater than 0. A contestant’s weekly score was then determined by the arithmetic
+meanofallvalidjudges’scoresforthatweek.
+2.2.2 FeatureEngineering
+To prepare the data for our model, we processed the raw features and created a final
+9-dimensionalfeaturevector.
+AgeStandardization: Tofixscaledifferencesbetweenvariables,westandardizedageusing
+thefollowingformula:
+Age−35
+A = (1)
+norm
+15
+Nationality Indicator: We created a simple binary variable, I , to show if a contestant is
+US
+fromtheUnitedStates. Wesetthisto1.0forUScontestantsand0.0forothers.
+Industry One-Hot Encoding: We grouped contestant careers into seven categories: Actor,
+Athlete, Singer, TV Personality, Model, Comedian, and Other. We used One-Hot Encoding for
+thesecategories. Thishelpsthemodelseehowacontestant’sjobaffectsfanvotes.
+2.2.3 Post-ProcessingDataSummary
+Afterdatacleaning,weobtainedafinalvalidsamplecovering34seasonsand421contestants.
+Thedatasetrecords298eliminationevents,averaging12.4contestantsperseason.
+2.3 Notation
+Wedefinetheprimarymathematicalnotationsusedthroughoutthispaperasfollows:
+Team#2607504 Page6of26
+Table1: Notation
+Symbol Description
+J Judgescoreofcontestantiatweekt
+i,t
+π Fanvoteshareofcontestantiatweekt
+i,t
+πˆ Posteriorestimateofthefanvoteshareforcontestanti
+i,t
+S Survivalscoreforcontestantiatweekt
+i,t
+R Scoringrule
+E Realeliminationsetatweekt
+real,t
+Alignment (R) FanalignmentscoreunderruleR
+Fan
+Alignment (R) JudgealignmentscoreunderruleR
+Judge
+S , S Controversymetrics: Fan-Carried/Robbed
+1 2
+YJ, YF Dependentvariablesinmixed-effectsmodels(judge/fan)
+i,t i,t
+X Contestanttraitvector
+Traits
+βJ, βF1, βF2 Fixed-effectcoefficients
+u , u Randominterceptsforprofessionalpartners/celebrities
+Pro Star
+ICC Variancecontributionofprofessional-partnerrandomeffects
+Pro
+f Compressedvoteutilityafteraconcavetransform
+i,t
+p Compressionfactor
+ρ Spearmancorrelationbetweenjudges’andfans’rankings
+t
+λ Dynamicweightonjudgesscores
+t
+wk Weightofparticlek atweektintheparticlefilter
+t
+3 Task 1: Estimation of Latent Fan Vote Shares
+3.1 Problem Analysis
+First,wedefinethenatureoftheproblem: theweeklyjudges’scoresJ andthefinalelimina-
+i,t
+tionoutcomesE areobservable,whereastheactualfanvotingdataremainsunobservable. Our
+real,t
+objective is to reconstruct the latent fan vote share π for each contestant based on these known
+i,t
+inputs;consequently,thisconstitutesaLatentVariableInferenceproblem.
+Furthermore,giventhataseasoncomprisesasequenceofweeklycompetitions,acontestant’s
+fan vote share depends not only on their current performance but also on the momentum accumu-
+lated in previous weeks, exhibiting strong temporal dependency. Therefore, the voting process
+shouldbemodeledasadynamicsystem. Synthesizingthecharacteristicsof“partialobservability”
+and“dynamicevolution,”weclassifythisproblemasaPartiallyObservableDynamicSystem.
+Figure2: FlowchartofSolvingtheModel
+Team#2607504 Page7of26
+3.2 Model Establishment and Solution
+3.2.1 ModelingLong-TermPopularityandLatentVoteShares
+Having defined the problem structure, we proceed to formulate the mathematical framework
+forestimatingthelatentfanvoteshares. Wepositthatacontestant’svoteshareisgovernedbytwo
+primary components: their long-term popularity (cumulative momentum) and the short-term
+votingtendencyoftheaudience.
+Theevolutionofacontestant’slong-termpopularity,denotedasµ ,ismodeledasfollows:
+i,t
+µ = µ +κ·I(|J ˜| > δ)·J ˜ +η (2)
+i,t i,t−1 t
+The contestant’s long-term popularity state at time t, denoted as λ ≡ µ , evolves from the
+i,t
+stateattheprevioustimestepµ withtheadditionofaprocessnoiseη ∼ (0,σ ). Weintroduce
+i,t−1 t µ
+a mechanism to capture ”significant events”—instances where the absolute value of the Z-score
+˜
+standardized judge rating, J, exceeds a designated threshold δ. These events, representing either
+exceptional excellence or notable failure, exert a directional shock on the contestant’s long-term
+˜ ˜
+popularity status. Specifically, J > 0 signifies an accumulation of popularity, whereas J < 0
+indicatesadecline,withtheintensityofthisshockbeingdirectlyproportionaltothemagnitude|J ˜|.
+We define x as the audience’s short-term voting tendency for contestant i at week t. This
+i,t
+tendency evolves dynamically, driven by the combined influence of a memory persistence term
+from the previous week, the current long-term popularity state µ , and the immediate stimulus
+i,t
+providedbythejudges’scoreJ . Thestatetransitionmodelisformulatedasfollows:
+i,t
+x = ρ·x +(1−ρ)·(µ +γ ·J )+ε (3)
+i,t i,t−1 i,t i,t t
+Here, ρ ∈ (0,1) represents the memory persistence coefficient for the voting tendency: a
+largerρimpliesthatx reliesmoreheavilyontheinertiafromthepreviousweek,whereas(1−ρ)
+i,t
+governs the injection intensity of the current week’s new signal (defined as µ +γ ·J ) into the
+i,t i,t
+state x . The parameter γ characterizes the influence of the judges’ score J on the audience’s
+i,t i,t
+votingtendency.
+This configuration incorporates both the long-term popularity state µ and the short-term
+i,t
+perturbationsdrivenbythecurrentweek’sscoring. Bydoingso,wecharacterizethedualdynamics
+of voting tendencies—capturing both secular trends and transient fluctuations—within a unified
+framework.
+Consequently,thevoteshareforeachcontestantisdeterminedusingtheSoftmaxfunction:
+exp(x )
+P i,t
+π = softmax(x ) = (4)
+i,t t
+exp(x )
+k k,t
+3.2.2 RuleAnalysisandCalculationofSurvivalScores
+Havingderivedthecontestants’voteshares,weproceedtocomputetheirscoresbasedonthe
+rules. The competition framework is categorized into three core paradigms; the definitions and
+computationallogicforeachphasearesummarizedinthetablebelow:
+Team#2607504 Page8of26
+Table2: AnalysisofScoringRules
+SeasonRange RuleParadigm ComputationalLogic
+S1-S2 RankRule Addjudgerank+voterank
+S3-S27 PercentageRule Weightedsumofjudgescores%+vote%
+S28+ Rank+JudgeSave Ranksum+JudgeSave
+To adjudicate the advancement or elimination of contestants, we define the Survival Score
+asthepivotal metric. Differentrule paradigmsnecessitatedistinct computationalformulasfor this
+score. Under the Percentage Rule, the final score is composed of equal weights (50%) assigned
+to the proportion of judges’ scores and the fan vote share. Let S denote the final Survival Score
+i
+for contestant i. Here, J represents the weekly score awarded by the judges, and π represents the
+i i
+contestant’sconcurrentvoteshare. Thecorecomputationalformulaisdefinedasfollows:
+J
+P i
+S = ( )+π (5)
+i i
+J
+k k
+In contrast, under the Rank Rule, let Rank and Rank denote the contestant’s ranking de-
+Ji πi
+rived from the judges’ scores and the vote share, respectively. Since a numerically lower rank
+indicates superior performance, the sum of ranks functions as an inverse metric; consequently, we
+adoptthenegativesumofranksasthecorecomputationalvariable.
+Furthermore,actualcompetitionspresentthecomplexityoftie-breakingscenarios. According
+to the producer’s official explanation, in the event of a tie in the aggregate rank score, the contes-
+tant with the lower fan vote count is eliminated. To ensure high consistency between our model
+and this official elimination logic, we incorporate a tie-breaking perturbation term, ξ ·π , into the
+i
+survivalscoreformula. Here,ξ servesasaperturbationcoefficientdesignedtoresolveadjudication
+ambiguitieswhenranksumsareidentical:
+S = −(Rank +Rank )+ξ ·π (6)
+i Ji πi i
+Furthermore,DancingwiththeStarsoccasionallyfeaturesweekswherenoeliminationoccurs;
+instead,thescoresfromthecurrentweekareaggregatedwiththoseofthesubsequentweektoadju-
+dicate elimination. To address such cases, our model adopts differentiatedaccumulation strategies
+contingentuponthespecificruleparadigm:
+Accumulation of Judges Scores: Across all seasons, in the event that no elimination occurs
+in week t, the judges’ score for the subsequent week, J , automatically aggregates the scores
+i,t+1
+fromtheprecedingunresolvedweeks:
+X
+J = J (7)
+i,accumulated i,T
+T∈Non-eliminationWindow
+Accumulation of Vote Shares: Percentage Rule (S3-S27): We employ a strategy of direct
+share summation. Given that the fundamental mechanism of this rule is the addition of the per-
+centage of total points and the percentage of total votes, it is logical to directly accumulate the
+contestants’voteshares.
+Rank Rule (S1-2, S28+): We utilize rank-point accumulation. Under this rule, the model
+aggregatesthecontestant’sweeklyrankingpointsratherthantherawvoteshares.
+Team#2607504 Page9of26
+3.2.3 ModelEstablishment
+To solve the proposed model, we employ Particle Filtering (Sequential Monte Carlo). For
+latentvariableinferenceproblemsofthisnature,thefourprevailingmethodologiesareRegression,
+the Kalman Filter, Markov Chain Monte Carlo (MCMC), and Particle Filtering. A comparative
+analysisofthesemethodsispresentedbelow:
+Table3: ComparisonofModelSolutionMethods
+Method Keyidea Maincaveat(here) Fit
+Regression Staticmapping. Lackstemporaldynamics(memory). Low
+Kalmanfilter Recursive; Poorperformancewithdiscreteelimination Low
+linear-Gaussian. events.
+MCMC Posteriorsampling. Offlineprocessing;tooslowforsequentialup- Medium
+dates.
+Particlefilter Sequential; Computationallyintensive. High
+nonlinear.
+Thecomputationalworkflowemployedtosolvethemodelisillustratedinthefigurebelow:
+Figure3: UncertaintyHeterogeneityAnalysis
+WecommencethealgorithmbyinitializinganensembleofN = 1000particles. Eachparticle
+k is characterized by a state vector comprising four parameters: µk, xk, wk, and Sk, which cor-
+0 0 0 t
+respond to the initial long-term popularity, initial short-term popularity, initial weight, and initial
+survivalscore,respectively.
+For each particle at every weekly time step, we propagate the state variables through the evo-
+lutionequationstoyieldthepredictedestimatesµk andxk. Subsequently,theshort-termvoteshare
+t t
+isderivedviatheSoftmaxfunction: πk = softmax(xk).
+t t
+Team#2607504 Page10of26
+Wethenperformapriorpredictionbyaggregatingthevotesharesacrosstheparticleensemble
+toestimatetheprobabilityofelimination:
+X
+P(iiseliminated) = w ·I[S = min(Sk)] (8)
+k
+k
+Next, we compute the likelihood Lk based on the observed elimination results. The particle
+t
+weightsareupdatedrecursivelyaccordingtow˜k = wk Lk andsubsequentlynormalized:
+t t−1 t
+w˜k
+wk = P (9)
+w˜i
+i
+Aresamplingstepisthenexecutedtomitigateparticledegeneracy,whereparticlesaredrawn
+withreplacementwithprobabilitiesproportionaltotheirnormalizedweightswk.
+Finally,theposteriorestimateofthecontestant’svoteshareiscomputedastheweightedaver-
+ageoftheparticles: X
+πˆ = wk ·πk (10)
+i i
+k
+Themethodologyforcomputingthelikelihoodisdetailedbelow. Theobjectiveofthemodelis
+toderivetheposteriorvotesharesbasedonobserveddata. Undertheassumptionofmodelvalidity,
+theSurvivalScoreofadvancingcontestantsmusttheoreticallyexceedthatofeliminatedcontestants.
+Predicatedonthislogic,weconstructthecorrespondinglikelihoodstatistics.
+a. BaselineEliminationLikelihood(Pre-Season28)
+Forcasesinvolvingasingleeliminationevent,thelikelihoodfunctionisdefinedas:
+Y
+L = σ(α·(Sk −Sk)) (11)
+j e
+j∈Survivors
+In cases where multiple contestants are eliminated simultaneously, the likelihood generalizes
+totheproductofpairwisecomparisonsbetweenallsurvivorsandalleliminatedcandidates:
+Y Y
+L = σ(α·(Sk −Sk)) (12)
+s e
+e∈Eliminateds∈Survivors
+Here,αservesasthediscriminativepowerparameter. Itisdesignedtoincreasemonotonically
+over time, signifying that the boundary between survival and elimination becomes increasingly
+distinctandrigorousasthecompetitionprogressesintolaterstages.
+b. Judges’SaveLikelihood-Post-Season28
+From Season 28 onwards, the elimination mechanism evolves into a two-stage probabilistic
+event. The first stage involves falling into the ”Bottom 2,” a status contingent upon the Survival
+Score, S . The second stage is the ”Judges’ Decision,” which is determined by technical merit.
+i,t
+Consequently,thelikelihoodfunctionisformulatedasfollows:
+2 3
+Y
+L = 4 σ(α·(S −max(S ,S ))) 5× σ(β ·(J −J )) (13)
+j e s | {zs e }
+j∈S
+| safe {z } Stage2:Judges’SaveProbability
+Stage1:intoBottom2Probability
+Here,thesecondstageismodeledusingaSigmoidfunctiondependentsolelyonthedifferential
+intechnicalscores.
+Team#2607504 Page11of26
+3.3 Model Accuracy and Validation
+Toassessthepredictivefidelityandinternalconsistencyofourmodel,weemploythreedistinct
+metrics: Top-N Hit Rate, Posterior Consistency Probability, and MAP (Maximum A Posteri-
+ori) Match Rate. Specifically, the Posterior Consistency Probability and MAP Match Rate serve
+as diagnostics for model fitting during the training phase (in-sample validation), while the Top-N
+HitRateevaluatesthemodel’sperformanceinforwardprediction(out-of-samplevalidation).
+ThePosteriorConsistencyProbabilityquantifiestheaggregateweightofparticlesthatsuccess-
+fullypredictthecorrecteliminationoutcomefollowingtheweightupdatestep. Itismathematically
+formulatedas:
+XK
+P = wk ·I(Sim(R,J ,πk) ∈ E ) (14)
+consistency t t t real,t
+k=1
+Here, E denotes the set of contestants actually eliminated in week t. The function
+real,t
+Sim(R,J ,πk)representsthetheoreticaleliminationresultderivedunderthespecificcompetition
+t t
+rulesR,giventheJudgeScoreJ andthelatentvoteshareπ(k) associatedwiththek-thparticle.
+t
+Toevaluatethemodel’sreconstructivecapacityovertheentirehistoricalspan(Seasons1-34),
+we introduce the MAP Match Rate. This metric essentially represents the empirical probability
+thatthemodelsuccessfullyreproducesthehistoricalgroundtruth.
+XT (cid:0) (cid:1)
+1
+AverageMAPMatchRate = I Sim(R,J ,πˆMAP) ∈ E (15)
+T | t {tz real,t}
+t=1
+Indicatorofcorrectpredictionatweekt
+Where πˆMAP denotes the expected value of the posterior distribution, approximated by the
+t
+weightedaverageoftheparticleensemble:
+XK
+πˆMAP = E[π |D ] ≈ wk ·πk (16)
+i,t i,t 1:t t i,t
+k=1
+XK
+πˆMAP = E[π |D ] ≈ wk ·πk (17)
+i,t i,t 1:t t i,t
+k=1
+Tofurtherevaluatethemodel’spredictiveefficacyregardingeliminationevents,weintroduce
+theTop-NHitRatemetric. Itscalculationisdefinedasfollows:
+XT
+1
+Top−N = I(Rank (E ) ≤ N) (18)
+t real,t
+T
+t=1
+Here,Rank (E )denotestherankassignedtothecontestantactuallyeliminatedinweekt.
+t real,t
+Thisrankingisderivedbysortingallcontestantsindescendingorderbasedontheirmodel-predicted
+eliminationprobabilities. Consequently,thismetricservestoassesswhetherthemodelsuccessfully
+anticipatedthecorrectoutcomepriortotheactualoccurrenceoftheelimination.
+Through an exhaustive grid search encompassing 4,320 distinct combinations within the full
+parameter space, we identified several parameter configurations of particular significance, as de-
+tailedbelow:
+Team#2607504 Page12of26
+Table4: ResultsofParameterGridSearch
+Category ρ γ δ α
+OverallBest 0.9 0.0 1.2 7.0
+MaxAccuracy 0.8 0.7 1.8 7.0
+MaxPrecision 0.7 0.8 1.8 7.0
+The hyperparameters corresponding to the “Overall Best” configuration were adopted for the
+finalmodel. Theresultingperformancemetricsarepresentedinthefollowingtable:
+Table5: ModelPerformanceEvaluation
+Metric HitRate RandomBaseline
+Top-1 37.92% ∼ 10%
+Top-3 79.19% ∼ 30%
+Itisevidentthatthemodel’smetricsaresignificantlysuperiortotherandombaseline. Thissub-
+stantial margin of improvement demonstrates the validity and predictive efficacy of our proposed
+model.
+Furthermore,theaccuracymetricsacrossdifferentseasonalerasarepresentedbelow:
+Table6: AccuracyAcrossRuleRegimes
+RuleParadigm AverageHitRate
+Percentage(S3-S27) 80.40%
+Rank(S1-2,S28+) 77.25%
+The comparable performance observed under both rule paradigms indicates that the model
+has correctly internalized the distinct computational logic governing each era, demonstrating its
+structuralrobustness.
+3.4 Analysis of Model Certainty and Heterogeneity in Uncertainty
+Relyingsolelyonpointestimatesisofteninsufficientforacomprehensiveassessmentofmodel
+reliability. Leveragingthenon-parametricnatureofSequentialMonteCarlo(SMC)methods,which
+arebasedonparticlesampling,wecannotonlyderivetheexpectedvalueoffanvotesharesbutalso
+fully reconstruct their posterior Probability Density Functions (PDF). In this section, we establish
+metrics for quantifying certainty based on particle distributions and analyze the heterogeneity of
+uncertaintyacrossdifferentcompetitivestates.
+3.4.1 ConstructionofCertaintyMetrics
+To quantify the credibility of the estimation results, we construct statistical metrics based on
+theparticleensemblefollowingtheresamplingstepatweekt.
+Team#2607504 Page13of26
+First,wecalculatetheWeightedPosteriorMeanforeachcontestantatweekttoserveasthe
+pointestimateforthevoteshare. Thecalculationisformulatedasfollows:
+XK
+πˆ = E[π |D ] ≈ w(k) ·π(k) (19)
+i,t i,t 1:t t i,t
+k=1
+Second, we compute the Weighted Posterior Standard Deviation to measure the degree of
+dispersionwithinthedistribution:
+v
+u
+uXK
+t
+σ = w(k) ·(π(k) −πˆ )2 (20)
+i,t t i,t i,t
+k=1
+Predicated on the normal approximation assumption under the Central Limit Theorem, we
+constructthe95%ConfidenceInterval(CI):
+CI = [max(0,πˆ −1.96σ ),min(1,πˆ +1.96σ )] (21)
+i,t i,t i,t i,t i,t
+Finally, we define the Confidence Interval Width (CI Width) as the core metric for model
+uncertainty:
+Uncertainty = CIupper −CIlower (22)
+i,t i,t i,t
+Awiderintervalindicatessubstantialuncertaintyintheestimation.
+3.4.2 HeterogeneityofUncertainty: Survivorsvs. EliminatedContestants
+Figure4: AnalysisofUncertaintyHeterogeneity
+A salient phenomenon emerges from the analysis: the model exhibits significantly higher es-
+timation certainty for eliminated contestants compared to survivors. Specifically, the average CI
+Widthforeliminatedcontestantsismarkedlynarrowerthanthatoftheirsurvivingcounterparts.
+Thisdisparityactsasaresponsetothefactthatan“elimination”constitutesanextremelystrin-
+gentobservationalevent. Theoretically,itmandatesthatthecontestant’scompositeSurvivalScore
+must strictly fall below that of all other surviving competitors. Within the likelihood computation,
+this condition functions as a potent “filter”: particles hypothesizing “high” or “moderate” vote
+sharesfortheeliminatedcandidateareassignednegligibleweightsoraresystematicallydiscarded.
+Team#2607504 Page14of26
+Consequently, the posterior distribution of the remaining particles is forced to collapse into a con-
+strained interval characterizing a “low vote share.” Thus, the model achieves high determinism
+regardingthestatusestimationofeliminatedcontestants.
+Concurrently, we observe a temporal trend where the uncertainty associated with Vote Share
+increasesasthecompetitionprogresses. Thisismechanicallydrivenbythereductioninthenumber
+ofcontestants;asthefieldnarrows,theexpectedVoteShareforeachremainingcontestantincreases,
+naturallyexpandingtheabsolutevarianceandthewidthoftheconfidenceintervals.
+4 Task 2:Counterfactual Assessment of Scoring Rule
+4.1 Problem Analysis
+Giventheestimatedfanvotesharesπˆ ,theobservedjudgescoresJ ,andtherealelimination
+i,t i,t
+results,weformulatethefollowingthreeprimaryobjectives:
+Objective 1: Compare and contrast the divergence in outcomes produced by distinct scoring
+rules.
+Objective2: Analyzethetrajectoriesofcontroversialcontestantsunderalternativerule.
+Objective3: Recommendanoptimalscoringmechanism.
+Objectives 1 and 2 necessitate the analysis of scenarios that did not empirically occur; con-
+sequently, we frame this as a problem of Probabilistic Counterfactual Inference. Furthermore,
+Objectives1and3involveevaluatingtherelativeefficacyofdifferentrules,requiringtheconstruc-
+tionofrobustquantitativemetricsforcomparativeassessment.
+4.2 Comparative Analysis and Rule Selection
+4.2.1 ComputationalFrameworkforCounterfactualOutcomes
+To quantify the divergence in outcomes between the historical and alternative rule, we lever-
+age the posterior particle ensemble derived in Task 1. This approach allows us to simulate the
+competitionundercounterfactualscenarioswhilepreservingtheestimatedlatentvoterdynamics.
+The procedure operates as follows: utilizing the posterior particles, we first extract the latent
+voteshareπk foreachcontestant. Wethenre-evaluatetheSurvivalScoreSk andthecorrespond-
+new
+ing ranking by applying the alternative rule R . Finally, we derive the elimination probabilities
+new
+and outcomes specific to the new rule. The computation remains consistent with the methodology
+establishedinTask1.
+Underthealternativerule,thecontestantwiththelowestSurvivalScoreisdesignatedforelim-
+ination. Consequently,theprobabilityofeliminationforcontestantiunderruleR isformulated
+new
+astheweightedaggregationofeliminationeventsacrosstheparticleensemble:
+X
+P(i ∈ E|R ) = wk ·I(i ∈ Ek) (23)
+new
+E [Rank (Ek)]−1
+k≤K π
+Alignment (R) = (24)
+Fan n −1
+t
+4.2.2 AnalysisofRuleDivergence
+Havingderivedthecounterfactualoutcomesunderthealternativerule,weproceedtoquantify
+the divergence between the two scoring regimes. We employ the Result Agreement Rate to mea-
+suretheconsistencyofeliminationoutcomesacrossdifferentrules. Theseasonalagreementrateis
+formulatedasfollows:
+Team#2607504 Page15of26
+XK
+P (E = E ) = wk ·I(Ek = Ek ) (25)
+t rank pct rank pct
+k=1
+XT
+1
+Agreement = P (E = E ) (26)
+t rank pct
+T
+t=1
+Here, P denotes the weekly result agreement probability, and Agreement represents the ag-
+t
+gregateseasonalconsistency,calculatedasthearithmeticmeanoftheweeklyagreementrates.
+Subsequently,wedefinetheFanAlignmentScoretoquantifythesensitivityoftheresultsto
+audiencevoting. Ahighervalueindicatesthatthefanvoteexertsamoredominantinfluenceonthe
+outcome. Thecalculationisdefinedas:
+E [Rank (Ek)]−1
+k≤K π
+Alignment (R) = (27)
+Fan n −1
+t
+Where the expectation operator E represents the weighted average over the K particles,
+k≤K
+andthetermn −1servesasanormalizationfactorfortheranking. Themetricrangesfrom0to1.
+t
+Avalueof0impliestheruleeliminatedthecontestantwiththehighestpopularity(Rank1),whereas
+avalueof1impliestheeliminationofthecontestantwiththelowestpopularity(lastplace).
+Finally,wecomputetheJudgeAlignmentScore. Ahighervaluesignifiesthattechnicalmerit
+(judges’scores)playsamoredecisiveroleintheoutcome. Theformulaisgivenby:
+E [Rank (Ek)]−1
+k≤K J
+Alignment (R) = (28)
+Judge n −1
+t
+The computational comparison between the Rank Rule and the Percentage Rule is visualized
+below:
+Figure5: ComparativeAnalysisofRuleConsistency
+Based on the quantitative data derived from our simulations, we draw the following critical
+conclusions:
+InherentRuleDisagreement: Ourcounterfactualsimulationsrevealasubstantialdivergence
+betweenthetworules. TheseasonalresultagreementratebetweentheRankRuleandthePercent-
+ageRuleismerely38.2%,indicatingthatinonly38.2%ofcasesdothesedistinctmechanismsyield
+identicaleliminationoutcomes.
+BiasDirectionality: ThePercentageRuleexhibitsapronouncedPro-FanBias. ItsFanAlign-
+ment Score (Align ) reaches as high as 0.945, exceeding that of the Rank Rule (0.687) by a
+Fan
+marginof0.38. Thisdisparityarisesbecausetheproportionalnatureoftheruleallowsthemassive
+votesurplusesof”superstars”todirectlyinundatethedeficitsinJudgeScore. Conversely,theRank
+Team#2607504 Page16of26
+Rule demonstrates superior Pro-Judge. Its Judge Alignment Score (Align ) stands at 0.823,
+Judge
+surpassingthePercentageRule(0.781)byapproximately5%. Byconvertingrawdataintoordinal
+rankings, the Rank Rule effectively imposes a ”Capping Effect” on the marginal influence of fan
+votes, thereby increasing the probability that contestants with lower technical merit fall into the
+dangerzone.
+Furthermore, we computed the Seasonal Result Agreement Rate across distinct historical
+epochs,revealingsignificantheterogeneityinconsistencyovertime:
+S1-S2 (Rank Era): The global agreement rate reached a high of 73.2%. During this nascent
+phase,thedifferentiationamongcontestantswasrelativelylow,whicheffectivelymaskedthestruc-
+turaldivergencebetweenthescoringrules.
+S3-S27(PercentageEra): Theagreementrateplummetedto28.5%. Thissharpdeclineindi-
+catesthatthescoringmechanismduringthiseraexhibitedanextremePro-FanBias,resultingina
+highfrequencyof“upsets”thatdefiedthelogicofameritocraticrankingsystem.
+S28+(ModernEra): Theagreementratereboundedto66.4%. Followingtheintroductionof
+theJudgeSavemechanism,thecompetitionframeworksuccessfullyre-establishedanequilibrium
+betweentechnicalmeritandpopularappeal.
+4.3 Analysis of Controversies
+4.3.1 ConstructionofControversyMetrics
+To quantify the degree of controversy associated with specific contestants, we construct a set
+of dedicated indicators. These metrics are designed to capture thestructural divergence between
+“professional evaluation” and “fan preference.” This discordance manifests primarily in two
+distinct cases: contestants possessing high technical merit who suffer premature elimination, and
+contestantswithlowtechnicalscoreswhoneverthelessachievesuperiorrankings.
+Wedefinetwometricstoquantifythesephenomena::
+Table7: DefinitionofControversyMetrics
+Dimension DesignationandInterpretation ArchetypalExamples
+S1 Fan-Carried Score: Contestants with low judges’ BobbyBones,BristolPalin
+scoresbuthighrankingduetopopularvote.
+S2 Robbed Score: Contestants with high technical ChandlerKinney,Mya
+meritbutprematurelyeliminatedduetolowvotes.
+ThecomputationalformulafortheFan-CarriedScore(S )isdefinedasfollows:
+1
+S = max(0,R −P )×(1−σ ) (29)
+1 pct pct norm
+Thespecificmethodologiesforcalculatingtheconstituentvariablesaredetailedbelow:
+Table8: VariableCalculationMethods
+Variable Definition Formula
+R −1
+R AverageJudgeRankPercentile judge
+pct N−1
+P −1
+P FinalPlacementPercentile final
+pct N−1
+σ NormalizedStd. Dev. ofWeeklyJudgeRanks σ rank
+norm N−1
+N NumberofContestantsinSeason -
+Team#2607504 Page17of26
+The term R − P quantifies the magnitude of the rank disparity when a contestant’s fi-
+pct pct
+nal standing significantly exceeds their technical ranking. The coefficient (1 − σ ) serves as
+norm
+a weighting factor for performance stability. Specifically, when a contestant demonstrates consis-
+tentlypoorperformance(implyinglowvarianceinlowscores),thiscoefficientincreases,thereby
+amplifyingtheresultantcontroversyscore.
+ThecomputationalformulafortheRobbedScore(S )isdefinedas:
+2
+S = max(0,Z )×max(0.5,1+Z ) (30)
+2 last season
+ThemethodologiesforcalculatingtheconstituentvariablesofS aredetailedbelow:
+2
+Table9: DefinitionsofVariablesforS
+2
+Variable Definition CalculationFormula
+Z TerminalWeekZ-Score Score last −µ week
+last Pσ
+week
+Z SeasonalAverageZ-Score 1 W Z
+season W t=1 t
+The term max(0,Z ) quantifies the contestant’s standardized performance during the spe-
+last
+cific week of their elimination. Controversy arises principally when a contestant is eliminated
+despiteperformingsignificantlyabovetheweeklyaverage. Thefactormax(0.5,1+Z )eval-
+season
+uates the contestant’s historical performance trajectory. If a consistently high-scoring contestant
+is eliminated, the magnitude of the controversy is amplified. Notably, should a contestant win the
+championship,S isforciblyconstrainedto0,astheconceptof“unjustelimination”isdefinitionally
+2
+inapplicableinsuchcases.
+4.3.2 CaseStudies
+Weappliedthemetricsmentionedabovetocalculatethecontroversyscoresforallcontestants.
+Itisevidentthat,withtheexceptionofBillyRayCyrus,theS scoresoftheotherthreecontro-
+1
+versial contestants mentioned in the problem are all very high, and their controversy rankings are
+alsoveryprominent. Meanwhile,BillyRayCyrusranksapproximatelyinthetop10%. Allofthis
+demonstratestherationalityoftheS metric. ThefigurealsomarksthepersonwiththehighestS
+1 2
+score.
+Todeterminewhetherusingdifferentruleswouldaffectthefinalresults,weconductedasim-
+ulation. Based on the popularity parameters inverted via SMC, we performed 1,000 Monte Carlo
+simulationstoobtaintheaveragefinalrankings.
+ForhighS contestantsinitiallyusingthePercentageRule:
+1
+Table10: PerformanceofHighS ContestantunderDifferentRules
+1
+Contestant S1 Outcome(Pct) NewOutcome(Rank) Difference
+BobbyBones 0.500 1.9 2.8 +0.9
+BristolPalin 0.263 4.7 5.8 +1.1
+BillyRayCyrus 0.141 5.5 6.2 +0.7
+For these contestants, their rankings all declined after adopting the Rank Rule. These contes-
+tants’ performance relies heavily on fan voting; when the influence of fans is limited by the Rank
+Rule,theirresultsworsen.
+Team#2607504 Page18of26
+Figure6: ControversyQuadrant
+ForhighS contestantsinitiallyusingtheRankRule:
+1
+Table11: HighS ContestantsInitiallyUsingRankRule
+1
+Contestant S1 Outcome(Rank) NewOutcome(Pct) Difference
+JerryRice 0.299 3.1 2.6 -0.5
+Jerry Rice already possesses high popularity; switching to the Percentage Rule actually
+strengthenstheinfluenceoffanvotes,resultinginahigherfinalranking.
+Further analysis of the top 10% of contestants ranked by S reveals that the average ranking
+1
+under the Rank Rule is 0.16 positions higher than under the Percentage Rule, and it yields a better
+ranking in 33.0% of cases (compared to only 22.5% for the Percentage Rule). The use of the
+Percentage Rule does not significantly improve the rankings of these contestants; this is likely
+because the contestants in the top 10% of S are not exclusively ”superstars,” and their fan vote
+1
+volumesarenotalwayssufficienttosignificantlyinfluencethefinaloutcome.
+We also utilized S to identify two controversial contestants who received high Judge Score
+2
+butwereultimatelyeliminated. ChandlerKinneydeliveredadominantperformancethroughoutthe
+seasonyetfinishedinthirdplace. Mya,arecognizedtechnicalperfectionist,losttoDonnyOsmond.
+Table12: AnalysisofContestantwithHighS Score
+2
+Contestant Season S Score MetricRank OriginalRule ChangeofRank
+2
+ChandlerKinney S33 3.869 #1 Rank +0.5
+Mya S9 3.373 #2 Percentage +0
+Itisevidentthatafterapplyingthenewrule,ChandlerKinney’sresultbecomesworse. Thisis
+Team#2607504 Page19of26
+because her advantage in technical scores is diluted, while her disadvantage in fan votes is ampli-
+fied. In contrast, Mya’s result shows little change, likely because Mya possesses a more balanced
+foundationofbothtechnicalskillsandfansupport.
+Furtheranalysisofthetop10%ofcontestantsrankedbyS revealsthattheiraverageranking
+2
+declines by 0.32 when the Percentage Rule is adopted. This indicates that this category of contro-
+versial contestants is more susceptible to the influence of rule changes.Simultaneously, to analyze
+whethertheJudgeSaveimpactstheresults,thefollowinganalysiswasconducted.
+Table13: AnalysisoftheEffectofJudgeSave
+Contestant S1orS2 Rank(NoSave) Rank(withJudgeSave) ChangeofRank
+JerryRice S1: 0.299 3.1 3.6 +0.5
+BobbyBones S1: 0.500 2.8 2.3 -0.5
+ChandlerKinney S2: 3.869 6.2 6.2 0.0
+Forthesethreecases,theeffectoftheJudgeSaveisnotsignificant. Analysisofthetop10%
+of contestants ranked by and indicates that the Judge Save is not important for contestants with
+high scores; due to their large fan base, their probability of entering the Bottom 2 is only 5.8%.
+In contrast, it is very important for contestants with high scores, who have a 28.4% probability of
+enteringtheBottom2.
+4.4 Recommendation of Rule
+Figure7: ComparisonofDifferentRules’Score
+A good rule should comprehensively consider the opinions of both fans and judges. The fol-
+lowingformulaisusedtocalculatetheoptimalscheme:
+Score(R) = w ·min(Align (R),0.75)+w ·Align (R) (31)
+fan | f{azn } judge judge
+CappedFanUtility
+Here, w is the weight for Align , and w is the weight for Align . The setting
+fan fan judge judge
+w = 0.7 > w = 0.3indicatesthat,asadancecompetitionshow,Meritocracyshouldoccupy
+judge fan
+Team#2607504 Page20of26
+thedominantpositionindeterminetheoutcomes. Simultaneously,0.75issetasathresholdforfans’
+influence; extremely high values exceeding this threshold typically imply Populism Overflow and
+should not receive additional system rewards. A similar practice is found in the Companies Act
+2006, s.21[5] , and George Tsebelis (2002) also theoretically demonstrates the Rationale behind
+usingthisvalue[6].
+Basedonthemetricformulaabove,thescoresfordifferentruleswerecalculated.
+Table14: FinalScoreunderDifferentRules
+Rules Score
+RankRule(NoSave) 0.782
+PercentageRule(NoSave) 0.772
+RankRulewithJudgeSave 0.785
+RankRulewithJudgeSaveistheoptimalrule,asitachievesabetterbalancebetweentechnical
+merit and popularity. Simultaneously, the Judge Save mechanism enables judges to ”eliminate” or
+”save”borderlinecontestants,whichpreventstheoccurenceofcertainextremesituations.
+5 Task 3: Quantification of Influential Factors
+5.1 Problem Analysis
+Objective1: AnalyzeexactlyhowsignificanttheimpactofProfessionalPartnersisoncompe-
+titionoutcomes. Dotheymerelyprovidetechnicalguidance,ordotheydirectlyboostfaninterest?
+Objective2: Determinewhetherthefeaturesprioritizedbyjudgesandfansareidentical,and
+whethertheimportanceofvariouscontestantattributes(e.g.,age,gender,occupation)areconsistent
+acrossthetwoevaluationsystems.
+This is a problem involving Causal Inference on Observational Data and Multilevel Vari-
+anceDecomposition. Itrequiresestablishingmodelstoexplainbothaudienceratingsandjudges’
+scores.
+5.2 Model Setting
+To precisely isolate the contributions of each explanatory variable, we constructed a Triple-
+TrackMixed-EffectsModel(3T-MEM).ThismodelutilizesthreeindependentandparallelLinear
+Mixed-EffectsModel(LMM)trackstomodeldistinctfeaturedimensionsorvariablegroupswithin
+thecomplexdataset,subsequentlyfusinginformationacrossthetracks. Thisresultsinmoreprecise
+parameterestimationanddataanalysis.
+5.2.1 DefinationofVariables
+In the Triple-Track Mixed-Effects Model (3T-MEM), Track A corresponds to the judge
+evaluation component. The dependent variable for Track A is defined as . Track B corresponds to
+thefanevaluationcomponent. ThedependentvariableforthistrackisYF = logit(πˆ )..
+i,t i,t
+ThecontestantfeaturevectorX includesthestandardizedcontestantagedefinedasX ,
+Traits Age
+thecategoricalvariableforthecontestant’sindustrydefinedasX ,andthecompetitionweek
+Industry
+defined as X . To capture the long-term, specific influence of ”partner identity,” we select
+Week
+the Professional Partner random intercept u . To address the autocorrelation among multiple
+Pro
+observationsofthesamecontestant,weselecttheStarindividualrandominterceptu .
+Star
+Team#2607504 Page21of26
+Figure8: 3T-MEMFlowchart
+5.2.2 Modelling
+For Track A, to dissect the judges’ scoring logic and verify whether it is purely based on
+technical performance, we construct The Meritocracy Model. The specific calculation formula is
+asfollows
+YJ = βJ ·X +uJ +uJ +ϵ (32)
+i,t Traits Pro Star
+ForTrackB1,todissecttheoverallvotinglogicofthefansandreflecttheirgeneralfavorability
+toward contestants—incorporating both dancing skills and individual charisma—we construct The
+FanPopularityModel. Thespecificcalculationformulaisasfollows:
+YF = βF1 ·X +uF1 +uF1 +ϵ (33)
+i,t Traits Pro Star
+For Track B2, to dissect the pure fan preference after stripping away technical performance,
+we innovatively introduce the current week’s judge scores YJ into the regression equation as a
+controlvariable,therebyisolatingthepurepopularitybias. WeconstructTheFanBiasModel. The
+specificcalculationformulaisasfollows:
+YF = γ ·YJ +βF2 ·X +uF2 +uF2 +ϵ (34)
+i,t i,t Traits Pro Star
+Here, the coefficient βF2 represents pure ”likability” or ”sympathy votes,” no longer encom-
+passingtheportionofvotesearnedduetosuperiorperformance.
+5.2.3 ModelDiagnostics: VIFCheck
+Toensuretheindependenceofeachexplanatoryvariable,wecalculatedtheVarianceInflation
+Factor(VIF).Thecalculationformulaisasfollows:
+1
+VIF = (35)
+j 1−R2
+j
+WhereR2isthecoefficientofdeterminationobtainedfromanauxiliaryregressiontreatingthe
+j
+j-thvariableasthedependentvariableandtheremainingvariablesasindependentvariables.
+Team#2607504 Page22of26
+Table15: VIFCheckResults
+Variable VIF Conclusion
+JudgeScoreZ 1.27 NoMulticollinearity
+Age(Standardized) 1.44 NoMulticollinearity
+Industry(Avg) ∼ 1.10 NoMulticollinearity
+Toanswerthequestion”howsignificantistheimpactofProfessionalPartnersontheresults,”
+weemployednumericalalgorithmstosolvethemodelparameters,therebycalculatingtheIntraclass
+CorrelationCoefficient(ICC).TheICCvaluereflectstheproportionofthetotalvarianceexplained
+bythe”ProfessionalPartner”variable. Itsmathematicaldefinitionisasfollows:
+σ2
+ICC = Pro (36)
+Pro σ2 +σ2 +σ2
+Pro Star ϵ
+Where σ2 represents the variance of the Professional Partner random effects, and the de-
+Pro
+nominator represents the total residual variance (including the Star individual variation σ2 and
+Star
+σ2).
+ϵ
+Table16: DecompositionofProfessionalPartnerVarianceContribution(ProICC)
+Track DependentVariable ProICC(ρ )
+Pro
+TrackA JudgeScore < 0.001 (Negligible)
+TrackB1 FanVoteShare < 0.001 (Negligible)
+TrackB2 Fanbias 0.0029(Low)
+Conclusion:thedirectstatisticalexplanatorypowerofProfessionalPartnersoncompeti-
+tionoutcomesisclosetozero.
+5.3 Result Analysis: Heterogeneity of Evaluation Systems
+To determine whether the features prioritized by judges and fans are identical, we compared
+the regression coefficients from Track A (Judge) and Track B2 (Fan Bias), revealing significant
+structuraldifferences.
+Industry: Todeeplydissectthedifferentialtreatmentofcontestantsfromdistinctbackgrounds,
+we extracted the regression coefficients for all industries. We calculated the coefficient difference
+∆ = βF2−βJ.When∆ > 0,fansaremorelenientthanjudges(orjudgesaretoostrict).Weselected
+nineindustriesforanalysis.
+Figure9: IndustryEffectsIllustration
+Team#2607504 Page23of26
+Table17: IndustryEffects: Judgevs. FanBias
+Industry Judge’sCoefβJ FanBiasβF2 Difference∆
+Politician -1.05* +0.13(ns) +1.18
+Journalist -1.11 -1.20 -0.09
+RealityStar +0.30 -1.01* -1.31
+Athlete -0.17** +0.02 +0.19
+Musician +0.34 -0.34 -0.68
+TVPersonality -0.37*** -0.38*** -0.01
+Model -0.34** -0.73*** -0.39
+Comedian -0.22 -0.64*** -0.42
+Actor 0.00 0.00 0.00
+explanation:***p<0.001,**p<0.01,*p<0.05,. p<0.1,ns,meaningthatit’snotsignificant。
+Duetothelargesamplesize,thep-valuecanbecalculatedusingthefollowingformula.
+ˆ
+β
+Z = , p = 2(1−Φ(|Z|)) (37)
+ˆ
+SE(β)
+It is evident that relative to Actors, the average scores for TV Personalities and Models are
+significantlylessthan0,indicatingtheiraverageperformanceisinferiortothatofActors. Thismay
+beattributedtotherelativelysuperiortechnicalskillsofActors. Athletesaresignificantlyinferior
+to Actors only in the judges’ evaluation; this is likely because, compared to fans, judges place
+greater emphasis on technical proficiency, and athletes are significantly inferior to professionally
+trained actors in terms of physical expressiveness. Meanwhile, fans show a clear preference for
+Politicians, which may be related to their high public influence despite their average technical
+skills. Conversely,judgesdemonstrateastrongerpreferencefor RealityStarsand Musicians.
+Age: The coefficient of the Judge Model (βJ ) is -0.42, compared to -0.24 in the Fan Bias
+Age
+Model (βF2 ). It is evident that although both sides favor younger contestants, fans demonstrate a
+Age
+significantlyhighertoleranceforoldercontestantsthanthejudges.
+6 Task 4: System Design
+6.1 ACDW-B3 Modelling
+We propose the ACDW-B3 system to balence fan engagement with professional meritocracu.
+ACDW-B3standsforAdaptiveConcaveDiminishing-returnsWeightedBottom-3System. Us-
+ingthemetricsconstructedearlierin4.4,thissystemachievesafinalscoreof0.9053,outperforming
+thepreviouslyidentifiedoptimalsolution,theRankRulewithJudgeSave(Score=0.7827).
+StepA:FanInfluenceDilution
+ToaddresstheissueofexcessivefanvotinginfluenceunderthePercentageRule,wemapthe
+rawfanvoteshareπ intoanon-linearutilityspace,therebymakingfanvotetohaveadiminishing
+i,t
+marginalutility.
+(π )p
+f = P i,t , p ∈ (0,1) (38)
+i,t (π )p
+k∈Ct k,t
+Whereparameterp(compressionfactor)controlsthedegreeofcompression. Wesetp = 0.55.
+StepB:Consensus-DrivenWeighting
+Team#2607504 Page24of26
+we constructed a Consensus Meter to determine the weights on jugde’s score and fan vote
+share. We define ρ as the Spearman correlation coefficient between the judges’ rankings and the
+t
+fanvoterankingsforthecurrentweek. Thejudges’weightλ isdynamicallyadjustedaccordingto
+t
+ρ :
+t
+1−ρ
+λ = λ +(λ −λ )· t (39)
+t min max min
+2
+HighConsensus(ρ ≈ 1),λ = 0.6. Wheneveryoneagreesonwhodancedwell,allowfans
+min
+todeterminetheminorrankingdifferences(Pro-Fan).
+Low Consensus (ρ < 0), λ = 0.8: When the judges and the audience hold diverging
+max
+opinions,thesystemincreasesthejudges’weighttosafeguardprofessionalintegrity.
+StepC:ComprehensiveScoreandBottom-3Mechanism
+Bottom-3DangerZone: ThethreecontestantswiththelowestscoreS enterthedangerzone.
+i,t
+Compared to the traditional Bottom-2, expanding the danger zone increases the show’s suspense
+(Drama)andaffordsthejudgesgreaterdiscretionarylatitude.
+J
+S = λ · Pi,t +(1−λ )·f (40)
+i,t t t i,t
+J
+JudgeSaveProtocol: Thejudgesholdthefinaldecision-makingpowerwithintheBottom-3
+andmusteliminatethecontestantwiththelowesttechnicalscore(J).
+6.2 Model Evaluation
+WecalculatethemetricsforthenewruleRandcompareitwiththebestruleidentifiedearlier,
+RankRulewithJudgeSave.
+Table18: Multi-DimensionalPerformanceComparisonofTwoRules
+Rule FanAlign JudgeAlign Score
+ACDW-B3 0.7630 0.9720 0.9053
+Rank+Save 0.6570 0.8370 0.7827
+The comprehensive score of ACDW-B3 has seen a substantial increase. This is primarily at-
+tributed to its astounding Judge Alignment (0.972)—it almost perfectly executes the professional
+will of the judges, avoiding Fan-Carried controverises. Meanwhile, the introduction of dynamic
+weighting allows the rule to maintain fairness in results during exciting moments of high disagree-
+mentbetweenjudgesandfans.
+7 Sensitivity Analysis
+In Section 4.4, we set w to 0.7. If we increase or decrease it by 0.05, the results are as
+judge
+follows:
+Team#2607504 Page25of26
+Table19: SensitivityAnalysisofw
+judge
+w RankRule+JudgeSave RankRule PercentageRule
+judge
+0.7 0.7885(best) 0.7822 0.7717
+0.65 0.7808(best) 0.7754 0.7701
+0.75 0.7963(best) 0.7890 0.7733
+Itisevidentthattheparameterchangesdonotaffectthefinalproposedscheme,indicatingthat
+theparametersettingsarereasonable.
+8 Strengths and Weaknesses
+8.1 Strengths
+• RigorousCounterfactualFramework: Ourmodelenables”re-running”historytoidentify
+”robbed” contestants and quantify directional biases (Pro−Fan vs. Capping), providing
+ascientificbasisforruleevaluation.
+• HighExplanatoryPowervia3T-MEM:Ourmodeleffectivelydisentanglestechnicalmerit
+from pure popularity, resolving long-standing debates on ”Professional Partner” influence
+andindustry-specificpreferencedivergences.
+8.2 Weaknesses
+• SimplificationofSocialDynamics: TheassumedMarkovianPropertyfocusingonweekly
+momentummayunderestimatemulti-yearfanloyaltiesorlong-termcelebrityarchetypesthat
+spanacrossmultipleseasons.
+References
+[1] Molinero,C.,Arcaute,E.,Smith,D.,&Batty,M.(2015).ThefracturednatureofBritishpolitics.
+arXivpreprintarXiv:1505.00217.
+[2] Dwork, C., Hardt, M., Pitassi, T., Reingold, O., & Zemel, R. (2012). Fairness through aware-
+ness. In Proceedings of the 3rd Innovations in Theoretical Computer Science Conference (pp.
+214–226).
+[3] Aird, A., Farastu, P., Sun, J., Štefancová, E., All, C., Voida, A., … & Burke, R. (2024). Dy-
+namic fairness-aware recommendation through multi-agent social choice. ACM Transactions
+onRecommenderSystems,3(2),1–35.
+[4] Collins,A.,McKenzie,J.,&VaughanWilliams,L.(2019).Whenisatalentcontestnotatalent
+contest? Sequentialperformancebiasinexpertevaluation.EconomicsLetters,177,94–98.
+[5] UKParliament.CompaniesAct2006,Section21.
+[6] George Tsebelis. Veto Players: How Political Institutions Work. Princeton University Press,
+2002.
+Team#2607504 Page26of26
+Report on Use of AI
+1. OpenAI ChatGPT (GPT-4o)
+Query: MyLaTeXdocumentisproducing“Overfull\hbox”warningsforlongtables. Ialsoneed
+to configure the header to display “Team # 2607504” on the left. How can I address these
+issues?
+Output: Isuggestedadding\setlength{\emergencystretch}{4em}tothepreambleandusingthe
+fancyhdrpackagetoconfiguretheheaders.
+2. Google Gemini (Feb 1, 2026 version)
+Query: Pleaserefinethissentenceforaformalresearchpaper: “Fanstendtosupportcelebritiesfor
+who they are, not solely for their dancing.” Also, suggest a professional name for a scoring
+mechanismthatusesaconcavefunction.
+Output: • Refinement: “Competition outcomes are predominantly governed by the celebri-
+ties’intrinsicattributes,ratherthansolelybytechnicalperformance.”
+• Suggestion: “AdaptiveConcaveDiminishing-returnsWeightedSystem(ACDW).”
+2. Google Gemini (Feb 1, 2026 version)
+Query1: Pleaserefinethissentenceforaformalresearchpaper: “Fanstendtosupportcelebri-
+tiesforwhotheyare,notsolelyfortheirdancing.” Also,suggestaprofessional-soundingnamefor
+ascoringmechanismthatappliesaconcavefunctiontoreducetheinfluenceofextremefanvotes.
+Output:
+• Refinement: “Competition outcomes are predominantly governed by the celebrities’ intrin-
+sicattributesandindividualcharisma,ratherthansolelybytechnicalperformance.”
+• Suggestedname: AdaptiveConcaveDiminishing-returnsWeightedSystem(ACDW).
+3. GitHub Copilot (Jan 20, 2026 version)
+Query 1: (In-editor prompt) Write a Python function using pandas to calculate the Z-score
+forjudges’scoreswithineachseasonandhandlemissingvaluesbyfillingthemwiththemedianof
+thatspecificseason.
+Output:
+(cid:11) (cid:8)
+1 def normalize_scores(df):
+2 df[’score’] = df.groupby(’season’)[’score’].transform(lambda x: x.fillna(x.median()))
+3 df[’z_score’] = df.groupby(’season’)[’score’].transform(lambda x: (x - x.mean()) / x.std())
+4 return df
+5
+(cid:10) (cid:9)
+
+=== END OF 终稿.pdf ===
+

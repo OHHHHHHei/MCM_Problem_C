@@ -1,112 +1,110 @@
-# 2026 MCM Problem C: "Unraveling the Votes"
-## SMC-Inverse Latent State Reconstruction System
 
-> A Sequential Monte Carlo (Particle Filter) approach to reconstruct hidden fan voting shares in *Dancing with the Stars*, based on observed elimination events and judge scores.
+# 2026 MCM Problem C: Deciphering the Invisible Vote
+### Team #2607504 Solution Repository
 
----
+![MCM Problem C](https://img.shields.io/badge/MCM-Problem%20C-blue) ![Python](https://img.shields.io/badge/Python-3.8%2B-green) ![Status](https://img.shields.io/badge/Status-Complete-success)
 
-### 🔥 Key Features
-*   **Bayesian Reconstruction**: Uses SMC (Particle Filtering) to invert the "Black Box" of elimination results, estimating the latent probability of fan support for every couple in every week.
-*   **Dynamic Modeling**: Captures "Hometown Glory" vs "What have you done for me lately?" using a dual-state model (Long-term Popularity $\mu$ + Short-term Momentum $x$).
-*   **Mechanism-Agnostic**: Handles complex rule changes across 33 seasons (Judge Saves, Double Eliminations, Rank vs Percentage rules).
-*   **Optimized Parameters**: Calibrated on 30+ seasons of historical data to maximize predictive accuracy (Top-3 Hit Rate ~80%).
+> A comprehensive data science framework to reconstruct latent fan voting shares, analyze rule fairness, and design optimal scoring mechanisms for *Dancing with the Stars*.
 
 ---
 
-### 📂 Directory Structure
+## 📄 Abstract
 
-The project has been refactored for modularity and scalability:
+This project addresses the "Black Box" of fan voting in *Dancing with the Stars* using a four-stage modeling approach:
+1.  **Latent State Reconstruction (SMC)**: Using **Particle Filtering** to invert elimination results and estimate weekly fan vote shares for 34 seasons.
+2.  **Counterfactual Analysis**: Simulating "What If" scenarios to compare **Rank Rule vs. Percentage Rule**, revealing bias ($S_1$) and controversy ($S_2$) metrics.
+3.  **Factor Quantification (3T-MEM)**: A **Triple-Track Linear Mixed-Effects Model** to disentangle the impact of technical skills, celebrity stardom, and professional partners.
+4.  **System Design (ACDW-B3)**: Proposing the **Adaptive Concave Diminishing-returns Weighted Bottom-3** system to maximize both fairness and entertainment value.
+
+---
+
+## 🚀 Key Modules & Usage
+
+The project is organized by the four main tasks of the competition.
+
+### 1. Latent Vote Reconstruction (Task 1)
+Reconstructs the hidden fan vote shares ($\pi_{i,t}$) using Sequential Monte Carlo.
+*   **Core Script**: `main.py`
+*   **Algorithm**: Particle Filter (SMC) with dual-state momentum (Long-term $\mu$ + Short-term $x$).
+*   **Usage**:
+    ```bash
+    # Run reconstruction for all seasons
+    python main.py
+    ```
+
+### 2. Controversy & Rule Analysis (Task 2)
+Analyzes "Robbed" contestants and compares Rank vs. Percentage rules.
+*   **Core Script**: `scripts/analyze_controversy_v3.py`
+*   **Feature**: Calculates $S_1$ (Fan-Carried) and $S_2$ (Robbed) scores for all contestants.
+*   **Usage**:
+    ```bash
+    # Generate controversy report
+    python scripts/analyze_controversy_v3.py
+    
+    # Run counterfactual simulations (e.g., "What if Bobby Bones faced the Rank Rule?")
+    python scripts/analyze_case_counterfactuals.py
+    ```
+
+### 3. Factor Analysis (Task 3)
+Quantifies the impact of Industry, Age, and Partners.
+*   **Core Script**: `scripts/analyze_q3_3t_mem.py`
+*   **Feature**: Runs the 3T-MEM model to calculate ICC for partners and coefficients for industries.
+*   **Visualization**: `scripts/plot_industry_balloon.py` (Generates the Balloon Plot).
+*   **Usage**:
+    ```bash
+    python scripts/analyze_q3_3t_mem.py
+    ```
+
+### 4. Mechanism Design (Task 4)
+Simulates the new **ACDW-B3** system.
+*   **Core Script**: `scripts/benchmark_acdw_full.py`
+*   **Feature**: Compares ACDW-B3 against Rank and Percentage rules on Fairness and Consensus metrics.
+*   **Usage**:
+    ```bash
+    python scripts/benchmark_acdw_full.py
+    ```
+
+---
+
+## 📂 Directory Structure
 
 ```text
 Code/
-├── main.py                     # Main Entry Point (Run this!)
-├── 2026_MCM_Problem_C_Data.csv # Source Data
-├── core/                       # [Core Package]
-│   ├── smc_inverse.py          # Particle Filter Engine (SMC)
-│   ├── data_processor.py       # Data Loading & Feature Engineering
-│   ├── competition_rules.py    # Rule Set Engine (Elimination Logic)
-│   └── analysis.py             # Result Analyzer & Metrics
-├── plots/                      # [Visualization]
-│   ├── plot_consistency_check.py     # Calibration Curves
-│   ├── plot_forensic_analysis.py     # Case Studies (e.g., Bobby Bones)
-│   ├── plot_memory_goldilocks.py     # Parameter Sensitivity
+├── main.py                     # [Task 1] Primary entry point for SMC Reconstruction
+├── docs/                       # Project Documentation
+│   ├── 终稿.pdf              # Final Submission Paper
+│   ├── Memo_Final.tex          # Final Recommendation Memo (LaTeX)
 │   └── ...
-├── optimization/               # [Hyperparameter Tuning]
-│   ├── optimizer_overnight.py  # Robust Grid Search
-│   └── optimizer_parallel.py   # Aggressive Parallel Search
-├── scripts/                    # [Utilities]
-│   └── extract_highlights.py   # Extract best models from logs
-└── tests/                      # [Unit Tests]
-    └── test_debug.py           # Integrity Check
+├── core/                       # Core Algorithms
+│   ├── smc_inverse.py          # Particle Filter Implementation
+│   └── competition_rules.py    # Historical Rules Engine
+├── scripts/                    # Analysis Suites
+│   ├── analyze_controversy_v3.py   # [Task 2] Controversy Metrics
+│   ├── analyze_q3_3t_mem.py        # [Task 3] Mixed-Effects Model
+│   ├── benchmark_acdw_full.py      # [Task 4] New System Simulation
+│   └── plot_industry_balloon.py    # Visualization Scripts
+├── output/                     # Generated results (logs, plots, json)
+└── data/                       # Dataset (2026_MCM_Problem_C_Data.csv)
 ```
 
 ---
 
-### 🚀 Quick Start
+## 🏆 Key Findings
 
-#### 1. Setup Environment
-Ensure you have Python 3.8+ and standard scientific libraries installed.
-```bash
-# Install dependencies (Standard Stack)
-pip install numpy pandas scipy matplotlib seaborn tqdm
-```
+*   **Pro-Fan Bias**: The **Percentage Rule** has a 0.945 bias towards popularity, often allowing superstars to bypass technical requirements.
+*   **The "Partner Myth"**: Using LMM, we proved that **Professional Partners** have a negligible statistical impact on outcomes compared to Celebrity Industry/Fame.
+*   **Optimal System**: The proposed **ACDW-B3** system achieves **97.2% Judge Alignment** while preserving fan agency, effectively solving the "Bobby Bones Problem."
 
-#### 2. Run the Reconstruction Model
-The `main.py` script runs the model using the **Optimized Parameters**.
+---
 
-```bash
-# Run full analysis on all seasons (Recommended)
-python main.py
+## 🛠 Prerequisites
 
-# Run in test mode (fewer particles, faster)
-python main.py --test
-
-# Run specific seasons
-python main.py --seasons 27 19 31
-```
-
-#### 3. Visualize Results
-Generate academic-quality plots in the `output/` directory:
+*   Python 3.8+
+*   Packages: `numpy`, `pandas`, `scipy`, `matplotlib`, `seaborn`, `statsmodels`
 
 ```bash
-# Example: Generate Validation Consistency Plot
-python plots/plot_consistency_check.py
-
-# Example: Forensic Analysis of "The Bobby Bones Effect" (Season 27)
-python plots/plot_forensic_analysis.py
+pip install -r requirements.txt
 ```
 
 ---
-
-### 🧠 Model Parameters (Optimized)
-
-Based on our extensive grid search (Grid Size: ~5000 combinations), the model defaults to the **"Overall Best"** configuration:
-
-| Parameter | Symbol | Value | Interpretation |
-| :--- | :---: | :---: | :--- |
-| **Memory Decay** | $\rho$ | **0.9** | **Elephants never forget.** Fans have long memories; accumulated popularity dominates temporary performance spikes. |
-| **Judge Influence** | $\gamma$ | **0.0** | **Independence.** Fan voting behavior is effectively independent of judge scoring cues. |
-| **Shock Threshold** | $\delta$ | **1.2** | **Stability.** Only massive performance deviations trigger structural popularity shifts. |
-| **Discriminant** | $\alpha$ | **7.0** | **Competition.** The voting distribution is sharp; the gap between top and bottom is significant. |
-
-*(You can override these defaults via command line, e.g., `python main.py --rho 0.5 --gamma 0.5`)*
-
----
-
-### 📊 Performance Metrics
-
-*   **Top-3 Hit Rate**: ~79.2% (The model correctly identifies the actual eliminated contestant in its top-3 risk list 4 out of 5 times).
-*   **MAP Match Rate**: ~82.2% (The model's "Most Likely" outcome matches the deterministic elimination rules 82% of the time).
-*   **Prediction**: Strictly "Pre-update" (No data leakage).
-*   **Reconstruction**: "Post-update" (Incorporates all history).
-
----
-
-### 📝 Usage Notes
-
-*   **Output**: All results (JSON/TXT/PNG) are saved to the `output/` folder.
-*   **Logs**: Check `analysis_report.txt` for a detailed breakdown of every season processed.
-*   **Debugging**: Run `python tests/test_debug.py` to verify your environment path mapping.
-
----
-*MCM 2026 Problem C Team*
+*© 2026 MCM Team #2607504*
